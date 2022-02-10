@@ -1,6 +1,7 @@
 { ... }:
 
 {
+  imports = (import ./modules);
 
   manual = {
     html.enable = true;
