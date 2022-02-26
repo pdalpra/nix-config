@@ -1,9 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
-let enableWithZshIntegration = {
-  enable = true;
-  enableZshIntegration = true;
-};
+let
+  enableWithZshIntegration = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 in
 {
   home.packages = with pkgs; [
@@ -39,14 +40,6 @@ in
     };
     zoxide = enableWithZshIntegration // {
       options = ["--cmd cd"];
-    };
-
-    ############
-    # STARSHIP #
-    ############
-
-    starship = enableWithZshIntegration // {
-      package = pkgs.unstable.starship;
     };
 
     #######
@@ -101,13 +94,14 @@ in
       ];
 
       shellAliases = {
-        cat  = "${pkgs.bat}/bin/bat";
-        rcat = "${pkgs.bat}/bin/bat -pP";
-        grep = "${pkgs.ripgrep}/bin/rg";
-        time = "${pkgs.hyperfine}/bin/hyperfine";
-        cloc = "${pkgs.tokei}/bin/tokei";
-        du   = "${pkgs.du-dust}/bin/dust";
-        df   = "${pkgs.duf}/bin/duf";
+        cat    = "${pkgs.bat}/bin/bat";
+        rcat   = "${pkgs.bat}/bin/bat -pP";
+        grep   = "${pkgs.ripgrep}/bin/rg";
+        time   = "${pkgs.hyperfine}/bin/hyperfine";
+        cloc   = "${pkgs.tokei}/bin/tokei";
+        du     = "${pkgs.du-dust}/bin/dust";
+        df     = "${pkgs.duf}/bin/duf";
+        nixdev = "nix develop --command zsh";
       };
     };
   };
