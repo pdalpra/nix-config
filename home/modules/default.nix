@@ -4,4 +4,5 @@
   ./jvm.nix
   ./cli.nix
   ./starship.nix
+  ./vim.nix
 ]
