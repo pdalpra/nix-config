@@ -1,14 +1,17 @@
-name: { nixpkgs, system, revision }:
+name: { nixpkgs, home-manager, system, revision }:
 
-let baseConfig =
-  { config, ... }: {
+let
+  specialArgs = {
+    hm-pkgs = home-manager.packages.${system};
+  };
+  baseConfig = { config, ... }: {
     config.system.configurationRevision = revision;
     config.networking.hostName = name;
     config.nix.registry.nixpkgs.flake = nixpkgs;
   };
 in
 nixpkgs.lib.nixosSystem rec {
-  inherit system;
+  inherit system specialArgs;
 
   modules = [
     baseConfig
