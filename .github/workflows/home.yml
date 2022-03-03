@@ -1,0 +1,22 @@
+name: "Home Manager configuration"
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2.4.0
+      - name: "Install Nix"
+        uses: cachix/install-nix-action@v16
+      - name: "Install Cachix"
+        uses: cachix/cachix-action@v10
+        with:
+          name: pdalpra
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - name: "Build Home Manager configuration"
+        run: "nix build \".#homeConfigurations.pdalpra.activationPackage\""
