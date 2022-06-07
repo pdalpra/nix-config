@@ -6,8 +6,6 @@
     ./users.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_5_16;
-
   time.timeZone      = "Europe/Paris";
   i18n.defaultLocale = "en_US.UTF-8";
 
