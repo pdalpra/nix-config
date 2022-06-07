@@ -65,6 +65,7 @@ in
         color.ui = true;
         core = {
           autocrlf = "input";
+          editor = "vim";
           whitespace = "blank-at-eol, -blank-at-eof";
           compression = 0;
         };
