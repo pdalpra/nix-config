@@ -6,8 +6,6 @@
     ./users.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_5_16;
-
   time.timeZone      = "Europe/Paris";
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -37,7 +35,6 @@
   };
 
   nix = {
-    package = pkgs.nixFlakes;
     autoOptimiseStore = true;
     extraOptions = ''
       experimental-features = nix-command flakes

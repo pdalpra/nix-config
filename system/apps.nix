@@ -26,7 +26,7 @@ in
       curl
       git
       htop
-      links
+      links2
       ncdu
       tree
       wget
