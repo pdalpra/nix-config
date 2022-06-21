@@ -1,4 +1,4 @@
-{ pkgs, hm-pkgs,... }:
+{ pkgs, hm-pkgs, ... }:
 
 {
   users = {

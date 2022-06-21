@@ -7,7 +7,7 @@ let
   isRustFile = path: type:
     hasSuffix ".rs" path && type == "regular" && path != "mod.rs";
   mergeAllAttrSets = attrsSets:
-    foldl' (recursiveUpdate) {} attrsSets;
+    foldl' (recursiveUpdate) { } attrsSets;
   disableModules = disabled: modules:
     mergeAllAttrSets (map (mod: { "${mod}" = { inherit disabled; }; }) modules);
 
@@ -30,12 +30,18 @@ let
   promptFormat = concatStrings (map (s: "\$${s}") promptOrder);
   modulesSources = readDir "${starshipPackage.src}/src/modules";
   enabledModules = disableModules false promptOrder; # <== ensure all modules used in the prompt are enabled
-  disabledModules = pipe modulesSources [            # <== from starship's sources...
-    (filterAttrs isRustFile)                         # <== keep only Rust files...
-    attrNames                                        # <== get the filenames...
-    (map (removeSuffix ".rs"))                       # <== remove Rust source extension...
-    (subtractLists promptOrder)                      # <== do not disable modules used in the prompt...
-    (disableModules true)                            # <== and finally build the configuration
+
+  # Disabling all modules by default
+  # - Grab starship's sources
+  # - List all Rust sources files
+  # - Get the file name, without the extension (<- name of the module)
+  # - Exclude the enabled modules
+  disabledModules = pipe modulesSources [
+    (filterAttrs isRustFile)
+    attrNames
+    (map (removeSuffix ".rs"))
+    (subtractLists promptOrder)
+    (disableModules true)
   ];
 in
 {
@@ -49,7 +55,7 @@ in
       {
         format = promptFormat;
         directory = {
-          format  = "\\[[$path](bold fg:39)\\]";
+          format = "\\[[$path](bold fg:39)\\]";
           truncation_length = 4;
           truncation_symbol = "…/";
         };

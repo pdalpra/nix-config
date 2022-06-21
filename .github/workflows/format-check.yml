@@ -1,0 +1,29 @@
+name: "Check that all files are formatted"
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2.4.0
+      - name: "Install Nix"
+        uses: cachix/install-nix-action@v16
+      - name: "Format code"
+        run: "nix fmt"
+      - name: "Get files that changed"
+        uses: tj-actions/verify-changed-files@v9.2
+        id: changed-files
+        with:
+          files: |
+            **/*.nix
+      - name: "Check that all files were formatted"
+        if: steps.changed-files.outputs.files_changed == 'true'
+        run: |
+          echo "Those files are not properly formatted:"
+          echo "${{ steps.changed-files.outputs.changed_files}}" | tr ' ' '\n' | sed 's/^/- /'
+          exit 1

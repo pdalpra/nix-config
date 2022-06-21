@@ -5,7 +5,7 @@ let
   jdk = pkgs.jdk11;
   sbt-extras = pkgs.sbt-extras.override { inherit jdk; };
 in
- {
+{
   home.packages = with pkgs; [
     coursier
     maven
@@ -34,19 +34,19 @@ in
       package = sbt-extras;
       plugins = [
         {
-          org      = "com.typesafe.sbt";
-          artifact = "sbt-git" ;
-          version  = "1.0.2";
+          org = "com.typesafe.sbt";
+          artifact = "sbt-git";
+          version = "1.0.2";
         }
         {
-          org      = "com.timushev.sbt";
+          org = "com.timushev.sbt";
           artifact = "sbt-updates";
-          version  = "0.6.1";
+          version = "0.6.1";
         }
         {
-          org      = "io.github.todokr";
+          org = "io.github.todokr";
           artifact = "sbt-project-switcher";
-          version  = "0.1.4";
+          version = "0.1.4";
         }
       ];
     };

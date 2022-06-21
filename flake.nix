@@ -14,14 +14,16 @@
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, flake-utils }:
     let
-      mkNixOS      = import ./lib/mk-nixos.nix;
-      mkHM         = import ./lib/mk-hm.nix;
-      system       = "x86_64-linux";
-      revision     = nixpkgs.lib.mkIf (self ? rev) self.rev;
-      allDevShells = flake-utils.lib.eachDefaultSystem(system: {
+      mkNixOS = import ./lib/mk-nixos.nix;
+      mkHM = import ./lib/mk-hm.nix;
+      system = "x86_64-linux";
+      revision = nixpkgs.lib.mkIf (self ? rev) self.rev;
+      perSystem = flake-utils.lib.eachDefaultSystem (system: {
+        formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
         devShell = (import ./dev-shell.nix { inherit system nixpkgs; });
       });
-    in nixpkgs.lib.recursiveUpdate allDevShells {
+    in
+    nixpkgs.lib.recursiveUpdate perSystem {
       nixosConfigurations = {
         vm = mkNixOS "vm" { inherit nixpkgs home-manager system revision; };
       };
