@@ -39,7 +39,7 @@ in
       };
     };
     zoxide = enableWithZshIntegration // {
-      options = ["--cmd cd"];
+      options = [ "--cmd cd" ];
     };
 
     #######
@@ -85,22 +85,22 @@ in
           # Prepend sudo to the current or last command with <ESC><ESC>
           name = "sudo";
           src = pkgs.fetchFromGitHub {
-            owner  = "hcgraf";
-            repo   = "zsh-sudo";
-            rev    = "d8084def6bb1bde2482e7aa636743f40c69d9b32";
+            owner = "hcgraf";
+            repo = "zsh-sudo";
+            rev = "d8084def6bb1bde2482e7aa636743f40c69d9b32";
             sha256 = "sha256-I17u8qmYttsodD58PqtTxtVZauyYcNw1orFLPngo9bY=";
           };
         }
       ];
 
       shellAliases = {
-        cat    = "${pkgs.bat}/bin/bat";
-        rcat   = "${pkgs.bat}/bin/bat -pP";
-        grep   = "${pkgs.ripgrep}/bin/rg";
-        time   = "${pkgs.hyperfine}/bin/hyperfine";
-        cloc   = "${pkgs.tokei}/bin/tokei";
-        du     = "${pkgs.du-dust}/bin/dust";
-        df     = "${pkgs.duf}/bin/duf";
+        cat = "${pkgs.bat}/bin/bat";
+        rcat = "${pkgs.bat}/bin/bat -pP";
+        grep = "${pkgs.ripgrep}/bin/rg";
+        time = "${pkgs.hyperfine}/bin/hyperfine";
+        cloc = "${pkgs.tokei}/bin/tokei";
+        du = "${pkgs.du-dust}/bin/dust";
+        df = "${pkgs.duf}/bin/duf";
         nixdev = "nix develop --command zsh";
       };
     };

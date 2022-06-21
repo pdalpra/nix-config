@@ -6,22 +6,22 @@
     ./users.nix
   ];
 
-  time.timeZone      = "Europe/Paris";
+  time.timeZone = "Europe/Paris";
   i18n.defaultLocale = "en_US.UTF-8";
 
   console = {
-    font   = "Lat2-Terminus16";
+    font = "Lat2-Terminus16";
     keyMap = "fr-bepo";
   };
 
   documentation.nixos = {
-    enable            = true;
+    enable = true;
     includeAllModules = true;
   };
 
   networking = {
     firewall.enable = false;
-    useDHCP         = false;
+    useDHCP = false;
     nameservers = [
       "1.1.1.1"
       "9.9.9.9"
@@ -41,8 +41,8 @@
     '';
     gc = {
       automatic = true;
-      dates     = "weekly";
-      options   = "--delete-older-than 14d";
+      dates = "weekly";
+      options = "--delete-older-than 14d";
     };
     trustedUsers = [
       "root"

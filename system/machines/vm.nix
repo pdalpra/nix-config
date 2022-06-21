@@ -13,9 +13,9 @@
       fsType = "ext4";
     };
     "/mnt/virtualbox" = {
-      device  = "host-home";
-      fsType  = "vboxsf";
-      options = ["auto,nofail,rw"];
+      device = "host-home";
+      fsType = "vboxsf";
+      options = [ "auto,nofail,rw" ];
     };
   };
 

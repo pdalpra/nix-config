@@ -48,13 +48,13 @@ in
   programs = {
     bash = {
       enableCompletion = true;
-      enableLsColors   = true;
+      enableLsColors = true;
     };
 
     command-not-found.enable = false;
 
     vim.defaultEditor = true;
-    zsh.enable        = true;
+    zsh.enable = true;
   };
 
   security = {
@@ -73,12 +73,12 @@ in
 
   virtualisation = {
     docker = {
-      enable        = true;
-      enableOnBoot  = true;
+      enable = true;
+      enableOnBoot = true;
       storageDriver = "overlay2";
       autoPrune = {
         enable = true;
-        dates  = "weekly";
+        dates = "weekly";
       };
     };
   };
