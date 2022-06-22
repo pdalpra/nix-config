@@ -13,6 +13,7 @@ let
 
     overlays = [
       unstable-overlay
+      (import ../overlays)
     ];
   };
 in

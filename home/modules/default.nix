@@ -5,4 +5,5 @@
   ./cli.nix
   ./starship.nix
   ./vim.nix
+  ./wm.nix
 ]
