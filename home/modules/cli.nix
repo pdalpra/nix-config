@@ -20,6 +20,13 @@ let
     '';
 in
 {
+  home.activation = {
+    # Remove sayings on logout, installed by prezto
+    removeZlogout = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      $DRY_RUN_CMD rm -f $HOME/.zlogout
+    '';
+  };
+
   home.packages = with pkgs; [
     _1password
     diskonaut
