@@ -8,7 +8,7 @@ let
     nix-env --switch-generation $1 -p ${nixSystemPath}
     ${nixSystemPath}/bin/switch-to-configuration switch
   '';
-  doasSudo = pkgs.writeShellScriptBin "sudo" "doas $1";
+  doasSudo = pkgs.writeShellScriptBin "sudo" ''doas "$@"'';
   nerdFonts = pkgs.nerdfonts.override {
     fonts = [
       "FiraCode"
