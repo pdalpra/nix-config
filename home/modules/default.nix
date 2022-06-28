@@ -5,5 +5,5 @@
   ./cli.nix
   ./starship.nix
   ./vim.nix
-  ./xmonad.nix
+  ./i3.nix
 ]

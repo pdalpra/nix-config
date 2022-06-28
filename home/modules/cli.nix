@@ -44,6 +44,11 @@ in
   ];
 
   programs = {
+    alacritty = {
+      enable = true;
+      settings = {
+      };
+    };
     bat.enable = true;
     direnv = enableWithZshIntegration;
     exa = {
