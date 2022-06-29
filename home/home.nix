@@ -1,7 +1,16 @@
-{ ... }:
+{ lib, ... }:
 
+with lib;
+
+let
+  importAll = imports: foldl' concat [ ] (map import imports);
+in
 {
-  imports = (import ./modules);
+  imports = importAll [
+    ./modules/cli
+    ./modules/dev
+    ./modules/editors
+  ];
 
   manual = {
     html.enable = true;
