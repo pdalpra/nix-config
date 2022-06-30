@@ -20,7 +20,7 @@
       revision = nixpkgs.lib.mkIf (self ? rev) self.rev;
       perSystem = flake-utils.lib.eachDefaultSystem (system: {
         formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
-        devShell = (import ./dev-shell.nix { inherit system nixpkgs; });
+        devShell = import ./dev-shell.nix { inherit system nixpkgs; };
       });
     in
     nixpkgs.lib.recursiveUpdate perSystem {

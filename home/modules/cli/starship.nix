@@ -6,10 +6,9 @@ with builtins;
 let
   isRustFile = path: type:
     hasSuffix ".rs" path && type == "regular" && path != "mod.rs";
-  mergeAll = attrsSets:
-    foldl' (recursiveUpdate) { } attrsSets;
-  disableModules = disabled: modules:
-    mergeAll (map (mod: { "${mod}" = { inherit disabled; }; }) modules);
+  mergeAll = foldl' recursiveUpdate { };
+  disableModules =
+    disabled: modules: mergeAll (map (mod: { "${mod}" = { inherit disabled; }; }) modules);
 
   starshipPackage = pkgs.unstable.starship;
   promptOrder = [

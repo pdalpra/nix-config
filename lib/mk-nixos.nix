@@ -15,7 +15,7 @@ nixpkgs.lib.nixosSystem rec {
 
   modules = [
     baseConfig
-    ../system/machines/${name}.nix
+    (../system/machines + "/${name}.nix")
     ../system/configuration.nix
   ];
 }

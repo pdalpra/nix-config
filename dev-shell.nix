@@ -5,6 +5,6 @@ pkgs.mkShell {
   name = "nix-config-dev";
   buildInputs = with pkgs; [
     cachix
-    nix-linter
+    statix
   ];
 }
