@@ -4,6 +4,7 @@
     ./cachix.nix
     ./apps.nix
     ./users.nix
+    ./wm.nix
   ];
 
   time.timeZone = "Europe/Paris";
