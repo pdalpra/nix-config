@@ -41,6 +41,7 @@ in
   };
 
   fonts = {
+    enableDefaultFonts = true;
     fontDir.enable = true;
     fonts = [ nerdFonts ];
   };

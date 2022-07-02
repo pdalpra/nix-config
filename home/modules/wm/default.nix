@@ -1,0 +1,4 @@
+[
+  ./kitty.nix
+  ./xmonad.nix
+]
