@@ -23,6 +23,7 @@
     { device = "/dev/disk/by-label/swap"; }
   ];
 
-  networking.interfaces.enp0s3.useDHCP = true;
+  #networking.useDHCP = true;
   virtualisation.virtualbox.guest.enable = true;
+  virtualisation.vmware.guest.enable = true;
 }
