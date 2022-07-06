@@ -12,11 +12,11 @@
       device = "/dev/disk/by-label/nixos";
       fsType = "ext4";
     };
-    "/mnt/virtualbox" = {
-      device = "host-home";
-      fsType = "vboxsf";
-      options = [ "auto,nofail,rw" ];
-    };
+#    "/mnt/virtualbox" = {
+#      device = "host-home";
+#      fsType = "vboxsf";
+#      options = [ "auto,nofail,rw" ];
+#    };
   };
 
   swapDevices = [

@@ -6,6 +6,8 @@ let
       pname = "onagre";
       version = "1.0.0-alpha.0";
 
+      doCheck = false;
+
       src = pkgs.fetchFromGitHub {
         owner = "oknozor";
         repo = pname;
@@ -33,6 +35,8 @@ let
       pname = "pop-launcher";
       version = "1.2.1";
 
+      doCheck = false;
+
       src = pkgs.fetchFromGitHub {
         owner = "pop-os";
         repo = "launcher";
@@ -47,14 +51,19 @@ let
         cmake
         pkg-config
       ];
+
+      installPhase = ''
+        mkdir -p $out/bin
+        cp /build/source/target/x86_64-unknown-linux-gnu/release/pop-launcher-bin $out/bin/pop-launcher'';
+
     };
 in
 {
   home.packages = with pkgs; [
     firefox
-#    onagre
-#    popLauncher
-    #pkgs.ulauncher
+    rofi
+    onagre
+    popLauncher
   ];
   services.picom = {
     enable = true;
