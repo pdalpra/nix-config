@@ -18,10 +18,13 @@
       mkHM = import ./lib/mk-hm.nix;
       system = "x86_64-linux";
       revision = nixpkgs.lib.mkIf (self ? rev) self.rev;
-      perSystem = flake-utils.lib.eachDefaultSystem (system: {
-        formatter = nixpkgs.legacyPackages.${system}.nixpkgs-fmt;
-        devShell = import ./dev-shell.nix { inherit system nixpkgs; };
-      });
+      perSystem = flake-utils.lib.eachDefaultSystem (system:
+        let pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          formatter = pkgs.nixpkgs-fmt;
+          devShell = import ./shell.nix { inherit pkgs; };
+        });
     in
     nixpkgs.lib.recursiveUpdate perSystem {
       nixosConfigurations = {
