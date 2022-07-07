@@ -1,6 +1,5 @@
-{ system, nixpkgs }:
-let pkgs = nixpkgs.legacyPackages.${system};
-in
+{ pkgs ? import <nixpkgs> { } }:
+
 pkgs.mkShell {
   name = "nix-config-dev";
   buildInputs = with pkgs; [
