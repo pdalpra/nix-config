@@ -9,10 +9,15 @@
       url = "github:nix-community/home-manager/release-22.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     flake-utils.url = "github:numtide/flake-utils";
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, flake-utils }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, flake-utils, ... }:
     let
       mkNixOS = import ./lib/mk-nixos.nix;
       mkHM = import ./lib/mk-hm.nix;
@@ -23,7 +28,7 @@
         in
         {
           formatter = pkgs.nixpkgs-fmt;
-          devShell = import ./shell.nix { inherit pkgs; };
+          devShell = import ./lib/dev-shell.nix { inherit pkgs; };
         });
     in
     nixpkgs.lib.recursiveUpdate perSystem {
