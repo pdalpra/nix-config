@@ -1,6 +1,6 @@
 { pkgs, config, ... }:
 
-let gitConfigHome = config.xdg.configHome;
+let gitConfigHome = "${config.xdg.configHome}/git";
 in
 {
   home.file.".tigrc" = {
@@ -33,10 +33,10 @@ in
       enable = true;
       includes = [
         {
-          path = "${gitConfigHome}/git/config_local";
+          path = "${gitConfigHome}/config_local";
         }
         {
-          path = "${gitConfigHome}/git/config_stuart";
+          path = "${gitConfigHome}/config_stuart";
           condition = "gitdir:~/Work/stuart/**";
         }
       ];
