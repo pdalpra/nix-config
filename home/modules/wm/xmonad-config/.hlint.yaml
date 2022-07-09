@@ -1,0 +1,4 @@
+- arguments: [--color]
+
+- functions:
+  - {name: unsafePerformIO, within: []} # unsafePerformIO can only appear in no modules

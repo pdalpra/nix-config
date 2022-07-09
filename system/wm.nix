@@ -15,6 +15,8 @@
       enable = true;
 
       displayManager = {
+        defaultSession = "none+xmonad";
+
         lightdm = {
           enable = true;
           background = ../resources/wallpaper.png;
@@ -43,6 +45,8 @@
         };
       };
       libinput.enable = true;
+
+      windowManager.xmonad.enable = true;
     };
   };
 }

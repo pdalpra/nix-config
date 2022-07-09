@@ -14,7 +14,7 @@
     ];
 
     userSettings = {
-      "editor.fontSize" = 16;
+      "editor.fontSize" = 12;
       "editor.fontFamily" = "'Jetbrains Mono', 'monospace', monospace";
       "editor.fontLigatures" = true;
       "editor.renderWhitespace" = "boundary";
@@ -23,7 +23,7 @@
       "files.autoSave" = "onFocusChange";
       "explorer.confirmDragAndDrop" = false;
       "workbench.startupEditor" = "none";
-      "window.zoomLevel" = 2.5;
+      "window.zoomLevel" = 1;
       "workbench.colorTheme" = "Tomorrow Night Eighties";
       "telemetry.telemetryLevel" = "off";
       "update.showReleaseNotes" = false;
@@ -33,6 +33,7 @@
       "gitlens.showWelcomeOnInstall" = false;
       "nix.enableLanguageServer" = true;
       "update.mode" = "none";
+      "terminal.integrated.enableMultiLinePasteWarning" = false;
     };
   };
 }

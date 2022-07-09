@@ -12,6 +12,7 @@ in
     ./modules/editors
     ./modules/media
     ./modules/web
+    ./modules/wm
   ];
 
   manual = {
