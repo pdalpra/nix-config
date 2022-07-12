@@ -53,6 +53,11 @@ in
 
     command-not-found.enable = false;
 
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+
     vim.defaultEditor = true;
     zsh.enable = true;
   };
