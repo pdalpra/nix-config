@@ -35,10 +35,6 @@ in
         {
           path = "${gitConfigHome}/config_local";
         }
-        {
-          path = "${gitConfigHome}/config_stuart";
-          condition = "gitdir:~/Work/stuart/**";
-        }
       ];
       userName = "Pierre Dal-Pra";
       userEmail = "dalpra.pierre@gmail.com";
