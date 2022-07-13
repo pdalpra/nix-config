@@ -4,5 +4,6 @@ builtins.filter builtins.pathExists [
   ./git-extra.nix
   ./go.nix
   ./jvm.nix
+  ./misc.nix
   ./rust.nix
 ]
