@@ -10,6 +10,7 @@ in
     ./modules/cli
     ./modules/dev
     ./modules/editors
+    ./modules/web
   ];
 
   manual = {

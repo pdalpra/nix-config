@@ -5,6 +5,10 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-22.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
+    nurpkgs = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/release-22.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,7 +21,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, flake-utils, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nurpkgs, home-manager, flake-utils, ... }:
     let
       mkNixOS = import ./lib/mk-nixos.nix;
       mkHM = import ./lib/mk-hm.nix;
@@ -36,7 +40,7 @@
         vm = mkNixOS "vm" { inherit nixpkgs home-manager system revision; };
       };
       homeConfigurations = {
-        pdalpra = mkHM "pdalpra" { inherit nixpkgs nixpkgs-unstable home-manager system; };
+        pdalpra = mkHM "pdalpra" { inherit nixpkgs nixpkgs-unstable nurpkgs home-manager system; };
       };
     };
 }
