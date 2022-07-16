@@ -20,6 +20,11 @@
     includeAllModules = true;
   };
 
+  hardware = {
+    bluetooth.enable = true;
+    pulseaudio.enable = true;
+  };
+
   networking = {
     firewall.enable = false;
     useDHCP = false;

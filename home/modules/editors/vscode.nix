@@ -32,6 +32,7 @@
       "gitlens.showWhatsNewAfterUpgrades" = false;
       "gitlens.showWelcomeOnInstall" = false;
       "nix.enableLanguageServer" = true;
+      "update.mode" = "none";
     };
   };
 }

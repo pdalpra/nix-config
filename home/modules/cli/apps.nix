@@ -25,6 +25,7 @@ in
       _1password
       diskonaut
       home-manager-rollback
+      httpie
       mdcat
       neofetch
       prettyping

@@ -82,13 +82,29 @@
         "type": "indirect"
       }
     },
+    "nurpkgs": {
+      "locked": {
+        "lastModified": 1657659901,
+        "narHash": "sha256-gxRrR8By5MdaoUipGaTCR3o8i7dX5Y6RIhMrHadVK7A=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "db82381e14a8269df7b0c9ceb5397fe774f76878",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "nurpkgs": "nurpkgs"
       }
     }
   },

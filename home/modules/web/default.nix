@@ -1,0 +1,4 @@
+[
+  ./browser.nix
+  ./apps.nix
+]
