@@ -27,7 +27,7 @@
 
   networking = {
     firewall.enable = false;
-    useDHCP = false;
+    useDHCP = true;
     nameservers = [
       "1.1.1.1"
       "9.9.9.9"
