@@ -13,6 +13,8 @@
 
     xserver = {
       enable = true;
+      layout = "us,fr";
+      xkbVariant = ",bepo";
 
       displayManager = {
         lightdm = {
