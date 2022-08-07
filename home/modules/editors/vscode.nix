@@ -14,8 +14,8 @@
     ];
 
     userSettings = {
-      "editor.fontSize" = 16;
-      "editor.fontFamily" = "'Jetbrains Mono', 'monospace', monospace";
+      "editor.fontSize" = 12;
+      "editor.fontFamily" = "'Jetbrains Mono Nerd Font', 'monospace', monospace";
       "editor.fontLigatures" = true;
       "editor.renderWhitespace" = "boundary";
       "editor.formatOnPaste" = true;
