@@ -23,4 +23,6 @@ in
 
   # After initial install, let home-manager manage itself
   programs.home-manager.enable = true;
+
+  home.stateVersion = "22.11";
 }
