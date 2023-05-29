@@ -3,7 +3,7 @@
   nixConfig.bash-prompt = "\[nix-config-dev\]$ ";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-22.05";
+    nixpkgs.url = "nixpkgs/nixos-22.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     nurpkgs = {
       url = "github:nix-community/NUR";
