@@ -1,7 +1,7 @@
 { pkgs, config, ... }:
 
 let
-  sbtBaseConfigPath = config.programs.sbt.baseConfigPath;
+  sbtBaseConfigPath = config.programs.sbt.baseUserConfigPath;
   jdk = pkgs.jdk11;
   sbt-extras = pkgs.sbt-extras.override { inherit jdk; };
 in

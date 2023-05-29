@@ -23,13 +23,15 @@ let
       unstableOverlay
     ];
   };
+  base = {
+    home = { inherit username homeDirectory; };
+  };
 in
 home-manager.lib.homeManagerConfiguration rec {
-  inherit system pkgs username homeDirectory;
+  inherit pkgs;
 
-  stateVersion = "21.11";
-
-  configuration.imports = [
+  modules = [
+    (base)
     ../home/home.nix
   ];
 }

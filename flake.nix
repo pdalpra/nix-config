@@ -7,7 +7,7 @@
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     nurpkgs.url = "github:nix-community/NUR";
     home-manager = {
-      url = "github:nix-community/home-manager/release-22.05";
+      url = "github:nix-community/home-manager/release-22.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
