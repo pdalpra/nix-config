@@ -1,11 +1,11 @@
 { pkgs, ... }:
 {
   environment.systemPackages = [ pkgs.cachix ];
-  nix = {
-    binaryCaches = [
+  nix.settings = {
+    substituters = [
       "https://pdalpra.cachix.org"
     ];
-    binaryCachePublicKeys = [
+    trusted-public-keys = [
       "pdalpra.cachix.org-1:AsXJMGyrER6tcCaNVD+ENoSFwdc5SYNTlUiHAcdPCH4="
     ];
   };
