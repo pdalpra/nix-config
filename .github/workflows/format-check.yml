@@ -12,7 +12,7 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@v2.4.0
       - name: "Install Nix"
-        uses: cachix/install-nix-action@v16
+        uses: cachix/install-nix-action@v20
       - name: "Format code"
         run: "nix fmt"
       - name: "Get files that changed"
