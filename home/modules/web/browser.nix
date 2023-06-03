@@ -15,12 +15,6 @@
 
     firefox = {
       enable = true;
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-        consent-o-matic
-        df-youtube
-        onepassword-password-manager
-        ublock-origin
-      ];
 
       profiles = {
         default = {
@@ -28,6 +22,12 @@
           settings = {
             "app.update.auto" = false;
           };
+          extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+            consent-o-matic
+            df-youtube
+            onepassword-password-manager
+            ublock-origin
+          ];
         };
       };
     };
