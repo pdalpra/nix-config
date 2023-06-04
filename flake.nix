@@ -20,6 +20,7 @@
 
   outputs = { self, nixpkgs, nixpkgs-unstable, nurpkgs, home-manager, flake-utils, ... }:
     let
+      mkISO = import ./lib/mk-iso.nix;
       mkNixOS = import ./lib/mk-nixos.nix;
       mkHM = import ./lib/mk-hm.nix;
       system = "x86_64-linux";
@@ -34,6 +35,7 @@
     in
     nixpkgs.lib.recursiveUpdate perSystem {
       nixosConfigurations = {
+        iso = mkISO { inherit nixpkgs system; };
         vm = mkNixOS "vm" { inherit nixpkgs home-manager system revision; };
       };
       homeConfigurations = {
