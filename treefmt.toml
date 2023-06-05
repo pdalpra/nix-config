@@ -1,0 +1,9 @@
+[formatter.nix]
+command = "nix"
+options = ["fmt"]
+includes = ["*.nix"]
+
+[formatter.yaml]
+command = "yamlfix"
+options = ["-c","formatters/yamlfix.toml"]
+includes = ["*.yml"]
