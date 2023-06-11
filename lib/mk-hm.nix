@@ -1,7 +1,6 @@
 username: { nixpkgs, nixpkgs-unstable, nurpkgs, home-manager, system }:
 
 let
-  allowUnfree = true;
   config = { allowUnfree = true; };
   isDarwin = nixpkgs.lib.strings.hasSuffix system "-darwin";
   homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
@@ -23,15 +22,12 @@ let
       unstableOverlay
     ];
   };
-  base = {
-    home = { inherit username homeDirectory; };
-  };
 in
 home-manager.lib.homeManagerConfiguration rec {
   inherit pkgs;
 
   modules = [
-    (base)
+    { home = { inherit username homeDirectory; }; }
     ../home/home.nix
   ];
 }

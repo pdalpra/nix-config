@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   imports = [
-    ./cachix.nix
     ./apps.nix
     ./users.nix
     ./wm.nix
