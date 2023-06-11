@@ -4,10 +4,10 @@ let
   specialArgs = {
     hm-pkgs = home-manager.packages.${system};
   };
-  baseConfig = { config, ... }: {
-    config.system.configurationRevision = revision;
-    config.networking.hostName = name;
-    config.nix.registry.nixpkgs.flake = nixpkgs;
+  baseConfig = { ... }: {
+    system.configurationRevision = revision;
+    networking.hostName = name;
+    nix.registry.nixpkgs.flake = nixpkgs;
   };
 in
 nixpkgs.lib.nixosSystem rec {
@@ -15,6 +15,7 @@ nixpkgs.lib.nixosSystem rec {
 
   modules = [
     baseConfig
+    ./cachix.nix
     (../system/machines + "/${name}.nix")
     ../system/configuration.nix
   ];
