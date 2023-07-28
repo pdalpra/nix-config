@@ -2,3 +2,6 @@
 .gitsecret/keys/random_seed
 !*.secret
 home/modules/dev/git-extra.nix
+
+# Ignore locally built derivations (eg. ISO images)
+result
