@@ -18,7 +18,7 @@ nixpkgs.lib.nixosSystem rec {
 
   modules = [
     baseConfig
-    ../system/cachix.nix
+    ./cachix.nix
     "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
   ];
 }
