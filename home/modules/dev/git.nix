@@ -54,8 +54,6 @@ in
         tree = ''!git log --graph --all --pretty=oneline --graph --decorate --color=always | less -r'';
         cleanup = ''!git remote prune origin && git branch --merged | grep -v '^* master$' | grep -v '^  master$' | xargs -r git branch -d'';
         wip = ''!git ci -a --amend --no-edit --date=now && git push -f'';
-        rebm = ''!git fetch --all && git rebase origin/master'';
-        rebase-from = ''!"git rebase -i $(git merge-base \"$1\" $(git rev-parse --abbrev-ref HEAD)) #'';
       };
       extraConfig = {
         color.ui = true;
