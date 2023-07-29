@@ -15,9 +15,13 @@ jobs:
         with:
           name: pdalpra
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-      - name: Build NixOS configuration
-        run: nix build ".#nixosConfigurations.iso.config.system.build.isoImage"
-      - uses: jakejarvis/s3-sync-action@master
+          skipPush: true
+      - name: Build ISO
+        run: |
+          derivation=".#nixosConfigurations.iso.config.system.build.isoImage"
+          cp -R "$(nix build $derivation --print-out-paths)/iso" .
+      - name: Upload to S3
+        uses: jakejarvis/s3-sync-action@master
         with:
           args: --follow-symlinks
         env:
@@ -25,5 +29,5 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: eu-west-1
-          SOURCE_DIR: result/iso
+          SOURCE_DIR: iso
           DEST_DIR: iso
