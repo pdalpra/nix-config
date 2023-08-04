@@ -10,7 +10,7 @@ let
     nix.registry.nixpkgs.flake = nixpkgs;
   };
 in
-nixpkgs.lib.nixosSystem rec {
+nixpkgs.lib.nixosSystem {
   inherit system specialArgs;
 
   modules = [
