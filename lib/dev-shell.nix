@@ -14,6 +14,8 @@ mkShell {
     fmtAll
     statix
     treefmt
+    nixpkgs-fmt
+    nil
     yamlfix
   ];
 }
