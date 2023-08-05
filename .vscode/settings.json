@@ -4,4 +4,21 @@
     "nixEnvSelector.suggestion": false,
     "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix",
     "nix.enableLanguageServer": true,
+    "nix.formatterPath": "nixpkgs-fmt",
+    "nix.serverPath": "nil",
+    "nix.serverSettings": {
+        "nil": {
+            "formatting": {
+                "command": [
+                    "nixpkgs-fmt"
+                ]
+            },
+            "nix": {
+                "flake": {
+                    "autoEvalInputs": true,
+                    "nixpkgsInputName": "nixpkgs"
+                }
+            }
+        }
+    }
 }
