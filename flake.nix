@@ -10,7 +10,11 @@
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    disko = {
+      # Pin to last commit before https://github.com/nix-community/disko/pull/299
+      url = "github:nix-community/disko?rev=bfc300b1c2138d4abaa87971f85d1fe5f4187f3e";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat = {
       url = "github:edolstra/flake-compat";
@@ -18,7 +22,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nurpkgs, home-manager, flake-utils, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, nurpkgs, home-manager, disko, flake-utils, ... }:
     let
       mkISO = import ./lib/mk-iso.nix;
       mkNixOS = import ./lib/mk-nixos.nix;
@@ -36,7 +40,7 @@
     nixpkgs.lib.recursiveUpdate perSystem {
       nixosConfigurations = {
         iso = mkISO { inherit nixpkgs system; };
-        vm = mkNixOS "vm" { inherit nixpkgs home-manager system revision; };
+        vm = mkNixOS "vm" { inherit nixpkgs home-manager disko system revision; };
       };
       homeConfigurations = {
         pdalpra = mkHM "pdalpra" { inherit nixpkgs nixpkgs-unstable nurpkgs home-manager system; };

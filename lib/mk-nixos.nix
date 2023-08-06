@@ -1,4 +1,4 @@
-name: { nixpkgs, home-manager, system, revision }:
+name: { nixpkgs, home-manager, disko, system, revision }:
 
 let
   specialArgs = {
@@ -9,14 +9,17 @@ let
     networking.hostName = name;
     nix.registry.nixpkgs.flake = nixpkgs;
   };
+  machineRoot = ../system/machines + "/${name}";
 in
 nixpkgs.lib.nixosSystem {
   inherit system specialArgs;
 
   modules = [
     baseConfig
+    disko.nixosModules.disko
     ./cachix.nix
-    (../system/machines + "/${name}.nix")
     ../system/configuration.nix
+    (machineRoot + /configuration.nix)
+    (machineRoot + /disks.nix)
   ];
 }
