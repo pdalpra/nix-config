@@ -13,7 +13,7 @@ let
 
   };
 in
-nixpkgs.lib.nixosSystem rec {
+nixpkgs.lib.nixosSystem {
   inherit system;
 
   modules = [
