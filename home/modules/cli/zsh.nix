@@ -4,7 +4,7 @@
   home.activation = {
     # Remove sayings on logout, installed by prezto
     removeZlogout = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      $DRY_RUN_CMD rm -f $HOME/.zlogout
+      $DRY_RUN_CMD ${pkgs.coreutils}/bin/rm -f $HOME/.zlogout
     '';
   };
 
