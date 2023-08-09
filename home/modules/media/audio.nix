@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     android-file-transfer
     asunder
+    pavucontrol
     quodlibet
   ];
 
