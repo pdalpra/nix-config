@@ -1,15 +1,12 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, my-utils, ... }:
 
-with lib;
 with builtins;
+with lib;
+with my-utils;
 
 let
-  isRustFile = path: type:
-    hasSuffix ".rs" path && type == "regular" && path != "mod.rs";
-  mergeAll = foldl' recursiveUpdate { };
-  disableModules =
-    disabled: modules: mergeAll (map (mod: { "${mod}" = { inherit disabled; }; }) modules);
-
+  isRust = path: hasSuffix ".rs" path && path != "mod.rs";
+  toogleModules = enabled: modules: mergeAll (map (mod: { "${mod}" = { disabled = !enabled; }; }) modules);
   starshipPackage = pkgs.unstable.starship;
   promptOrder = [
     "nix_shell"
@@ -27,8 +24,8 @@ let
     "character"
   ];
   promptFormat = concatStrings (map (s: "\$${s}") promptOrder);
-  modulesSources = readDir "${starshipPackage.src}/src/modules";
-  enabledModules = disableModules false promptOrder; # <== ensure all modules used in the prompt are enabled
+  modulesSources = "${starshipPackage.src}/src/modules";
+  enabledModules = toogleModules true promptOrder; # <== ensure all modules used in the prompt are enabled
 
   # Disabling all modules by default
   # - Grab starship's sources
@@ -36,11 +33,10 @@ let
   # - Get the file name, without the extension (<- name of the module)
   # - Exclude the enabled modules
   disabledModules = pipe modulesSources [
-    (filterAttrs isRustFile)
-    attrNames
+    (filterFiles isRust)
     (map (removeSuffix ".rs"))
     (subtractLists promptOrder)
-    (disableModules true)
+    (toogleModules false)
   ];
   starshipConfig = {
     format = promptFormat;
