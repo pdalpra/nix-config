@@ -1,0 +1,6 @@
+cradle:
+  cabal:
+    - path: "config.hs"
+      component: "xmonad-config:exe:config"
+    - path: "lib"
+      component: "xmonad-config:exe:config"

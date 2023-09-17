@@ -1,5 +1,5 @@
 ---
-name: Check that all files are formatted
+name: Lint
 on:
   pull_request:
   push:
@@ -15,4 +15,4 @@ jobs:
         uses: cachix/install-nix-action@v20
       - name: Check that all sources are properly formatted
         run: |-
-          nix develop -c treefmt --fail-on-change --no-cache .github .
+          nix develop -c lint-all

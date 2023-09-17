@@ -5,7 +5,7 @@ let
     hm-pkgs = home-manager.packages.${system};
     my-utils = import ./utils.nix { inherit (nixpkgs) lib; };
   };
-  baseConfig = { ... }: {
+  baseConfig = _: {
     system.configurationRevision = revision;
     networking.hostName = name;
     nix.registry.nixpkgs.flake = nixpkgs;

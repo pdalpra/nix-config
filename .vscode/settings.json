@@ -1,6 +1,11 @@
 {
     "editor.formatOnType": true,
     "editor.formatOnSave": true,
+    "haskell.formattingProvider": "fourmolu",
+    "haskell.manageHLS": "PATH",
+    "haskell.openSourceInHackage": false,
+    "haskell.openDocumentationInHackage": false,
+    "haskell.plugin.eval.config.exception": true,
     "nixEnvSelector.suggestion": false,
     "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix",
     "nix.enableLanguageServer": true,
@@ -20,5 +25,9 @@
                 }
             }
         }
-    }
+    },
+    "files.watcherExclude": {
+        "**/target": true
+    },
+    "editor.fontFamily": "'Berkeley Mono', 'monospace', monospace"
 }

@@ -30,11 +30,13 @@
       system = "x86_64-linux";
       revision = nixpkgs.lib.mkIf (self ? rev) self.rev;
       perSystem = flake-utils.lib.eachDefaultSystem (system:
-        let pkgs = nixpkgs.legacyPackages.${system};
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+          unstable = nixpkgs-unstable.legacyPackages.${system};
         in
         {
           formatter = pkgs.nixpkgs-fmt;
-          devShell = import ./lib/dev-shell.nix { inherit pkgs; };
+          devShell = import ./lib/dev-shell.nix { inherit pkgs unstable; };
         });
     in
     nixpkgs.lib.recursiveUpdate perSystem {

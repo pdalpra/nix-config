@@ -1,6 +1,3 @@
-let
-  swapSize = "10G";
-in
 {
   disko.devices = {
     disk.sda = {
@@ -23,7 +20,7 @@ in
             name = "root";
             device = "/dev/disk/by-label/nixos";
             start = "512M";
-            end = "-${swapSize}";
+            end = "-10G";
             content = {
               type = "filesystem";
               format = "ext4";

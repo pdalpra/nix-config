@@ -76,6 +76,7 @@ in
 
   services = {
     openssh.enable = true;
+    thermald.enable = true;
     uptimed.enable = true;
   };
 

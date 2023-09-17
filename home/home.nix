@@ -12,14 +12,22 @@ in
     ./modules/editors
     ./modules/media
     ./modules/web
+    ./modules/wm
   ] ++ [
     ./modules/fonts.nix
+    ./modules/security.nix
   ];
 
   manual = {
     html.enable = true;
     manpages.enable = true;
   };
+
+  xdg.userDirs =
+    {
+      enable = true;
+      createDirectories = true;
+    };
 
   news.display = "silent";
 

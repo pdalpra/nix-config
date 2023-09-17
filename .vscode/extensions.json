@@ -1,7 +1,9 @@
 {
     "recommendations": [
         "github.vscode-github-actions",
+        "haskell.haskell",
+        "justusadam.language-haskell",
         "arrterian.nix-env-selector",
         "jnoortheen.nix-ide"
-    ],
+    ]
 }
