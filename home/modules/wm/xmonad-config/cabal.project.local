@@ -1,0 +1,8 @@
+documentation: True
+
+package *
+  documentation: True
+  ghc-options: -haddock
+
+package dbus
+  documentation: False
