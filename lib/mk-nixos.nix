@@ -3,6 +3,7 @@ name: { nixpkgs, home-manager, disko, system, revision }:
 let
   specialArgs = {
     hm-pkgs = home-manager.packages.${system};
+    my-utils = import ./utils.nix { inherit (nixpkgs) lib; };
   };
   baseConfig = { ... }: {
     system.configurationRevision = revision;

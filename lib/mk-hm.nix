@@ -1,6 +1,9 @@
 username: { nixpkgs, nixpkgs-unstable, nurpkgs, home-manager, system }:
 
 let
+  specialArgs = {
+    my-utils = import ./utils.nix { inherit (nixpkgs) lib; };
+  };
   config = { allowUnfree = true; };
   isDarwin = nixpkgs.lib.strings.hasSuffix system "-darwin";
   homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
@@ -23,8 +26,10 @@ let
     ];
   };
 in
-home-manager.lib.homeManagerConfiguration rec {
+home-manager.lib.homeManagerConfiguration {
   inherit pkgs;
+
+  extraSpecialArgs = specialArgs;
 
   modules = [
     { home = { inherit username homeDirectory; }; }
