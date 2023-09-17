@@ -12,6 +12,8 @@ in
     ./modules/editors
     ./modules/media
     ./modules/web
+  ] ++ [
+    ./modules/fonts.nix
   ];
 
   manual = {
