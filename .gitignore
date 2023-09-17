@@ -5,3 +5,7 @@ home/modules/dev/git-extra.nix
 
 # Ignore locally built derivations (eg. ISO images)
 result
+home/fonts/opentype/BerkeleyMono-BoldItalic.otf
+home/fonts/opentype/BerkeleyMono-Bold.otf
+home/fonts/opentype/BerkeleyMono-Italic.otf
+home/fonts/opentype/BerkeleyMono-Regular.otf
