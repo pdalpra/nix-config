@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedRecordDot #-}
+
 module Scratchpads (setup, run, weather) where
 
 import qualified Terminal
@@ -10,7 +12,7 @@ import XMonad.Util.WorkspaceCompare (filterOutWs)
 setup :: XConfig a -> XConfig a
 setup c =
   filterScratchpadsWorkspace $
-    c {manageHook = manageScratchpads <+> manageHook c}
+    c {manageHook = manageScratchpads <+> c.manageHook}
   where
     filterScratchpadsWorkspace = (addEwmhWorkspaceSort . pure . filterOutWs) [scratchpadWorkspaceTag]
     manageScratchpads = namedScratchpadManageHook scratchpads

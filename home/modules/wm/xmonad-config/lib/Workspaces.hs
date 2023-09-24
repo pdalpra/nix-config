@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedRecordDot #-}
+
 module Workspaces
   ( setup
   , web
@@ -108,12 +110,12 @@ shiftTo =
 toProject :: Workspace -> Project
 toProject ws =
   Project
-    { projectName = name ws
-    , projectDirectory = workingDirectory ws
-    , projectStartHook = startApps <$> (nonEmpty . runAtStartup) ws
+    { projectName = ws.name
+    , projectDirectory = ws.workingDirectory
+    , projectStartHook = startApps <$> nonEmpty ws.runAtStartup
     }
   where
-    startApps = traverse_ (spawnOnOnce $ name ws)
+    startApps = traverse_ $ spawnOnOnce ws.name
 
 
 workspacesLayout c =
