@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedRecordDot #-}
+
 module Polybar (setup) where
 
 import qualified Codec.Binary.UTF8.String as UTF8
@@ -11,7 +13,7 @@ import XMonad.Prelude
 setup :: IO (XConfig a -> XConfig a)
 setup = do
   dbus <- initDbus
-  return $ \c -> c {logHook = polybarLogHook dbus <> logHook c}
+  return $ \c -> c {logHook = polybarLogHook dbus <> c.logHook}
 
 
 initDbus :: IO D.Client

@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedRecordDot #-}
+
 module KeyboardLayout (setup) where
 
 import XMonad
@@ -10,8 +12,8 @@ import XMonad.Util.Run (runProcessWithInput)
 setup :: XConfig a -> XConfig a
 setup c =
   c
-    { handleEventHook = remapKeysOnLayoutChange <> handleEventHook c
-    , startupHook = startupHook c >> setDefault
+    { handleEventHook = remapKeysOnLayoutChange <> c.handleEventHook
+    , startupHook = c.startupHook >> setDefault
     }
     `additionalKeys` buildKeyRemapBindings allRemaps
 

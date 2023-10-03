@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedRecordDot #-}
+
 module WindowRules (setup) where
 
 import Data.Ratio ((%))
@@ -10,7 +12,7 @@ import XMonad.StackSet
 setup :: XConfig l -> XConfig l
 setup c =
   c
-    { manageHook = windowRules <+> manageHook c
+    { manageHook = windowRules <+> c.manageHook
     }
 
 
