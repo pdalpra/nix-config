@@ -9,6 +9,7 @@ let
     ${treefmt}/bin/treefmt --fail-on-change --no-cache ${sourcePaths};
     statix check
   '';
+
   nixTools = [
     cachix
     git-secret
