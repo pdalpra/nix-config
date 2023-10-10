@@ -1,4 +1,4 @@
-{ disks ? [ "/dev/sda" ] }:
+{ disks ? [ "/dev/sda" ], ... }:
 let
   mainDisk = builtins.elemAt disks 0;
 in
