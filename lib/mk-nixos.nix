@@ -11,6 +11,8 @@ let
     nix.registry.nixpkgs.flake = nixpkgs;
   };
   machineRoot = ../system/machines + "/${name}";
+  specificConfig = machineRoot + /configuration.nix;
+  diskoConfig = import (machineRoot + /disks.nix) { };
 in
 nixpkgs.lib.nixosSystem {
   inherit system specialArgs;
@@ -20,7 +22,7 @@ nixpkgs.lib.nixosSystem {
     disko.nixosModules.disko
     ./cachix.nix
     ../system/configuration.nix
-    (machineRoot + /configuration.nix)
-    (machineRoot + /disks.nix)
+    specificConfig
+    diskoConfig
   ];
 }
