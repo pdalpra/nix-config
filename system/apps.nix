@@ -2,13 +2,10 @@
 
 let
   nixSystemPath = "/nix/var/nix/profiles/system";
-  nixosListGens = pkgs.writeShellScriptBin "nixos-list-gens"
-    ''nix-env -p ${nixSystemPath} --list-generations'';
   nixosRollbackAnyGen = pkgs.writeShellScriptBin "nixos-rollback-any-gen" ''
     nix-env --switch-generation $1 -p ${nixSystemPath}
     ${nixSystemPath}/bin/switch-to-configuration switch
   '';
-  doasSudo = pkgs.writeShellScriptBin "sudo" ''doas "$@"'';
   nerdFonts = pkgs.nerdfonts.override {
     fonts = [
       "FiraCode"
@@ -34,16 +31,14 @@ in
       nix-du
       nix-index
       # Custom shell scripts
-      doasSudo
-      nixosListGens
       nixosRollbackAnyGen
     ];
   };
 
   fonts = {
-    enableDefaultFonts = true;
+    enableDefaultPackages = true;
     fontDir.enable = true;
-    fonts = [
+    packages = [
       nerdFonts
     ];
   };
@@ -66,12 +61,10 @@ in
   };
 
   security = {
-    doas = {
+    sudo = {
       enable = true;
       wheelNeedsPassword = false;
     };
-
-    sudo.enable = false;
   };
 
   services = {
