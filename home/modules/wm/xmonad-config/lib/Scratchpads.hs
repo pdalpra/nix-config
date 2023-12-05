@@ -32,8 +32,9 @@ weather :: NamedScratchpad
 weather =
   NS
     nsName
-    (Terminal.runShow nsName ["-o font_size=12"] "curl 'https://wttr.in?m&F&Q&2&lang=fr'")
+    (Terminal.runShow nsName ["-o font.size=15"] command)
     (title =? nsName)
     defaultFloating
   where
     nsName = "weather"
+    command = "curl -s \"https://wttr.in?m&F&Q&2&lang=fr\" | less"
