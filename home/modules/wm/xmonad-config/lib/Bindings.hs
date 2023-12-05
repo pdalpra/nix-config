@@ -34,9 +34,11 @@ setup c =
 
 showKeybindings :: String -> [((KeyMask, KeySym), NamedAction)] -> NamedAction
 showKeybindings windowTitle bindings =
-  addName "Show keybindings" $ spawn $ Terminal.runShow windowTitle ["-o font_size=12"] text
+  addName "Show keybindings"
+    . spawn
+    $ Terminal.runShow windowTitle ["-o font.size=16"] text
   where
-    text = mconcat ["echo '", unlines $ showKm bindings, "' | pr -2 -t"]
+    text = mconcat ["echo \"", unlines $ showKm bindings, "\" | pr -2 -t | less"]
 
 {- FOURMOLU_DISABLE -}
 myKeys :: XConfig Layout -> [((KeyMask, KeySym), NamedAction)]
