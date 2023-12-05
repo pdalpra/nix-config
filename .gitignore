@@ -1,11 +1,17 @@
 .direnv
-.gitsecret/keys/random_seed
-!*.secret
-home/modules/dev/git-extra.nix
 
 # Ignore locally built derivations (eg. ISO images)
 result
-home/fonts/opentype/BerkeleyMono-BoldItalic.otf
-home/fonts/opentype/BerkeleyMono-Bold.otf
-home/fonts/opentype/BerkeleyMono-Italic.otf
-home/fonts/opentype/BerkeleyMono-Regular.otf
+
+# Git secrets
+.gitsecret/keys/random_seed
+!*.secret
+home/modules/dev/git-extra.nix
+home/fonts/BerkeleyMono-Bold.otf
+home/fonts/BerkeleyMono-Bold.ttf
+home/fonts/BerkeleyMono-BoldItalic.otf
+home/fonts/BerkeleyMono-BoldItalic.ttf
+home/fonts/BerkeleyMono-Italic.otf
+home/fonts/BerkeleyMono-Italic.ttf
+home/fonts/BerkeleyMono-Regular.otf
+home/fonts/BerkeleyMono-Regular.ttf

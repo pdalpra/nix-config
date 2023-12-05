@@ -13,8 +13,10 @@ let
 
     installPhase = ''
       runHook preInstall
-      mkdir -p $out/share/fonts
-      cp -R opentype $out/share/fonts
+      mkdir -p $out/share/fonts/opentype
+      mkdir -p $out/share/fonts/truetype
+      cp *.otf $out/share/fonts/opentype || true
+      cp *.ttf $out/share/fonts/truetype || true
       runHook postInstall
     '';
   };
