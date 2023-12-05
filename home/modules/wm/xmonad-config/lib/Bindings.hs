@@ -3,6 +3,7 @@
 module Bindings where
 
 import Data.Ratio ((%))
+import qualified Scratchpads
 import qualified Terminal
 import XMonad
 import XMonad.Hooks.ManageHelpers (doRectFloat)
@@ -51,6 +52,7 @@ myKeys c =
         [ key "Apps"     (modm .|. shiftMask, xK_p)      $ spawn "rofi -show drun"
         , key "Terminal" (modm .|. shiftMask, xK_Return) $ spawn c.terminal
         , key "Emoji"    (modm .|. shiftMask, xK_e)      $ spawn "rofimoji"
+        , key "Weather"  (modm .|. shiftMask, xK_w)      $ Scratchpads.run Scratchpads.weather
         ]
     , keySet
         "Layouts"
@@ -96,15 +98,16 @@ myKeys c =
     modm = c.modMask
     key name binding action = (binding, addName name action)
     keySet setName ks = subtitle setName : ks
-    switchMove m = if m == shiftMask then "Move to" else "Switch to"
     switchOrMoveOnWorkspaces =
-      [ key (mconcat [switchMove m, " workspace ", show i]) (m .|. modm, k) $ windows $ f i
+      [ key (mconcat [action, " workspace ", show i]) (m .|. modm, k) $ windows $ f i
       | (f, m) <- [(W.greedyView, noModMask), (W.shift, shiftMask)]
+      , let action = if m == shiftMask then "Move to" else "Switch to"
       , (i, k) <- zip c.workspaces [xK_1 .. xK_9]
       ]
     switchOrMoveOnScreens =
-      [ key (mconcat [switchMove m, " screen ", show screen]) (m .|. modm, k) (screenWorkspace screen >>= flip whenJust (windows . f))
-      | (f, m) <- [(W.view, noModMask), (W.shift, shiftMask)]
-      , (k, screen) <- zip [xK_w, xK_e, xK_r] [0 ..]
+      [ key (mconcat [action, " screen ", show screen]) (m .|. modm, k) (screenWorkspace screen >>= flip whenJust (windows . f))
+      | (f, m) <- [(W.view, mod2Mask), (W.shift, mod2Mask .|. shiftMask)]
+      , let action = if m == mod2Mask .|. shiftMask then "Move to" else "Switch to" 
+      , (k, screen) <- zip [xK_1, xK_2] [0 ..]
       ]
 {- FOURMOLU_ENABLE -}
