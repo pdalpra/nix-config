@@ -21,7 +21,7 @@ executable config
 
   ghc-options:      -Wall -Whi-shadowing -Wname-shadowing
   build-depends:
-    , base            ^>=4.16.1.0
+    , base            ^>=4.17.0
     , dbus            ^>=1.2.0
     , utf8-string     ^>=1.0.0
     , xmonad          ^>=0.17.0
