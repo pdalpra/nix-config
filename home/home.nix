@@ -15,6 +15,7 @@ in
     ./modules/wm
   ] ++ [
     ./modules/fonts.nix
+    ./modules/misc.nix
     ./modules/security.nix
   ];
 
