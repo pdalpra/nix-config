@@ -9,7 +9,7 @@ import XMonad.Util.NamedWindows (getName)
 import XMonad.Util.Run (safeSpawn)
 
 
-setup :: (LayoutClass l Window) => XConfig l -> XConfig l
+setup :: LayoutClass l Window => XConfig l -> XConfig l
 setup = withUrgencyHook LibNotifyUrgencyHook
 
 
@@ -24,4 +24,10 @@ instance UrgencyHook LibNotifyUrgencyHook where
     where
       findWorkspace ws = return (W.findTag window ws)
       notify namedWindow workspace =
-        safeSpawn "notify-send" ["-u", "low", mconcat ["Workspace", workspace, ":"], mconcat ["See '", show namedWindow, "'"]]
+        safeSpawn
+          "notify-send"
+          [ "-u"
+          , "low"
+          , mconcat ["Workspace", workspace, ":"]
+          , mconcat ["See '", show namedWindow, "'"]
+          ]
