@@ -13,8 +13,8 @@ import XMonad.Util.WorkspaceCompare (filterOutWs)
 
 setup :: XConfig a -> XConfig a
 setup c =
-  filterScratchpadsWorkspace
-    $ c {manageHook = manageScratchpads <+> c.manageHook}
+  filterScratchpadsWorkspace $
+    c {manageHook = manageScratchpads <+> c.manageHook}
   where
     filterScratchpadsWorkspace = (addEwmhWorkspaceSort . pure . filterOutWs) [scratchpadWorkspaceTag]
     manageScratchpads = namedScratchpadManageHook scratchpads
