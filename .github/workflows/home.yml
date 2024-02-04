@@ -21,4 +21,5 @@ jobs:
       - name: Setup cache
         uses: DeterminateSystems/magic-nix-cache-action@v3
       - name: Build Home Manager configuration
+        if: false
         run: nix build ".#homeConfigurations.pdalpra.activationPackage"
