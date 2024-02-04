@@ -10,14 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v4
       - name: Install Nix
-        uses: cachix/install-nix-action@v23
+        uses: cachix/install-nix-action@v25
       - name: Install Cachix
-        uses: cachix/cachix-action@v12
+        uses: cachix/cachix-action@v14
         with:
           name: pdalpra
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      - name: Setup cache
+        uses: DeterminateSystems/magic-nix-cache-action@v3
       - name: Push flake inputs to Cachix
-        run: nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | cachix push
+        run:
+          nix flake archive --json | jq -r '.path,(.inputs|to_entries[].value.path)' | cachix push
           pdalpra
