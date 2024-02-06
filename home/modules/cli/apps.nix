@@ -27,6 +27,7 @@ in
       diskonaut
       home-manager-rollback
       httpie
+      manix
       mdcat
       neofetch
       prettyping
