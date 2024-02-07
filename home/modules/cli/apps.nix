@@ -23,9 +23,11 @@ in
   home = {
     packages = with pkgs; [
       _1password
+      comma
       diskonaut
       home-manager-rollback
       httpie
+      manix
       mdcat
       neofetch
       prettyping
