@@ -4,7 +4,7 @@ let
   isDarwin = nixpkgs.lib.strings.hasSuffix system "-darwin";
   specialArgs = {
     inherit isDarwin;
-    my-utils = import ./utils.nix { inherit (nixpkgs) lib; };
+    myLib = import ./utils.nix { inherit (nixpkgs) lib; };
   };
   config = { allowUnfree = true; };
   homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
