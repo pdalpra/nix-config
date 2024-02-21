@@ -1,8 +1,8 @@
-{ pkgs, lib, my-utils, ... }:
+{ pkgs, lib, myLib, ... }:
 
 with builtins;
 with lib;
-with my-utils;
+with myLib;
 
 let
   isRust = path: hasSuffix ".rs" path && path != "mod.rs";

@@ -1,7 +1,7 @@
-{ pkgs, config, lib, my-utils, ... }:
+{ pkgs, config, lib, myLib, ... }:
 
 with lib;
-with my-utils;
+with myLib;
 
 let
   libPath = ./xmonad-config/lib;

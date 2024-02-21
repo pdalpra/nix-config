@@ -1,4 +1,4 @@
-{ pkgs, hm-pkgs, ... }:
+{ pkgs, hmPkgs, ... }:
 
 {
   users = {
@@ -10,7 +10,7 @@
         home = "/home/pdalpra";
         createHome = true;
         shell = pkgs.zsh;
-        packages = [ hm-pkgs.home-manager ];
+        packages = [ hmPkgs.home-manager ];
         extraGroups = [
           "docker"
           "wheel"
