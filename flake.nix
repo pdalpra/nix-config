@@ -11,8 +11,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
-      # Pin to last commit before https://github.com/nix-community/disko/pull/299
-      url = "github:nix-community/disko?rev=bfc300b1c2138d4abaa87971f85d1fe5f4187f3e";
+      url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils.url = "github:numtide/flake-utils";
