@@ -22,5 +22,4 @@ jobs:
       - name: Setup cache
         uses: DeterminateSystems/magic-nix-cache-action@v3
       - name: Check that all sources are properly formatted
-        run: |-
-          nix develop -c lint-all
+        run: nix develop -c lint-all
