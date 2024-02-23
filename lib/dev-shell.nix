@@ -1,4 +1,4 @@
-{ pkgs, unstable }:
+{ pkgs, unstable, agenixBin }:
 
 with pkgs;
 
@@ -9,13 +9,15 @@ let
     ${treefmt}/bin/treefmt --fail-on-change --no-cache ${sourcePaths};
     statix check
   '';
-
+  agenixFile = writeShellScriptBin "agenix-file" "cat $2 | ${agenixBin}/bin/agenix --editor='-' -e $1";
   nixTools = [
     cachix
     git-secret
     nixpkgs-fmt
     unstable.nil
     statix
+    agenixBin
+    agenixFile
   ];
   haskellTools = with haskellPackages; [
     cabal-install
@@ -34,7 +36,6 @@ let
     zlib.dev
   ];
   miscTools = [
-    git-secret
     fmtAll
     lintAll
     yamlfix
