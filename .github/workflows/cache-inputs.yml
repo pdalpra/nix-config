@@ -21,7 +21,7 @@ jobs:
       - name: Setup cache
         uses: DeterminateSystems/magic-nix-cache-action@v3
       - name: Push flake inputs to Cachix
-        run: |
+        run: |-
           nix flake archive --json | \
           jq -r '.path,(.inputs|to_entries[].value.path)' | \
           cachix push pdalpra

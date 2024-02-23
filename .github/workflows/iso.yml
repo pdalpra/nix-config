@@ -19,7 +19,7 @@ jobs:
       - name: Setup cache
         uses: DeterminateSystems/magic-nix-cache-action@v3
       - name: Build ISO
-        run: |
+        run: |-
           derivation=".#nixosConfigurations.iso.config.system.build.isoImage"
           cp -R "$(nix build $derivation --print-out-paths)/iso" .
       - name: Upload to S3
