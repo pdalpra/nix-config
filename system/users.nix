@@ -15,9 +15,7 @@
           "docker"
           "wheel"
         ];
-        openssh.authorizedKeys.keys = [
-          "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBHxXCVW8ElfZeVZ7l7VQI+wmwbtiAO9dzhCEuiNeuiHLLuoFDKes4gbsbgf/fEWkKFPuUyrwlN//k2dAycGtlgo="
-        ];
+        openssh.authorizedKeys.keys = (import ../keys/pdalpra.nix).sshKeys;
       };
     };
   };

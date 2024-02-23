@@ -3,9 +3,16 @@
   nixConfig.bash-prompt = "\[nix-config-dev\]$ ";
 
   inputs = {
+    # Package sources
     nixpkgs.url = "nixpkgs/nixos-23.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     nurpkgs.url = "github:nix-community/NUR";
+
+    # Additional tools
+    agenix = {
+      url = "github:yaxitech/ragenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,6 +21,8 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Flake libraries
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat = {
       url = "github:edolstra/flake-compat";
@@ -21,7 +30,17 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, nurpkgs, home-manager, disko, flake-utils, ... }:
+  outputs =
+    { self
+    , nixpkgs
+    , nixpkgs-unstable
+    , nurpkgs
+    , agenix
+    , home-manager
+    , disko
+    , flake-utils
+    , ...
+    }:
     let
       mkISO = import ./lib/mk-iso.nix;
       mkNixOS = import ./lib/mk-nixos.nix;
@@ -32,10 +51,11 @@
         let
           pkgs = nixpkgs.legacyPackages.${system};
           unstable = nixpkgs-unstable.legacyPackages.${system};
+          agenixBin = agenix.packages.${system}.default;
         in
         {
           formatter = pkgs.nixpkgs-fmt;
-          devShell = import ./lib/dev-shell.nix { inherit pkgs unstable; };
+          devShell = import ./lib/dev-shell.nix { inherit pkgs unstable agenixBin; };
         });
     in
     nixpkgs.lib.recursiveUpdate perSystem {
