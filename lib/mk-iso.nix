@@ -4,8 +4,10 @@ let
   baseConfig = { pkgs, ... }: {
     environment.systemPackages = with pkgs; [
       git
-      git-secret
     ];
+
+    systemd.services.sshd.wantedBy = pkgs.lib.mkForce [ "multi-user.target" ];
+    users.users.root.openssh.authorizedKeys.keys = (import ../keys/pdalpra.nix).sshKeys;
 
     nix.extraOptions = ''
       experimental-features = nix-command flakes
