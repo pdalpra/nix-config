@@ -46,6 +46,7 @@
       mkISO = import ./lib/mk-iso.nix;
       mkNixOS = import ./lib/mk-nixos.nix;
       mkHM = import ./lib/mk-hm.nix;
+      mkDevShell = import ./lib/dev-shell.nix;
       system = "x86_64-linux";
       revision = nixpkgs.lib.mkIf (self ? rev) self.rev;
       perSystem = flake-utils.lib.eachDefaultSystem (system:
@@ -56,7 +57,7 @@
         in
         {
           formatter = pkgs.nixpkgs-fmt;
-          devShell = import ./lib/dev-shell.nix { inherit pkgs unstable agenixBin; };
+          devShell = mkDevShell { inherit pkgs unstable agenixBin; };
         });
     in
     nixpkgs.lib.recursiveUpdate perSystem {
