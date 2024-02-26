@@ -49,7 +49,7 @@
       mkDevShell = import ./lib/dev-shell.nix;
       system = "x86_64-linux";
       revision = nixpkgs.lib.mkIf (self ? rev) self.rev;
-      perSystem = flake-utils.lib.eachDefaultSystem (system:
+      forAllSystems = flake-utils.lib.eachDefaultSystem (system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
           unstable = nixpkgs-unstable.legacyPackages.${system};
@@ -60,7 +60,8 @@
           devShell = mkDevShell { inherit pkgs unstable agenixBin; };
         });
     in
-    nixpkgs.lib.recursiveUpdate perSystem {
+    nixpkgs.lib.recursiveUpdate forAllSystems {
+      packages.${system}.disko = disko.packages.${system}.default;
       nixosConfigurations = {
         iso = mkISO { inherit nixpkgs system; };
         vm = mkNixOS "vm" { inherit nixpkgs home-manager disko system revision; };
