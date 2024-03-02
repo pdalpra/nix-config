@@ -1,4 +1,4 @@
-name: { overlays, lib, home-manager, disko, system, revision }:
+name: { overlays, lib, home-manager, disko, agenix, system, revision }:
 
 let
   pkgs = overlays system;
@@ -7,6 +7,7 @@ let
     myLib = import ./utils.nix { inherit (pkgs) lib; };
   };
   baseConfig = _: {
+    age.identityPaths = [ "/etc/agenix/key" ];
     system.configurationRevision = revision;
     networking.hostName = name;
   };
@@ -19,6 +20,7 @@ lib.nixosSystem {
 
   modules = [
     baseConfig
+    agenix.nixosModules.default
     disko.nixosModules.disko
     ./cachix.nix
     ../system/configuration.nix

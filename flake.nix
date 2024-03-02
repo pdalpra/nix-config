@@ -65,7 +65,7 @@
       packages.${system}.disko = disko.packages.${system}.default;
       nixosConfigurations = {
         iso = mkISO { inherit nixpkgs system; };
-        vm = mkNixOS "vm" { inherit overlays lib home-manager disko system revision; };
+        vm = mkNixOS "vm" { inherit overlays lib home-manager disko agenix system revision; };
       };
       homeConfigurations = {
         pdalpra = mkHM "pdalpra" { inherit overlays home-manager system; };
