@@ -22,7 +22,7 @@ in
     # Restarts polybar automatically
     activation = {
       restartPolybar = lib.hm.dag.entryAfter [ "writeBoundary" ]
-        "$DRY_RUN_CMD ${systemctl} --user restart polybar.service";
+        "$DRY_RUN_CMD ${systemctl} --user restart polybar.service || true";
     };
 
     packages = with pkgs; [
