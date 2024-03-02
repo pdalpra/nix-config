@@ -12,6 +12,11 @@ let
   unstableOverlay = final: prev: {
     unstable = import nixpkgs-unstable { inherit config system; };
   };
+  withCustomLib = final: prev: {
+    lib = prev.lib // {
+      my = import ./utils.nix { inherit (prev) lib; };
+    };
+  };
 in
 import nixpkgs {
   inherit config system;
@@ -19,5 +24,6 @@ import nixpkgs {
   overlays = [
     nurOverlay
     unstableOverlay
+    withCustomLib
   ];
 }

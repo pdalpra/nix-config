@@ -1,12 +1,11 @@
-{ pkgs, lib, myLib, ... }:
+{ pkgs, lib, ... }:
 
 with builtins;
 with lib;
-with myLib;
 
 let
   isRust = path: hasSuffix ".rs" path && path != "mod.rs";
-  toogleModules = enabled: modules: mergeAll (map (mod: { "${mod}" = { disabled = !enabled; }; }) modules);
+  toogleModules = enabled: modules: my.mergeAll (map (mod: { "${mod}" = { disabled = !enabled; }; }) modules);
   starshipPackage = pkgs.unstable.starship;
   promptOrder = [
     "nix_shell"
@@ -33,7 +32,7 @@ let
   # - Get the file name, without the extension (<- name of the module)
   # - Exclude the enabled modules
   disabledModules = pipe modulesSources [
-    (filterFiles isRust)
+    (my.filterFiles isRust)
     (map (removeSuffix ".rs"))
     (subtractLists promptOrder)
     (toogleModules false)
@@ -78,7 +77,7 @@ in
     enable = true;
     enableZshIntegration = true;
     package = starshipPackage;
-    settings = mergeAll [
+    settings = my.mergeAll [
       enabledModules
       disabledModules
       starshipConfig
