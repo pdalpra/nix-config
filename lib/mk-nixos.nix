@@ -4,7 +4,6 @@ let
   pkgs = overlays system;
   specialArgs = {
     hmPkgs = home-manager.packages.${system};
-    myLib = import ./utils.nix { inherit (pkgs) lib; };
   };
   baseConfig = _: {
     system.configurationRevision = revision;
@@ -15,6 +14,7 @@ let
   diskoConfig = import (machineRoot + /disks.nix) { };
 in
 lib.nixosSystem {
+
   inherit system specialArgs pkgs;
 
   modules = [
