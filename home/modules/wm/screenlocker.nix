@@ -20,7 +20,7 @@ in
   # Restarts xss-lock automatically
   home.activation = {
     restartXssLock = lib.hm.dag.entryAfter [ "writeBoundary" ]
-      "$DRY_RUN_CMD ${pkgs.systemd}/bin/systemctl --user restart xss-lock.service";
+      "$DRY_RUN_CMD ${pkgs.systemd}/bin/systemctl --user restart xss-lock.service || true";
   };
 
   services.screen-locker = {
