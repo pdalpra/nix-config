@@ -1,31 +1,13 @@
-username: { nixpkgs, nixpkgs-unstable, nurpkgs, home-manager, system }:
+username: { overlays, home-manager, system }:
 
 let
-  isDarwin = nixpkgs.lib.strings.hasSuffix system "-darwin";
+  pkgs = overlays system;
+  isDarwin = pkgs.lib.strings.hasSuffix system "-darwin";
   specialArgs = {
     inherit isDarwin;
-    myLib = import ./utils.nix { inherit (nixpkgs) lib; };
+    myLib = import ./utils.nix { inherit (pkgs) lib; };
   };
-  config = { allowUnfree = true; };
   homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
-  pkgsForNur = import nixpkgs { inherit config system; };
-  nurOverlay = final: prev: {
-    nur = import nurpkgs {
-      pkgs = pkgsForNur;
-      nurpkgs = pkgsForNur;
-    };
-  };
-  unstableOverlay = final: prev: {
-    unstable = import nixpkgs-unstable { inherit config system; };
-  };
-  pkgs = import nixpkgs {
-    inherit config system;
-
-    overlays = [
-      nurOverlay
-      unstableOverlay
-    ];
-  };
 in
 home-manager.lib.homeManagerConfiguration {
   inherit pkgs;

@@ -1,4 +1,4 @@
-{ pkgs, unstable, agenixBin }:
+{ pkgs, agenixBin }:
 
 with pkgs;
 

@@ -47,27 +47,28 @@
       mkNixOS = import ./lib/mk-nixos.nix;
       mkHM = import ./lib/mk-hm.nix;
       mkDevShell = import ./lib/dev-shell.nix;
+      inherit (nixpkgs) lib;
+      overlays = import ./lib/overlays.nix { inherit nixpkgs nixpkgs-unstable nurpkgs; };
       system = "x86_64-linux";
       revision = nixpkgs.lib.mkIf (self ? rev) self.rev;
       forAllSystems = flake-utils.lib.eachDefaultSystem (system:
         let
-          pkgs = nixpkgs.legacyPackages.${system};
-          unstable = nixpkgs-unstable.legacyPackages.${system};
+          pkgs = overlays system;
           agenixBin = agenix.packages.${system}.default;
         in
         {
           formatter = pkgs.nixpkgs-fmt;
-          devShell = mkDevShell { inherit pkgs unstable agenixBin; };
+          devShell = mkDevShell { inherit pkgs agenixBin; };
         });
     in
     nixpkgs.lib.recursiveUpdate forAllSystems {
       packages.${system}.disko = disko.packages.${system}.default;
       nixosConfigurations = {
         iso = mkISO { inherit nixpkgs system; };
-        vm = mkNixOS "vm" { inherit nixpkgs home-manager disko system revision; };
+        vm = mkNixOS "vm" { inherit overlays lib home-manager disko system revision; };
       };
       homeConfigurations = {
-        pdalpra = mkHM "pdalpra" { inherit nixpkgs nixpkgs-unstable nurpkgs home-manager system; };
+        pdalpra = mkHM "pdalpra" { inherit overlays home-manager system; };
       };
     };
 }

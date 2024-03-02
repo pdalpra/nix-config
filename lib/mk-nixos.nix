@@ -1,21 +1,21 @@
-name: { nixpkgs, home-manager, disko, system, revision }:
+name: { overlays, lib, home-manager, disko, system, revision }:
 
 let
+  pkgs = overlays system;
   specialArgs = {
     hmPkgs = home-manager.packages.${system};
-    myLib = import ./utils.nix { inherit (nixpkgs) lib; };
+    myLib = import ./utils.nix { inherit (pkgs) lib; };
   };
   baseConfig = _: {
     system.configurationRevision = revision;
     networking.hostName = name;
-    nix.registry.nixpkgs.flake = nixpkgs;
   };
   machineRoot = ../system/machines + "/${name}";
   specificConfig = machineRoot + /configuration.nix;
   diskoConfig = import (machineRoot + /disks.nix) { };
 in
-nixpkgs.lib.nixosSystem {
-  inherit system specialArgs;
+lib.nixosSystem {
+  inherit system specialArgs pkgs;
 
   modules = [
     baseConfig
