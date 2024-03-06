@@ -52,6 +52,12 @@ in
   };
 
   programs = {
+    atuin = enableWithZshIntegration // {
+      flags = [
+        "--disable-up-arrow"
+      ];
+    };
+
     bat.enable = true;
     direnv = enableWithZshIntegration // {
       nix-direnv.enable = true;
