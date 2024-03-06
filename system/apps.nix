@@ -28,6 +28,7 @@ in
       tree
       wget
       # Nix utils
+      unstable.nh
       nix-du
       nix-index
       # Custom shell scripts
