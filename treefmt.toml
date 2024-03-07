@@ -9,8 +9,7 @@ options = ["-i"]
 includes = ["*.hs"]
 
 [formatter.nix]
-command = "nix"
-options = ["fmt"]
+command = "nixpkgs-fmt"
 includes = ["*.nix"]
 
 [formatter.yaml]

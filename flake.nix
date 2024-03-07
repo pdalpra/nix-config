@@ -46,20 +46,30 @@
       mkISO = import ./lib/mk-iso.nix;
       mkNixOS = import ./lib/mk-nixos.nix;
       mkHM = import ./lib/mk-hm.nix;
-      mkDevShell = import ./lib/dev-shell.nix;
       inherit (nixpkgs) lib;
       overlays = import ./lib/overlays.nix { inherit nixpkgs nixpkgs-unstable nurpkgs; };
       system = "x86_64-linux";
       revision = nixpkgs.lib.mkIf (self ? rev) self.rev;
-      forAllSystems = flake-utils.lib.eachDefaultSystem (system:
-        let
-          pkgs = overlays system;
-          agenixBin = agenix.packages.${system}.default;
-        in
-        {
-          formatter = pkgs.nixpkgs-fmt;
-          devShell = mkDevShell { inherit pkgs agenixBin; };
-        });
+      forAllSystems = flake-utils.lib.eachDefaultSystem
+        (system:
+          let
+            pkgs = overlays system;
+            agenixBin = agenix.packages.${system}.default;
+            lintingPkgs = with pkgs; [
+              treefmt
+              statix
+              deadnix
+              haskellPackages.cabal-fmt
+              haskellPackages.fourmolu
+              yamlfix
+              nixpkgs-fmt
+            ];
+          in
+          {
+            formatter = pkgs.nixpkgs-fmt;
+            checks.lint = import ./lib/lint.nix { inherit pkgs lintingPkgs; };
+            devShells.default = import ./lib/dev-shell.nix { inherit pkgs lintingPkgs agenixBin; };
+          });
     in
     nixpkgs.lib.recursiveUpdate forAllSystems {
       packages.${system}.disko = disko.packages.${system}.default;
