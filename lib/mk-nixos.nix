@@ -1,11 +1,16 @@
-name: { overlays, lib, home-manager, disko, agenix, system, revision }:
+name: { lib
+      , myLib
+      , overlays
+      , home-manager
+      , agenix
+      , disko
+      , system
+      , revision
+      }:
 
 let
   pkgs = overlays system;
-  specialArgs = {
-    hmPkgs = home-manager.packages.${system};
-    myLib = import ./utils.nix { inherit (pkgs) lib; };
-  };
+  specialArgs = { inherit myLib; };
   baseConfig = _: {
     age.identityPaths = [ "/etc/agenix/key" ];
     system.configurationRevision = revision;
@@ -13,7 +18,7 @@ let
   };
   machineRoot = ../system/machines + "/${name}";
   specificConfig = machineRoot + /configuration.nix;
-  diskoConfig = import (machineRoot + /disks.nix) { };
+  diskoConfig = machineRoot + /disks.nix;
 in
 lib.nixosSystem {
   inherit system specialArgs pkgs;
@@ -26,5 +31,6 @@ lib.nixosSystem {
     ../system/configuration.nix
     specificConfig
     diskoConfig
+    home-manager.nixosModules.home-manager
   ];
 }
