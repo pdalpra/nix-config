@@ -3,13 +3,13 @@
 let
   config = { allowUnfree = true; };
   pkgs = import nixpkgs { inherit config system; };
-  nurOverlay = final: prev: {
+  nurOverlay = _: _: {
     nur = import nurpkgs {
       inherit pkgs;
       nurpkgs = pkgs;
     };
   };
-  unstableOverlay = final: prev: {
+  unstableOverlay = _: _: {
     unstable = import nixpkgs-unstable { inherit config system; };
   };
 in
