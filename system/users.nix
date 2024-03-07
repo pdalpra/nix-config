@@ -1,6 +1,7 @@
-{ pkgs, hmPkgs, config, ... }:
+{ pkgs, config, myLib, ... }:
 
 {
+
   # Secrets
   age.secrets.pdalpra.file = ../secrets/pdalpra.age;
   age.secrets.root.file = ../secrets/root.age;
@@ -18,7 +19,6 @@
         home = "/home/pdalpra";
         createHome = true;
         shell = pkgs.zsh;
-        packages = [ hmPkgs.home-manager ];
         extraGroups = [
           "docker"
           "wheel"
@@ -26,5 +26,13 @@
         openssh.authorizedKeys.keys = (import ../keys/pdalpra.nix).sshKeys;
       };
     };
+  };
+  home-manager = {
+    backupFileExtension = "bkp";
+    extraSpecialArgs = { inherit myLib; };
+    useUserPackages = true;
+    useGlobalPkgs = true;
+
+    users.pdalpra = ../home/home.nix;
   };
 }
