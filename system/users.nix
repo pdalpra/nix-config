@@ -6,6 +6,8 @@
   age.secrets.pdalpra.file = ../secrets/pdalpra.age;
   age.secrets.root.file = ../secrets/root.age;
 
+  programs.fuse.userAllowOther = true;
+
   users = {
     mutableUsers = false;
     defaultUserShell = pkgs.bash;

@@ -1,5 +1,9 @@
 {
 
+
+  # Required by ZFS
+  networking.hostId = "fcd4a364";
+
   boot = {
     initrd.availableKernelModules = [
       "ata_piix"

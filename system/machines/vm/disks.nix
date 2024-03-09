@@ -1,8 +1,32 @@
-{ disks ? [ "/dev/sda" ], ... }:
+{ config, lib, persistence, ... }:
+
 let
-  mainDisk = builtins.elemAt disks 0;
+  mainDisk = "/dev/sda";
+  swapSize = "4G";
+  blankSnapshot = "main/root@blank";
+  poolName = "main";
+  zfs_fs = mountpoint: options: {
+    inherit mountpoint;
+    type = "zfs_fs";
+    options.mountpoint = "legacy";
+  } // options;
 in
 {
+  services.zfs.trim.enable = true;
+
+  fileSystems = {
+    ${persistence.system}.neededForBoot = true;
+    ${persistence.homes}.neededForBoot = true;
+  };
+
+  boot = {
+    supportedFilesystems = [ "zfs" ];
+    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+    initrd.postDeviceCommands = lib.mkAfter ''
+      zfs rollback -r ${blankSnapshot} && echo "Blank snapshot restored"
+    '';
+  };
+
   disko.devices = {
     disk.main = {
       device = mainDisk;
@@ -13,20 +37,23 @@ in
           ESP = {
             name = "ESP";
             type = "EF00";
-            size = "512M";
+            size = "1G";
             content = {
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
             };
           };
-          root = {
-            name = "root";
-            end = "-2G";
+          luks = {
+            end = "-${swapSize}";
             content = {
-              type = "filesystem";
-              format = "ext4";
-              mountpoint = "/";
+              type = "luks";
+              name = "encrypted";
+              extraOpenArgs = [ "--allow-discards" ];
+              content = {
+                type = "zfs";
+                pool = poolName;
+              };
             };
           };
           swap = {
@@ -37,6 +64,20 @@ in
             };
           };
         };
+      };
+    };
+    zpool.${poolName} = {
+      type = "zpool";
+      mode = ""; # unmirrored
+      options.ashift = "13"; # 8k blocks
+      rootFsOptions.canmount = "off";
+      datasets = {
+        root = zfs_fs "/" {
+          postCreateHook = "zfs snapshot ${blankSnapshot}";
+        };
+        nix = zfs_fs "/nix" { };
+        persistentSystem = zfs_fs persistence.system { };
+        persistentHomes = zfs_fs persistence.homes { };
       };
     };
   };
