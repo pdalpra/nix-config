@@ -6,6 +6,14 @@ _:
     ./wm.nix
   ];
 
+  boot.loader = {
+    efi.canTouchEfiVariables = true;
+    systemd-boot = {
+      enable = true;
+      memtest86.enable = true;
+    };
+  };
+
   time.timeZone = "Europe/Paris";
   i18n.defaultLocale = "en_US.UTF-8";
 
