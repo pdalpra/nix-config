@@ -22,6 +22,7 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    impermanence.url = "github:nix-community/impermanence";
 
     # Flake libraries
     flake-utils.url = "github:numtide/flake-utils";
@@ -39,6 +40,7 @@
     , agenix
     , home-manager
     , disko
+    , impermanence
     , flake-utils
     , ...
     }:
@@ -84,6 +86,7 @@
             home-manager
             agenix
             disko
+            impermanence
             system
             revision;
         };

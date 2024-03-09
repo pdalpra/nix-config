@@ -4,15 +4,20 @@ name: { lib
       , home-manager
       , agenix
       , disko
+      , impermanence
       , system
       , revision
       }:
 
 let
   pkgs = overlays system;
-  specialArgs = { inherit myLib; };
+  persistence = {
+    system = "/persistent-system";
+    homes = "/persistent-homes";
+  };
+  specialArgs = { inherit myLib impermanence persistence; };
   baseConfig = _: {
-    age.identityPaths = [ "/etc/agenix/key" ];
+    age.identityPaths = [ "${persistence.system}/key" ];
     system.configurationRevision = revision;
     networking.hostName = name;
   };
@@ -31,6 +36,7 @@ lib.nixosSystem {
     ../system/configuration.nix
     specificConfig
     diskoConfig
+    impermanence.nixosModules.impermanence
     home-manager.nixosModules.home-manager
   ];
 }

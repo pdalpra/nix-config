@@ -3,6 +3,7 @@ _:
   imports = [
     ./apps.nix
     ./users.nix
+    ./impermanence.nix
     ./wm.nix
   ];
 
