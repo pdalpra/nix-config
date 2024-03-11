@@ -1,13 +1,13 @@
-name: { lib
-      , myLib
-      , overlays
-      , home-manager
-      , agenix
-      , disko
-      , impermanence
-      , system
-      , revision
-      }:
+{ lib
+, myLib
+, overlays
+, home-manager
+, agenix
+, disko
+, impermanence
+, system
+, revision
+}: name:
 
 let
   pkgs = overlays system;
@@ -15,7 +15,9 @@ let
     system = "/persistent-system";
     homes = "/persistent-homes";
   };
-  specialArgs = { inherit myLib impermanence persistence; };
+  specialArgs = {
+    inherit myLib impermanence persistence;
+  };
   baseConfig = _: {
     age.identityPaths = [ "${persistence.system}/key" ];
     system.configurationRevision = revision;

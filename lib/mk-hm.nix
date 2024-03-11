@@ -1,8 +1,8 @@
-username: { myLib
-          , overlays
-          , home-manager
-          , system
-          }:
+{ myLib
+, overlays
+, home-manager
+, system
+}: username:
 
 let
   pkgs = overlays system;
