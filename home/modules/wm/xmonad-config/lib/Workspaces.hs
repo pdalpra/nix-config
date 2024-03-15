@@ -68,7 +68,7 @@ work :: Workspace
 work =
   Workspace
     { name = "work"
-    , workingDirectory = "~/Work/stuart"
+    , workingDirectory = "~/Code/work"
     , runAtStartup = ["idea"]
     }
 
@@ -77,7 +77,7 @@ perso :: Workspace
 perso =
   Workspace
     { name = "perso"
-    , workingDirectory = "~/Work/personal"
+    , workingDirectory = "~/Code/perso"
     , runAtStartup = []
     }
 
@@ -87,7 +87,7 @@ nix :: Workspace
 nix =
   Workspace
     { name = "nix"
-    , workingDirectory = "~/Work/personal/nix-config"
+    , workingDirectory = "~/Code/perso/nix-config"
     , runAtStartup = ["code", "kitty"]
     }
 
