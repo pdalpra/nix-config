@@ -1,8 +1,12 @@
 { pkgs, config, ... }:
 
-let gitConfigHome = "${config.xdg.configHome}/git";
-in
 {
+  age.secrets = {
+    perso.file = ../../../secrets/git-perso.age;
+    work.file = ../../../secrets/git-work.age;
+  };
+
+
   home.file.".tigrc" = {
     text = ''
       bind main = !git commit --fixup=%(commit)
@@ -33,11 +37,13 @@ in
       enable = true;
       includes = [
         {
-          path = "${gitConfigHome}/config_local";
+          inherit (config.age.secrets.perso) path;
+        }
+        {
+          condition = "gitdir:~/Code/work";
+          inherit (config.age.secrets.work) path;
         }
       ];
-      userName = "Pierre Dal-Pra";
-      userEmail = "dalpra.pierre@gmail.com";
       delta = {
         enable = true;
         options = {

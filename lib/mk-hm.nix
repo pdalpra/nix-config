@@ -1,6 +1,7 @@
 { myLib
 , overlays
 , home-manager
+, agenix
 , system
 }: username:
 
@@ -17,6 +18,7 @@ home-manager.lib.homeManagerConfiguration {
 
   modules = [
     { home = { inherit username homeDirectory; }; }
+    agenix.homeManagerModules.default
     ../home/home.nix
   ];
 }

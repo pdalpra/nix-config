@@ -16,7 +16,7 @@ let
     homes = "/persistent-homes";
   };
   specialArgs = {
-    inherit myLib impermanence persistence;
+    inherit myLib agenix impermanence persistence;
   };
   baseConfig = _: {
     age.identityPaths = [ "${persistence.system}/key" ];
