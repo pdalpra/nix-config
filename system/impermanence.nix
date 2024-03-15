@@ -1,4 +1,4 @@
-{ lib, config, persistence, impermanence, ... }:
+{ lib, config, persistence, agenix, impermanence, ... }:
 
 let
   persistentHomePath = user: "${persistence.homes}/${user}";
@@ -15,6 +15,7 @@ in
 
   home-manager.users.pdalpra = {
     imports = [
+      agenix.homeManagerModules.default
       impermanence.nixosModules.home-manager.impermanence
     ];
 

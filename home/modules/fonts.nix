@@ -1,28 +1,22 @@
-{ pkgs, ... }:
+{ config, myLib, ... }:
 
 let
-  myFonts = pkgs.stdenvNoCC.mkDerivation {
-    pname = "my-fonts";
-    version = "1.0.0";
-    src = ../fonts;
-    dontConfigure = true;
-
-    meta = {
-      description = "My fonts";
+  home = config.home.homeDirectory;
+  fontNames = [
+    "BerkeleyMono-Bold.otf"
+    "BerkeleyMono-BoldItalic.otf"
+    "BerkeleyMono-Italic.otf"
+    "BerkeleyMono-Regular.otf"
+    "BerkeleyMono-Bold.ttf"
+    "BerkeleyMono-BoldItalic.ttf"
+    "BerkeleyMono-Italic.ttf"
+    "BerkeleyMono-Regular.ttf"
+  ];
+  toSecret = fontName: {
+    age.secrets.${fontName} = {
+      file = ../../secrets/fonts/${fontName}.age;
+      path = "${home}/.local/share/fonts/${fontName}";
     };
-
-    installPhase = ''
-      runHook preInstall
-      mkdir -p $out/share/fonts/opentype
-      mkdir -p $out/share/fonts/truetype
-      cp *.otf $out/share/fonts/opentype || true
-      cp *.ttf $out/share/fonts/truetype || true
-      runHook postInstall
-    '';
   };
 in
-{
-  home.packages = [
-    myFonts
-  ];
-}
+myLib.mergeAll (map toSecret fontNames)

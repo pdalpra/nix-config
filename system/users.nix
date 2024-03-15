@@ -3,8 +3,10 @@
 {
 
   # Secrets
-  age.secrets.pdalpra.file = ../secrets/pdalpra.age;
-  age.secrets.root.file = ../secrets/root.age;
+  age.secrets = {
+    pdalpra.file = ../secrets/pdalpra.age;
+    root.file = ../secrets/root.age;
+  };
 
   programs.fuse.userAllowOther = true;
 
