@@ -72,7 +72,7 @@ in
     nnn = {
       enable = true;
       bookmarks = {
-        w = "~/Work";
+        w = "~/Code";
       };
     };
     zoxide = enableWithZshIntegration // {
