@@ -19,6 +19,8 @@ let
     "java"
     "elm"
     "golang"
+    "python"
+    "nodejs"
     "jobs"
     "line_break"
     "character"
@@ -67,6 +69,8 @@ let
       style = "bold fg:136";
     };
     golang.format = "\\[[go: $version](bold fg:14)\\]";
+    python.format = "\\[[python: $version](bold fg:2)\\]";
+    nodejs.format = "\\[[node: $version](bold fg:11)\\]";
     java.format = "\\[[java: $version](bold fg:202)\\]";
     jobs.symbol = "";
     nix_shell.format = "\\[[nix: $name](bold fg:69)\\]";
