@@ -21,6 +21,7 @@ let
     "golang"
     "python"
     "nodejs"
+    "haskell"
     "jobs"
     "line_break"
     "character"
@@ -69,6 +70,7 @@ let
       style = "bold fg:136";
     };
     golang.format = "\\[[go: $version](bold fg:14)\\]";
+    haskell.format = "\\[[λ: $version](bold fg:5)\\]";
     python.format = "\\[[python: $version](bold fg:2)\\]";
     nodejs.format = "\\[[node: $version](bold fg:11)\\]";
     java.format = "\\[[java: $version](bold fg:202)\\]";
