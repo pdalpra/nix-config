@@ -11,15 +11,12 @@
 
 let
   pkgs = overlays system;
-  persistence = {
-    system = "/persistent-system";
-    homes = "/persistent-homes";
-  };
   specialArgs = {
-    inherit myLib agenix impermanence persistence;
+    inherit myLib agenix impermanence;
   };
   baseConfig = _: {
-    age.identityPaths = [ "${persistence.system}/key" ];
+    # FIXME : agenix/impermanence mixup
+    age.identityPaths = [ "/persistent-system/key" ];
     system.configurationRevision = revision;
     networking.hostName = name;
   };
@@ -34,11 +31,12 @@ lib.nixosSystem {
     baseConfig
     agenix.nixosModules.default
     disko.nixosModules.disko
+    impermanence.nixosModules.impermanence
+    ../modules/nixos/impermanence.nix
     ./cachix.nix
     ../system/configuration.nix
     specificConfig
     diskoConfig
-    impermanence.nixosModules.impermanence
     home-manager.nixosModules.home-manager
   ];
 }

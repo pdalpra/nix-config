@@ -1,28 +1,14 @@
-{ lib, config, persistence, agenix, impermanence, ... }:
+_:
 
-let
-  persistentHomePath = user: "${persistence.homes}/${user}";
-in
 {
-
-  environment.persistence.${persistence.system} = {
-    hideMounts = true;
+  system.impermanence = {
+    enable = true;
 
     files = [
       "/etc/machine-id"
     ];
-  };
 
-  home-manager.users.pdalpra = {
-    imports = [
-      agenix.homeManagerModules.default
-      impermanence.nixosModules.home-manager.impermanence
-    ];
-
-    home.persistence.pdalpra = {
-      persistentStoragePath = persistentHomePath "pdalpra";
-      allowOther = true;
-
+    users.pdalpra = {
       directories = [
         "Code"
         "Desktop"
@@ -34,23 +20,6 @@ in
         ".ssh"
         ".local/share/atuin"
       ];
-
     };
   };
-
-  system.activationScripts.persistent-dirs.text =
-    let
-      users = lib.attrValues config.users.users;
-      mkHomePersist = user:
-        let
-          path = persistentHomePath user.name;
-        in
-        lib.optionalString user.createHome ''
-          mkdir -p ${path}
-          chown ${user.name}:${user.group} ${path}
-          chmod ${user.homeMode} ${path}
-        '';
-    in
-    lib.concatLines (map mkHomePersist users);
-
 }

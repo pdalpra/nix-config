@@ -1,10 +1,11 @@
-{ config, lib, persistence, ... }:
+{ config, lib, ... }:
 
 let
   mainDisk = "/dev/sda";
   swapSize = "4G";
   blankSnapshot = "main/root@blank";
   poolName = "main";
+  impermanencePaths = config.system.impermanence.paths;
   zfs_fs = mountpoint: options: {
     inherit mountpoint;
     type = "zfs_fs";
@@ -15,8 +16,8 @@ in
   services.zfs.trim.enable = true;
 
   fileSystems = {
-    ${persistence.system}.neededForBoot = true;
-    ${persistence.homes}.neededForBoot = true;
+    ${impermanencePaths.system}.neededForBoot = true;
+    ${impermanencePaths.homes}.neededForBoot = true;
   };
 
   boot = {
@@ -76,8 +77,8 @@ in
           postCreateHook = "zfs snapshot ${blankSnapshot}";
         };
         nix = zfs_fs "/nix" { };
-        persistentSystem = zfs_fs persistence.system { };
-        persistentHomes = zfs_fs persistence.homes { };
+        persistentSystem = zfs_fs impermanencePaths.system { };
+        persistentHomes = zfs_fs impermanencePaths.homes { };
       };
     };
   };
