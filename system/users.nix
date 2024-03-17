@@ -1,4 +1,4 @@
-{ pkgs, config, myLib, ... }:
+{ pkgs, config, myLib, agenix, ... }:
 
 {
 
@@ -7,8 +7,6 @@
     pdalpra.file = ../secrets/pdalpra.age;
     root.file = ../secrets/root.age;
   };
-
-  programs.fuse.userAllowOther = true;
 
   users = {
     mutableUsers = false;
@@ -37,6 +35,11 @@
     useUserPackages = true;
     useGlobalPkgs = true;
 
-    users.pdalpra = ../home/home.nix;
+    users.pdalpra = {
+      imports = [
+        agenix.homeManagerModules.default
+        ../home/home.nix
+      ];
+    };
   };
 }
