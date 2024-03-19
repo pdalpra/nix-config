@@ -1,31 +1,20 @@
-{ config, lib, ... }:
+{ config, ... }:
 
 let
   mainDisk = "/dev/sda";
   swapSize = "4G";
-  blankSnapshot = "main/root@blank";
-  poolName = "main";
-  impermanencePaths = config.system.impermanence.paths;
-  zfs_fs = mountpoint: options: {
-    inherit mountpoint;
-    type = "zfs_fs";
-    options.mountpoint = "legacy";
-  } // options;
+  pool = "main";
 in
 {
   services.zfs.trim.enable = true;
-
-  fileSystems = {
-    ${impermanencePaths.system}.neededForBoot = true;
-    ${impermanencePaths.homes}.neededForBoot = true;
+  system.impermanence.zfs = {
+    enable = true;
+    inherit pool;
   };
 
   boot = {
     supportedFilesystems = [ "zfs" ];
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-    initrd.postDeviceCommands = lib.mkAfter ''
-      zfs rollback -r ${blankSnapshot} && echo "Blank snapshot restored"
-    '';
   };
 
   disko.devices = {
@@ -53,7 +42,7 @@ in
               extraOpenArgs = [ "--allow-discards" ];
               content = {
                 type = "zfs";
-                pool = poolName;
+                inherit pool;
               };
             };
           };
@@ -67,19 +56,10 @@ in
         };
       };
     };
-    zpool.${poolName} = {
+    zpool.${pool} = {
       type = "zpool";
       mode = ""; # unmirrored
-      options.ashift = "13"; # 8k blocks
-      rootFsOptions.canmount = "off";
-      datasets = {
-        root = zfs_fs "/" {
-          postCreateHook = "zfs snapshot ${blankSnapshot}";
-        };
-        nix = zfs_fs "/nix" { };
-        persistentSystem = zfs_fs impermanencePaths.system { };
-        persistentHomes = zfs_fs impermanencePaths.homes { };
-      };
+      options.ashift = "12"; # 4k blocks
     };
   };
 }
