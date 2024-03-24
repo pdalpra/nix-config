@@ -22,6 +22,10 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     impermanence.url = "github:nix-community/impermanence";
 
     # Flake libraries
@@ -40,6 +44,7 @@
     , agenix
     , home-manager
     , disko
+    , darwin
     , impermanence
     , flake-utils
     , ...
@@ -53,6 +58,9 @@
       mkISO = import ./lib/mk-iso.nix;
       mkNixOS = import ./lib/mk-nixos.nix {
         inherit lib myLib overlays home-manager agenix disko impermanence system revision;
+      };
+      mkDarwin = import ./lib/mk-darwin.nix {
+        inherit lib overlays darwin revision;
       };
       mkHM = import ./lib/mk-hm.nix { inherit myLib overlays agenix home-manager system; };
       forAllSystems = flake-utils.lib.eachDefaultSystem
@@ -81,6 +89,9 @@
       nixosConfigurations = {
         iso = mkISO { inherit nixpkgs system; };
         vm = mkNixOS "vm";
+      };
+      darwinConfigurations = {
+        work = mkDarwin "x86_64-darwin" "work";
       };
       homeConfigurations = {
         pdalpra = mkHM "pdalpra";

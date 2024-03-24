@@ -30,7 +30,6 @@ in
       # Nix utils
       unstable.nh
       nix-du
-      nix-index
       # Custom shell scripts
       nixosRollbackAnyGen
     ];
