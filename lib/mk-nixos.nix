@@ -2,6 +2,7 @@
 , myLib
 , overlays
 , home-manager
+, nixos-hardware
 , agenix
 , disko
 , impermanence
@@ -11,8 +12,9 @@
 
 let
   pkgs = overlays system;
+  hardwareProfiles = nixos-hardware.nixosModules;
   specialArgs = {
-    inherit myLib agenix impermanence;
+    inherit myLib impermanence hardwareProfiles;
   };
   baseConfig = _: {
     # FIXME : agenix/impermanence mixup

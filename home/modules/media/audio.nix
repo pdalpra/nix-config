@@ -61,5 +61,8 @@
     '';
   };
 
-  services.pasystray.enable = true;
+  services = {
+    easyeffects.enable = true;
+    pasystray.enable = true;
+  };
 }
