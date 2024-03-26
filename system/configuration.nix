@@ -1,4 +1,4 @@
-_:
+{ lib, ... }:
 {
   imports = [
     ./apps.nix
@@ -28,15 +28,17 @@ _:
     includeAllModules = true;
   };
 
-  hardware = {
-    bluetooth.enable = true;
-    pulseaudio.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    jack.enable = true;
+    pulse.enable = true;
   };
 
   networking = {
     firewall.enable = false;
-    useDHCP = true;
-    nameservers = [
+    useDHCP = lib.mkDefault true;
+    nameservers = lib.mkDefault [
       "1.1.1.1"
       "9.9.9.9"
       "4.4.4.4"

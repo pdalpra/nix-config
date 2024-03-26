@@ -9,6 +9,7 @@
     nurpkgs.url = "github:nix-community/NUR";
 
     # Additional tools
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
     agenix = {
       url = "github:yaxitech/ragenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,6 +38,7 @@
     , nixpkgs
     , nixpkgs-unstable
     , nurpkgs
+    , nixos-hardware
     , agenix
     , home-manager
     , disko
@@ -52,7 +54,7 @@
       revision = nixpkgs.lib.mkIf (self ? rev) self.rev;
       mkISO = import ./lib/mk-iso.nix;
       mkNixOS = import ./lib/mk-nixos.nix {
-        inherit lib myLib overlays home-manager agenix disko impermanence system revision;
+        inherit lib myLib overlays home-manager nixos-hardware agenix disko impermanence system revision;
       };
       mkHM = import ./lib/mk-hm.nix { inherit myLib overlays agenix home-manager system; };
       forAllSystems = flake-utils.lib.eachDefaultSystem
@@ -81,6 +83,7 @@
       nixosConfigurations = {
         iso = mkISO { inherit nixpkgs system; };
         vm = mkNixOS "vm";
+        fw16 = mkNixOS "fw16";
       };
       homeConfigurations = {
         pdalpra = mkHM "pdalpra";
