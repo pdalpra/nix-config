@@ -20,9 +20,9 @@ import nixpkgs {
   inherit config system;
 
   overlays = [
+    customLib
     nurOverlay
     unstableOverlay
-    customLib
   ];
 }
 
