@@ -13,7 +13,9 @@ let
     unstable = import nixpkgs-unstable { inherit config system; };
   };
   customLib = _: prev: {
-    lib = prev.lib // import ./utils.nix { inherit (prev) lib; };
+    lib = prev.lib // {
+      extra = import ./utils.nix { inherit (prev) lib; };
+    };
   };
 in
 import nixpkgs {
