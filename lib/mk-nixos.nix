@@ -1,5 +1,4 @@
 { lib
-, myLib
 , overlays
 , home-manager
 , agenix
@@ -11,9 +10,7 @@
 
 let
   pkgs = overlays system;
-  specialArgs = {
-    inherit myLib agenix impermanence;
-  };
+  specialArgs = { inherit agenix impermanence; };
   baseConfig = _: {
     # FIXME : agenix/impermanence mixup
     age.identityPaths = [ "/persistent-system/key" ];
@@ -25,6 +22,7 @@ let
   diskoConfig = machineRoot + /disks.nix;
 in
 lib.nixosSystem {
+
   inherit system specialArgs pkgs;
 
   modules = [
