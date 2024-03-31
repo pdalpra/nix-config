@@ -3,6 +3,7 @@
 let
   config = { allowUnfree = true; };
   pkgs = import nixpkgs { inherit config system; };
+  utils = import ./utils.nix { inherit (pkgs) lib; };
   nurOverlay = _: _: {
     nur = import nurpkgs {
       inherit pkgs;
@@ -13,7 +14,7 @@ let
     unstable = import nixpkgs-unstable { inherit config system; };
   };
   customLib = _: prev: {
-    lib = prev.lib // (import ./utils.nix { inherit (prev) lib; });
+    lib = prev.lib // utils;
   };
 in
 import nixpkgs {
