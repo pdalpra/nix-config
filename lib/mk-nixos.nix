@@ -24,7 +24,7 @@ let
 in
 nixosSystem {
 
-  inherit system specialArgs pkgs;
+  inherit lib system specialArgs pkgs;
 
   modules = [
     baseConfig
