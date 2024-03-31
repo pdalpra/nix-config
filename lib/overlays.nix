@@ -13,15 +13,15 @@ let
   unstableOverlay = _: _: {
     unstable = import nixpkgs-unstable { inherit config system; };
   };
-  #customLib = final: prev: {
-  #  final.lib = prev.lib // utils;
-  #};
+  customLib = final: prev: {
+    final.lib = prev.lib // utils;
+  };
 in
 import nixpkgs {
   inherit config system;
 
   overlays = [
-    #customLib
+    customLib
     nurOverlay
     unstableOverlay
   ];
