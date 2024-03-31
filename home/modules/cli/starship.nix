@@ -58,6 +58,7 @@ let
       tag_symbol = "";
     };
     git_status = {
+      command_timeout = 1000;
       ahead = "⇡$count";
       behind = " ⇣$count";
       untracked = "?$count";
