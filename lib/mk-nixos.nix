@@ -5,6 +5,7 @@
 , impermanence
 , system
 , revision
+, nixosSystem
 }: name:
 
 let
@@ -21,7 +22,7 @@ let
   specificConfig = machineRoot + /configuration.nix;
   diskoConfig = machineRoot + /disks.nix;
 in
-lib.nixosSystem {
+nixosSystem {
 
   inherit system specialArgs pkgs;
 

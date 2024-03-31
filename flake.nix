@@ -51,6 +51,7 @@
       mkISO = import ./lib/mk-iso.nix;
       mkNixOS = import ./lib/mk-nixos.nix {
         inherit overlays home-manager agenix disko impermanence system revision;
+        inherit (nixpkgs.lib) nixosSystem;
       };
       mkHM = import ./lib/mk-hm.nix { inherit overlays agenix home-manager system; };
       forAllSystems = flake-utils.lib.eachDefaultSystem
