@@ -1,7 +1,6 @@
-{ config, lib, myLib, impermanence, ... }:
+{ config, lib, impermanence, ... }:
 
 with lib;
-with myLib;
 
 let
   cfg = config.system.impermanence;

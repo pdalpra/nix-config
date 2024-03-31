@@ -1,4 +1,4 @@
-{ pkgs, config, myLib, agenix, ... }:
+{ pkgs, config, lib, agenix, ... }:
 
 {
 
@@ -31,7 +31,6 @@
   };
   home-manager = {
     backupFileExtension = "bkp";
-    extraSpecialArgs = { inherit myLib; };
     useUserPackages = true;
     useGlobalPkgs = true;
 
