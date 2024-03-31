@@ -45,13 +45,12 @@
     , ...
     }:
     let
-      inherit (nixpkgs) lib;
       overlays = import ./lib/overlays.nix { inherit nixpkgs nixpkgs-unstable nurpkgs; };
       system = "x86_64-linux";
       revision = nixpkgs.lib.mkIf (self ? rev) self.rev;
       mkISO = import ./lib/mk-iso.nix;
       mkNixOS = import ./lib/mk-nixos.nix {
-        inherit lib overlays home-manager agenix disko impermanence system revision;
+        inherit overlays home-manager agenix disko impermanence system revision;
       };
       mkHM = import ./lib/mk-hm.nix { inherit overlays agenix home-manager system; };
       forAllSystems = flake-utils.lib.eachDefaultSystem

@@ -1,5 +1,4 @@
-{ lib
-, overlays
+{ overlays
 , home-manager
 , agenix
 , disko
@@ -10,6 +9,7 @@
 
 let
   pkgs = overlays system;
+  inherit (pkgs) lib;
   specialArgs = { inherit agenix impermanence; };
   baseConfig = _: {
     # FIXME : agenix/impermanence mixup
