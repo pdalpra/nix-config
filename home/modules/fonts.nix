@@ -1,4 +1,4 @@
-{ config, myLib, ... }:
+{ config, lib, .. }:
 
 let
   home = config.home.homeDirectory;
@@ -19,4 +19,4 @@ let
     };
   };
 in
-myLib.mergeAll (map toSecret fontNames)
+lib.mergeAll (map toSecret fontNames)

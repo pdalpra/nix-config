@@ -1,8 +1,7 @@
-{ pkgs, lib, myLib, ... }:
+{ pkgs, lib, ... }:
 
 with builtins;
 with lib;
-with myLib;
 
 let
   isRust = path: hasSuffix ".rs" path && path != "mod.rs";
@@ -59,6 +58,7 @@ let
       tag_symbol = "";
     };
     git_status = {
+      command_timeout = 1000;
       ahead = "⇡$count";
       behind = " ⇣$count";
       untracked = "?$count";

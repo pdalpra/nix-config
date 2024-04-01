@@ -1,5 +1,4 @@
-{ myLib
-, overlays
+{ overlays
 , home-manager
 , agenix
 , system
@@ -8,13 +7,12 @@
 let
   pkgs = overlays system;
   isDarwin = pkgs.lib.strings.hasSuffix system "-darwin";
-  specialArgs = { inherit isDarwin myLib; };
-  homeDirectory = if isDarwin then "/Users/${username}" else "/home/${username}";
+  extraSpecialArgs = { inherit isDarwin; };
+  homeDirectory =
+    if isDarwin then "/Users/${username}" else "/home/${username}";
 in
 home-manager.lib.homeManagerConfiguration {
-  inherit pkgs;
-
-  extraSpecialArgs = specialArgs;
+  inherit pkgs extraSpecialArgs;
 
   modules = [
     { home = { inherit username homeDirectory; }; }
