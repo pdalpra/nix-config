@@ -1,9 +1,20 @@
 { pkgs, config, ... }:
 
+
+let
+  gitConfigHome =
+    "${config.xdg.configHome}/git";
+in
 {
   age.secrets = {
-    perso.file = ../../../secrets/git-perso.age;
-    work.file = ../../../secrets/git-work.age;
+    perso = {
+      file = ../../../secrets/git-perso.age;
+      path = "${gitConfigHome}/perso";
+    };
+    work = {
+      file = ../../../secrets/git-work.age;
+      path = "${gitConfigHome}/work";
+    };
   };
 
 
