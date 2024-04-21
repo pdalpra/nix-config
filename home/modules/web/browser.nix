@@ -10,6 +10,7 @@
         { id = "mdjildafknihdffpkfmmpnpoiajfjnjd"; } # Consent-o-matic
         { id = "mjdepdfccjgcndkmemponafgioodelna"; } # Distraction Free Youtube
         { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # uBlock Origin
+        { id = "fgmjlmbojbkmdpofahffgcpkhkngfpef"; } # Startpage
       ];
     };
 
@@ -27,6 +28,7 @@
             df-youtube
             onepassword-password-manager
             ublock-origin
+            startpage-private-search
           ];
         };
       };
