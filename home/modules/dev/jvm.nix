@@ -2,7 +2,7 @@
 
 let
   sbtBaseConfigPath = config.programs.sbt.baseUserConfigPath;
-  jdk = pkgs.jdk11;
+  jdk = pkgs.jdk21;
   sbt-extras = pkgs.sbt-extras.override { inherit jdk; };
 in
 {
@@ -34,14 +34,9 @@ in
       package = sbt-extras;
       plugins = [
         {
-          org = "com.typesafe.sbt";
-          artifact = "sbt-git";
-          version = "1.0.2";
-        }
-        {
           org = "com.timushev.sbt";
           artifact = "sbt-updates";
-          version = "0.6.1";
+          version = "0.6.3";
         }
         {
           org = "io.github.todokr";
