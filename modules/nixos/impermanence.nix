@@ -26,10 +26,11 @@ let
 in
 {
   options.system.impermanence = with types; {
-    enable = mkEnableOption "enable impermanence";
+    enable = mkEnableOption "Enable impermanence";
+    pause = mkEnableOption "Keep disk layout, but do not wipe on boot";
 
     zfs = {
-      enable = mkEnableOption "use ZFS for persistence";
+      enable = mkEnableOption "Use ZFS for persistence";
 
       pool = mkOption {
         type = str;
@@ -136,9 +137,12 @@ in
     # - auto restore blank snapshot at boot
     # - Create datasets for system, homes and the nix store
     (mkIf (cfg.enable && cfg.zfs.enable) {
-      boot.initrd.postDeviceCommands = lib.mkAfter ''
-        zfs rollback -r ${blankSnapshot cfg.zfs.pool} && echo "Blank snapshot restored"
-      '';
+      boot.initrd.postDeviceCommands = mkAfter (
+        if (!cfg.pause) then
+          "zfs rollback -r ${blankSnapshot cfg.zfs.pool} && echo 'Blank snapshot restored'"
+        else
+          ""
+      );
 
       fileSystems = {
         ${cfg.paths.system}.neededForBoot = true;
@@ -146,7 +150,6 @@ in
       };
 
       disko.devices.zpool."${cfg.zfs.pool}" = {
-        rootFsOptions.canmount = "off";
         datasets = {
           root = zfs_fs "/" {
             postCreateHook = "zfs snapshot ${blankSnapshot cfg.zfs.pool}";
