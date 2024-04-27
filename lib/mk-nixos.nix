@@ -5,13 +5,14 @@
 , agenix
 , disko
 , impermanence
-, hardware
+, nixos-hardware
 , system
 , revision
 }: name:
 
 let
   pkgs = overlays system;
+  hardware = nixos-hardware.nixosModules;
   specialArgs = {
     inherit myLib agenix impermanence hardware;
   };

@@ -23,7 +23,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence.url = "github:nix-community/impermanence";
-    hardware.url = "github:NixOS/nixos-hardware";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     # Flake libraries
     flake-utils.url = "github:numtide/flake-utils";
@@ -42,7 +42,7 @@
     , home-manager
     , disko
     , impermanence
-    , hardware
+    , nixos-hardware
     , flake-utils
     , ...
     }:
@@ -54,7 +54,7 @@
       revision = nixpkgs.lib.mkIf (self ? rev) self.rev;
       mkISO = import ./lib/mk-iso.nix;
       mkNixOS = import ./lib/mk-nixos.nix {
-        inherit lib myLib overlays home-manager agenix disko impermanence hardware system revision;
+        inherit lib myLib overlays home-manager agenix disko impermanence nixos-hardware system revision;
       };
       mkHM = import ./lib/mk-hm.nix { inherit myLib overlays agenix home-manager system; };
       forAllSystems = flake-utils.lib.eachDefaultSystem
