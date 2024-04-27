@@ -5,6 +5,7 @@
 , agenix
 , disko
 , impermanence
+, hardware
 , system
 , revision
 }: name:
@@ -12,7 +13,7 @@
 let
   pkgs = overlays system;
   specialArgs = {
-    inherit myLib agenix impermanence;
+    inherit myLib agenix impermanence hardware;
   };
   baseConfig = _: {
     # FIXME : agenix/impermanence mixup
