@@ -3,7 +3,6 @@
 module Bindings where
 
 import Data.Ratio ((%))
-import qualified Scratchpads
 import qualified Terminal
 import XMonad
 import XMonad.Hooks.ManageHelpers (doRectFloat)
@@ -37,7 +36,7 @@ showKeybindings :: String -> [((KeyMask, KeySym), NamedAction)] -> NamedAction
 showKeybindings windowTitle bindings =
   addName "Show keybindings"
     . spawn
-    $ Terminal.runShow windowTitle ["-o font.size=16"] text
+    $ Terminal.runShow windowTitle ["-o font.size=6"] text
   where
     text = mconcat ["echo \"", unlines $ showKm bindings, "\" | pr -2 -t | less"]
 
@@ -52,7 +51,7 @@ myKeys c =
         [ key "Apps"     (modm .|. shiftMask, xK_p)      $ spawn "rofi -show drun"
         , key "Terminal" (modm .|. shiftMask, xK_Return) $ spawn c.terminal
         , key "Emoji"    (modm .|. shiftMask, xK_e)      $ spawn "rofimoji"
-        , key "Weather"  (modm .|. shiftMask, xK_w)      $ Scratchpads.run Scratchpads.weather
+        , key "Weather"  (modm .|. shiftMask, xK_w)      $ spawn "rofi -show window"
         ]
     , keySet
         "Layouts"
@@ -70,12 +69,12 @@ myKeys c =
         ]
     , keySet
         "Windows => switch"
-        [ key "Previous"      (modm .|. shiftMask,                 xK_Left)  $ windows W.focusUp
-        , key "Next"          (modm .|. shiftMask,                 xK_Right) $ windows W.focusDown
-        , key "Focus main"    (modm,                               xK_m)     $ windows W.focusMaster
-        , key "Switcher"      (modm .|. shiftMask,                 xK_Tab)   $ spawn "rofi -show window"
-        , key "Close focused" (modm .|. shiftMask,                 xK_c)     kill
-        , key "Close any"     (modm .|. controlMask .|. shiftMask, xK_c)     $ spawn "xkill"
+        [ key "Previous"      (modm .|. shiftMask,                 xK_Left)   $ windows W.focusUp
+        , key "Next"          (modm .|. shiftMask,                 xK_Right)  $ windows W.focusDown
+        , key "Focus main"    (modm,                               xK_m)      $ windows W.focusMaster
+        , key "Switcher"      (modm .|. shiftMask,                 xK_Tab)    $ spawn "rofi -show window"
+        , key "Close focused" (modm,                               xK_Escape) kill
+        , key "Close any"     (modm .|. controlMask .|. shiftMask, xK_c)      $ spawn "xkill"
         ]
     , keySet
         "Windows => move"

@@ -47,7 +47,7 @@ in
           family = "Berkeley Mono";
           style = "Regular";
         };
-        size = 18.0;
+        size = 6.0;
         builtin_box_drawing = false;
       };
       colors = tomorrowNightEightiesTheme;

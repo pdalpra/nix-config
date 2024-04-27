@@ -1,4 +1,4 @@
-module Terminal (setup, runShow) where
+module Terminal (setup, runShow, term) where
 
 import XMonad
 import XMonad.Prelude
@@ -6,16 +6,16 @@ import XMonad.Prelude
 
 setup :: XConfig l -> XConfig l
 setup c =
-  c {terminal = myTerminal}
+  c {terminal = term}
 
 
-myTerminal :: String
-myTerminal = "alacritty"
+term :: String
+term = "alacritty"
 
 
 runShow :: String -> [String] -> String -> String
 runShow name options cmd =
   mconcat
-    [myTerminal, " -T ", name, " ", optionsString, " -e sh -c '", cmd, "'"]
+    [term, " -T ", name, " ", optionsString, " -e sh -c '", cmd, "'"]
   where
     optionsString = mconcat $ intersperse " " options

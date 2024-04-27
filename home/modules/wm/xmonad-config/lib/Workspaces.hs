@@ -3,6 +3,7 @@
 module Workspaces
   ( setup
   , web
+  , mail
   , chat
   , work
   , perso
@@ -13,6 +14,7 @@ module Workspaces
 where
 
 import Data.List.NonEmpty (nonEmpty)
+import Terminal (term)
 import XMonad
 import XMonad.Actions.DynamicProjects (Project (..), dynamicProjects)
 import XMonad.Actions.MouseResize
@@ -51,7 +53,16 @@ web =
   Workspace
     { name = "web"
     , workingDirectory = "~"
-    , runAtStartup = ["chromium"]
+    , runAtStartup = []
+    }
+
+
+mail :: Workspace
+mail =
+  Workspace
+    { name = "mail"
+    , workingDirectory = "~"
+    , runAtStartup = []
     }
 
 
@@ -87,14 +98,15 @@ nix :: Workspace
 nix =
   Workspace
     { name = "nix"
-    , workingDirectory = "~/Code/perso/nix-config"
-    , runAtStartup = ["code", "kitty"]
+    , workingDirectory = "~/Code/nix-config"
+    , runAtStartup = ["code", term]
     }
 
 
 allWorkspaces :: [Workspace]
 allWorkspaces =
   [ web
+  , mail
   , chat
   , work
   , perso
@@ -127,6 +139,7 @@ workspacesLayout c =
     . smartSpacing 5
     . smartBorders
     . webLayout
+    . mailLayout
     . chatLayout
     . workLayout
     . persoLayout
@@ -135,7 +148,8 @@ workspacesLayout c =
     toggleFullScreen = mkToggle $ single NBFULL
     dropSpacingLabel = renamed [CutWordsLeft 1]
     layout = layoutHook def
-    webLayout = forWorkspace web layout
+    webLayout = forWorkspace web (tabs ||| Full)
+    mailLayout = forWorkspace mail Full
     chatLayout = forWorkspace chat (tabs ||| Full)
     workLayout = forWorkspace work layout
     persoLayout = forWorkspace perso layout
