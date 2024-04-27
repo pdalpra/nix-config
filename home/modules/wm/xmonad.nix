@@ -21,22 +21,32 @@ in
     feh
     unstable.scrot
     xfce.thunar
+    xorg.xbacklight
     xorg.xev
     xorg.xmessage
     xorg.xkill
     xkblayout-state
   ];
 
-  services.picom = {
-    enable = true;
-    fade = true;
-    inactiveOpacity = 1;
+  services = {
+    picom = {
+      enable = true;
+      fade = true;
+      inactiveOpacity = 1;
+    };
+    udiskie.enable = true;
   };
 
   xsession = {
     enable = true;
 
     initExtra = ''
+      1password --silent &
+      protonmail-bridge -n &
+      chromium &
+      chromium --incognito &
+      slack &
+      thunderbird &
       feh --bg-scale ${../../../resources/wallpaper.png}
     '';
 

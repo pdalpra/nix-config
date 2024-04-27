@@ -19,8 +19,10 @@ setup c =
 windowRules :: ManageHook
 windowRules =
   composeOne
-    [ appName =? "pavucontrol" -?> smallCenteredFloat
-    , appName =? "Thunar" -?> doFloat
+    [ appName =? "chromium-browser" -?> shiftTo web
+    , className =? "thunderbird" -?> shiftTo mail
+    , appName =? "pavucontrol" -?> smallCenteredFloat
+    , className =? "Thunar" -?> doFloat
     , appName =? "slack" -?> shiftTo chat
     ]
   where

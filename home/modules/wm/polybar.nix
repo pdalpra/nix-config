@@ -4,10 +4,11 @@ let
   colorWarning = "#f79836";
   polybarLogs = "${config.xdg.dataHome}/polybar/logs";
   systemctl = "${pkgs.systemd}/bin/systemctl";
+  loginctl = "${pkgs.systemd}/bin/loginctl";
   common = {
-    font-0 = "JetbrainsMono Nerd Font:size=16:style=Medium,Regular";
-    font-1 = "Font Awesome 6 Free,Font Awesome 6 Free Solid:size=16:style=Solid";
-    font-2 = "Font Awesome 6 Free,Font Awesome 6 Free Regular:size=16:style=Regular";
+    font-0 = "Berkeley Mono:size=12:style=Regular";
+    font-1 = "Font Awesome 6 Free,Font Awesome 6 Free Solid:size=12:style=Solid";
+    font-2 = "Font Awesome 6 Free,Font Awesome 6 Free Regular:size=12:style=Regular";
 
     enable-ipc = true;
     module-margin = 1;
@@ -52,11 +53,9 @@ in
       };
       "bar/bottom" = common // {
         bottom = true;
-        tray-position = "center";
         modules-left = "cpu memory temperature disk";
+        modules-center = "tray";
         modules-right = "keyboard sound backlight";
-        tray-maxsize = 16;
-        tray-scale = "1.6";
       };
 
       ##############
@@ -120,12 +119,14 @@ in
         label-close-foreground = label-open-foreground;
         label-separator = "|";
 
-        menu-0-0 = "Suspend";
-        menu-0-0-exec = "${systemctl} suspend";
-        menu-0-1 = "Reboot";
-        menu-0-1-exec = "${systemctl} reboot";
-        menu-0-2 = "Poweroff";
-        menu-0-2-exec = "${systemctl} poweroff";
+        menu-0-0 = "Lock";
+        menu-0-0-exec = "${loginctl} lock-session";
+        menu-0-1 = "Suspend";
+        menu-0-1-exec = "${systemctl} suspend";
+        menu-0-2 = "Reboot";
+        menu-0-2-exec = "${systemctl} reboot";
+        menu-0-3 = "Poweroff";
+        menu-0-3-exec = "${systemctl} poweroff";
       };
 
       #################
@@ -155,6 +156,16 @@ in
         label-mounted = "%mountpoint% %percentage_free%%";
       };
 
+      ###################
+      # BOTTOM - CENTER #
+      ###################
+
+      "module/tray" = {
+        type = "internal/tray";
+        tray-size = "90%";
+        tray-padding = "5px";
+      };
+
       ##################
       # BOTTOM - RIGHT #
       ##################
@@ -166,7 +177,8 @@ in
       };
       "module/backlight" = {
         type = "internal/backlight";
-        format = "ﯦ <label>";
+        format = "%{T2} %{T-} <label>";
+        enable-scroll = true;
       };
       "module/keyboard" = {
         type = "internal/xkeyboard";
