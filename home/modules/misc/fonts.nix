@@ -14,7 +14,7 @@ let
   ];
   toSecret = fontName: {
     age.secrets.${fontName} = {
-      file = ../../secrets/fonts/${fontName}.age;
+      file = ../../../secrets/fonts/${fontName}.age;
       path = "${home}/.local/share/fonts/${fontName}";
     };
   };

@@ -11,12 +11,9 @@ in
     ./modules/dev
     ./modules/editors
     ./modules/media
+    ./modules/misc
     ./modules/web
     ./modules/wm
-  ] ++ [
-    ./modules/fonts.nix
-    ./modules/misc.nix
-    ./modules/security.nix
   ];
 
   manual = {
