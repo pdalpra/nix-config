@@ -50,7 +50,7 @@ _:
 
   nix = {
     extraOptions = ''
-      experimental-features = nix-command flakes
+      experimental-features = nix-command flakes no-url-literals repl-flake
     '';
     gc = {
       automatic = true;
@@ -58,6 +58,7 @@ _:
       options = "--delete-older-than 14d";
     };
     settings = {
+      warn-dirty = false;
       auto-optimise-store = true;
       trusted-users = [
         "root"
