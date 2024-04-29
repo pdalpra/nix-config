@@ -47,6 +47,7 @@ in
       chromium --incognito &
       slack &
       thunderbird &
+      yubikey-touch-detector -libnotify &
       feh --bg-scale ${../../../resources/wallpaper.png}
     '';
 
