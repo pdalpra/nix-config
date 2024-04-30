@@ -14,7 +14,7 @@ let
   pkgs = overlays system;
   hardware = nixos-hardware.nixosModules;
   specialArgs = {
-    inherit myLib agenix impermanence hardware;
+    inherit myLib agenix hardware;
   };
   baseConfig = _: {
     # FIXME : agenix/impermanence mixup

@@ -1,20 +1,20 @@
-{ config, lib, myLib, impermanence, ... }:
+{ config, lib, myLib, ... }:
 
 with lib;
 with myLib;
 
 let
   cfg = config.system.impermanence;
-  persistentHomePath = user: "${cfg.paths.homes}/${user}";
-  enableHomeManager = user: {
+  concat = s1: s2: s1 + s2;
+  perUser = user: {
     "${user.name}" = {
-      imports = [ impermanence.nixosModules.home-manager.impermanence ];
-
-      home.persistence."${user.name}" = {
-        inherit (user) files directories;
-        persistentStoragePath = persistentHomePath user.name;
-        allowOther = true;
-      };
+      inherit (user) files;
+      directories =
+        (map (concat ".config/") user.xdg.configs) ++
+        (map (concat ".local/share/") user.xdg.data) ++
+        (map (concat ".local/state/") user.xdg.states) ++
+        (map (concat ".cache/") user.xdg.caches) ++
+        user.directories;
     };
   };
   blankSnapshot = poolName: "${poolName}/root@blank";
@@ -83,6 +83,28 @@ in
             default = [ ];
             description = "List of user directories to persist";
           };
+          xdg = {
+            caches = mkOption {
+              type = listOf str;
+              default = [ ];
+              description = "Caches to persist from XDG hierarchy";
+            };
+            configs = mkOption {
+              type = listOf str;
+              default = [ ];
+              description = "Configurations to persist from XDG hierarchy";
+            };
+            data = mkOption {
+              type = listOf str;
+              default = [ ];
+              description = "Data to persist from XDG hierarchy";
+            };
+            states = mkOption {
+              type = listOf str;
+              default = [ ];
+              description = "States to persist from XDG hierarchy";
+            };
+          };
         };
       }));
     };
@@ -101,36 +123,14 @@ in
         hideMounts = true;
       };
 
-      ################
-      # HOME MANAGER #
-      ################
-
-      programs.fuse.userAllowOther = mkForce true;
-
-      home-manager.users = pipe cfg.users [
-        attrValues
-        (map enableHomeManager)
-        mergeAll
-      ];
-
-      system.activationScripts.persistent-dirs.text =
-        let
-          mkHomePersist = persistedUser:
-            let
-              user = config.users.users.${persistedUser};
-              path = persistentHomePath user.name;
-            in
-            lib.optionalString user.createHome ''
-              mkdir -p ${path}
-              chown ${user.name}:${user.group} ${path}
-              chmod ${user.homeMode} ${path}
-            '';
-        in
-        pipe cfg.users [
-          attrNames
-          (map mkHomePersist)
-          concatLines
+      environment.persistence.${cfg.paths.homes} = {
+        hideMounts = true;
+        users = pipe cfg.users [
+          attrValues
+          (map perUser)
+          mergeAll
         ];
+      };
     })
     # ZFS based setup:
     # - blank snapshot after creation

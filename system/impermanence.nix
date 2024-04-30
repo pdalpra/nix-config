@@ -18,8 +18,13 @@ _:
         "Pictures"
         "Videos"
         ".ssh"
-        ".local/share/atuin"
       ];
+
+      xdg = {
+        data = [
+          "atuin"
+        ];
+      };
     };
   };
 }
