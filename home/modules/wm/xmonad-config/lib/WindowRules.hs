@@ -20,6 +20,7 @@ windowRules :: ManageHook
 windowRules =
   composeOne
     [ appName =? "chromium-browser" -?> shiftTo web
+    , appName =? "whatsapp-for-linux" -?> shiftTo chat
     , className =? "thunderbird" -?> shiftTo mail
     , appName =? "pavucontrol" -?> smallCenteredFloat
     , className =? "Thunar" -?> doFloat
