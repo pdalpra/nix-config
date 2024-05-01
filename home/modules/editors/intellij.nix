@@ -1,7 +1,9 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    unstable.jetbrains-toolbox
-  ];
+  home = {
+    packages = with pkgs; [
+      unstable.jetbrains.idea-ultimate
+    ];
+  };
 }

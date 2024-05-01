@@ -23,6 +23,7 @@ in
   home = {
     packages = with pkgs; [
       _1password
+      bottom
       comma
       diskonaut
       home-manager-rollback
@@ -32,7 +33,6 @@ in
       neofetch
       prettyping
       tealdeer
-      wally-cli
     ];
 
     sessionVariables = {

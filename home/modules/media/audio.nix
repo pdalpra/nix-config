@@ -9,7 +9,7 @@
   ];
 
   # Manage asunder configuration
-  home.file."${config.xdg.configHome}/asunder/asunder" = {
+  xdg.configFile."asunder/asunder" = {
     text = ''
       /dev/cdrom
       ${config.home.homeDirectory}/CD Rips
@@ -61,5 +61,8 @@
     '';
   };
 
-  services.pasystray.enable = true;
+  services = {
+    easyeffects.enable = true;
+    pasystray.enable = true;
+  };
 }
