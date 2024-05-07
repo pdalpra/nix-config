@@ -2,6 +2,7 @@
 
 let
   colorWarning = "#f79836";
+  colorPowerMenu = "ef1735";
   polybarLogs = "${config.xdg.dataHome}/polybar/logs";
   systemctl = "${pkgs.systemd}/bin/systemctl";
   loginctl = "${pkgs.systemd}/bin/loginctl";
@@ -108,25 +109,32 @@ in
         label-low = "  %percentage%% (%time%)";
         label-low-foreground = colorWarning;
       };
-      "module/powermenu" = rec {
+      "module/powermenu" = {
         type = "custom/menu";
         expand-right = false;
         format-spacing = 1;
 
         label-open = "";
-        label-open-foreground = "#EF1735";
+        label-open-foreground = colorPowerMenu;
         label-close = "";
-        label-close-foreground = label-open-foreground;
+        label-close-foreground = colorPowerMenu;
         label-separator = "|";
 
         menu-0-0 = "Lock";
         menu-0-0-exec = "${loginctl} lock-session";
-        menu-0-1 = "Suspend";
-        menu-0-1-exec = "${systemctl} suspend";
-        menu-0-2 = "Reboot";
-        menu-0-2-exec = "${systemctl} reboot";
-        menu-0-3 = "Poweroff";
-        menu-0-3-exec = "${systemctl} poweroff";
+        menu-0-0-foreground = colorPowerMenu;
+        menu-0-1 = "Logout";
+        menu-0-1-exec = "${loginctl} kill-session self";
+        menu-0-1-foreground = colorPowerMenu;
+        menu-0-2 = "Suspend";
+        menu-0-2-exec = "${systemctl} suspend";
+        menu-0-2-foreground = colorPowerMenu;
+        menu-0-3 = "Reboot";
+        menu-0-3-exec = "${systemctl} reboot";
+        menu-0-3-foreground = colorPowerMenu;
+        menu-0-4 = "Poweroff";
+        menu-0-4-exec = "${systemctl} poweroff";
+        menu-0-4-foreground = colorPowerMenu;
       };
 
       #################
