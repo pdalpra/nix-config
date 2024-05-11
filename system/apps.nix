@@ -25,6 +25,7 @@ in
       htop
       links2
       ncdu
+      psmisc
       tree
       wget
       # Nix utils
