@@ -119,8 +119,8 @@ in
       ##########
 
       environment.persistence.${cfg.paths.system} = {
-        inherit (cfg) files directories;
-        hideMounts = true;
+        inherit (cfg) directories;
+        files = cfg.files ++ [ "/etc/machine-id" ];
       };
 
       environment.persistence.${cfg.paths.homes} = {
