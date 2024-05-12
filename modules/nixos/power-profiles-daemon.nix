@@ -32,20 +32,11 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    assertions = [
-      {
-        assertion = !config.services.tlp.enable;
-        message = ''
-          You have set services.power-profiles-daemon-custom.enable = true;
-          which conflicts with services.tlp.enable = true;
-        '';
-      }
-    ];
-
     environment.systemPackages = [ cfg.package ];
 
     services = {
       power-profiles-daemon.enable = lib.mkForce false;
+      tlp.enable = lib.mkForce false;
       dbus.packages = [ cfg.package ];
       udev.packages = [ cfg.package ];
     };
