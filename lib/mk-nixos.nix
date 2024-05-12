@@ -35,6 +35,7 @@ lib.nixosSystem {
     disko.nixosModules.disko
     impermanence.nixosModules.impermanence
     ../modules/nixos/impermanence.nix
+    ../modules/nixos/power-profiles-daemon.nix
     ./cachix.nix
     ../system/configuration.nix
     specificConfig
