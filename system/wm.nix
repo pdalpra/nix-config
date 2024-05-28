@@ -11,6 +11,8 @@
       ];
     };
 
+    gnome.gnome-keyring.enable = true;
+
     xserver = {
       enable = true;
       layout = "us,fr";
