@@ -33,7 +33,7 @@
       "hie-bios"
       "chromium"
       "mozilla"
-      "teeldeer"
+      "tealdeer"
     ];
 
     configs = [
