@@ -9,10 +9,22 @@ _:
 
   boot.loader = {
     efi.canTouchEfiVariables = true;
-    systemd-boot = {
+    grub = {
       enable = true;
+      device = "nodev";
+      efiSupport = true;
+      splashImage = ../resources/wallpaper.png;
       memtest86.enable = true;
+      extraEntries = ''
+        menuentry "Reboot" {
+          reboot
+        }
+        menuentry "Poweroff" {
+          halt
+        }
+      '';
     };
+
   };
 
   time.timeZone = "Europe/Paris";
