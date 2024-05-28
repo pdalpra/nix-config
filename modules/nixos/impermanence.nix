@@ -137,12 +137,16 @@ in
     # - auto restore blank snapshot at boot
     # - Create datasets for system, homes and the nix store
     (mkIf (cfg.enable && cfg.zfs.enable) {
-      boot.initrd.postDeviceCommands = mkAfter (
-        if (!cfg.pause) then
-          "zfs rollback -r ${blankSnapshot cfg.zfs.pool} && echo 'Blank snapshot restored'"
-        else
-          ""
-      );
+      boot = {
+        loader.grub.zfsSupport = true;
+        supportedFilesystems = [ "zfs" ];
+        initrd.postDeviceCommands = mkAfter (
+          if (!cfg.pause) then
+            "zfs rollback -r ${blankSnapshot cfg.zfs.pool} && echo 'Blank snapshot restored'"
+          else
+            ""
+        );
+      };
 
       fileSystems = {
         ${cfg.paths.system}.neededForBoot = true;
