@@ -1,6 +1,5 @@
 {
 
-
   # Required by ZFS
   networking.hostId = "fcd4a364";
 
