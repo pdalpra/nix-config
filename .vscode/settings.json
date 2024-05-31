@@ -6,6 +6,7 @@
     "haskell.openSourceInHackage": false,
     "haskell.openDocumentationInHackage": false,
     "haskell.plugin.eval.config.exception": true,
+    "haskell.plugin.fourmolu.config.external": true,
     "nixEnvSelector.suggestion": false,
     "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix",
     "nix.enableLanguageServer": true,

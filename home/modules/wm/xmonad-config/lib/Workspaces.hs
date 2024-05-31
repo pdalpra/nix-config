@@ -5,9 +5,9 @@ module Workspaces
   , web
   , mail
   , chat
+  , nix
   , work
   , perso
-  , nix
   , allWorkspaces
   , shiftTo
   )
@@ -108,9 +108,9 @@ allWorkspaces =
   [ web
   , mail
   , chat
+  , nix
   , work
   , perso
-  , nix
   ]
 
 
