@@ -2,6 +2,7 @@ _:
 {
   imports = [
     ./apps.nix
+    ./networking.nix
     ./users.nix
     ./impermanence.nix
     ./wm.nix
@@ -40,24 +41,11 @@ _:
     includeAllModules = true;
   };
 
-  hardware = {
-    bluetooth.enable = true;
-    pulseaudio.enable = true;
-  };
-
-  networking = {
-    firewall.enable = false;
-    useDHCP = true;
-    nameservers = [
-      "1.1.1.1"
-      "9.9.9.9"
-      "4.4.4.4"
-      "8.8.8.8"
-    ];
-    timeServers = [
-      "0.pool.ntp.org"
-      "1.pool.ntp.org"
-    ];
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    jack.enable = true;
+    pulse.enable = true;
   };
 
   nix = {
