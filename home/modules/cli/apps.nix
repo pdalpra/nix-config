@@ -56,10 +56,7 @@ in
     direnv = enableWithZshIntegration // {
       nix-direnv.enable = true;
     };
-    eza = {
-      enable = true;
-      enableAliases = true;
-    };
+    eza = enableWithZshIntegration;
     jq.enable = true;
     nix-index = enableWithZshIntegration;
     nnn = {
