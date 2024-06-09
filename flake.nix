@@ -56,7 +56,6 @@
       mkNixOS = import ./lib/mk-nixos.nix {
         inherit lib myLib overlays home-manager agenix disko impermanence nixos-hardware system revision;
       };
-      mkHM = import ./lib/mk-hm.nix { inherit myLib overlays agenix home-manager system; };
       forAllSystems = flake-utils.lib.eachDefaultSystem
         (system:
           let
@@ -83,9 +82,6 @@
       nixosConfigurations = {
         iso = mkISO { inherit nixpkgs system; };
         vm = mkNixOS "vm";
-      };
-      homeConfigurations = {
-        pdalpra = mkHM "pdalpra";
       };
     };
 }
