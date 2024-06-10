@@ -5,19 +5,6 @@ let
     enable = true;
     enableZshIntegration = true;
   };
-  home-manager-rollback = with pkgs; writeShellScriptBin "home-manager-rollback"
-    ''
-      awk=${gawk}/bin/awk
-      grep=${ripgrep}/bin/rg
-      if [ -z $1 ]; then
-        generation=$(home-manager generations | $awk 'NR==2')
-      else
-        generation=$(home-manager generations | $grep "id $1\s+")
-      fi
-      generation_path=$(echo $generation | $awk '{print $NF}')
-      echo "Rollback home-manager to $generation_path"
-      $generation_path/activate
-    '';
 in
 {
   home = {
@@ -26,7 +13,6 @@ in
       bottom
       comma
       diskonaut
-      home-manager-rollback
       httpie
       manix
       mdcat
