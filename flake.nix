@@ -1,5 +1,5 @@
 {
-  description = "My NixOS and home-manager configurations";
+  description = "My NixOS configurations";
   nixConfig.bash-prompt = "\[nix-config-dev\]$ ";
 
   inputs = {
