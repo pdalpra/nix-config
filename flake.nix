@@ -4,7 +4,7 @@
 
   inputs = {
     # Package sources
-    nixpkgs.url = "nixpkgs/nixos-23.11";
+    nixpkgs.url = "nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     nurpkgs.url = "github:nix-community/NUR";
 
