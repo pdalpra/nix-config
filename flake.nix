@@ -24,6 +24,7 @@
     };
     impermanence.url = "github:nix-community/impermanence";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    catppuccin.url = "github:catppuccin/nix";
 
     # Flake libraries
     flake-utils.url = "github:numtide/flake-utils";
@@ -43,6 +44,7 @@
     , disko
     , impermanence
     , nixos-hardware
+    , catppuccin
     , flake-utils
     , ...
     }:
@@ -69,6 +71,7 @@
           disko
           impermanence
           nixos-hardware
+          catppuccin
           system
           revision;
       };
