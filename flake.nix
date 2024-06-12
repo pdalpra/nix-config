@@ -48,13 +48,29 @@
     }:
     let
       inherit (nixpkgs) lib;
-      myLib = import ./lib/utils.nix { inherit lib; };
-      overlays = import ./lib/overlays.nix { inherit nixpkgs nixpkgs-unstable nurpkgs; };
+      myLib = import ./lib/utils.nix {
+        inherit lib;
+      };
+      overlays = import ./lib/overlays.nix {
+        inherit nixpkgs nixpkgs-unstable nurpkgs;
+      };
       system = "x86_64-linux";
       revision = nixpkgs.lib.mkIf (self ? rev) self.rev;
-      mkISO = import ./lib/mk-iso.nix;
+      mkISO = import ./lib/mk-iso.nix {
+        inherit nixpkgs system;
+      };
       mkNixOS = import ./lib/mk-nixos.nix {
-        inherit lib myLib overlays home-manager agenix disko impermanence nixos-hardware system revision;
+        inherit
+          lib
+          myLib
+          overlays
+          home-manager
+          agenix
+          disko
+          impermanence
+          nixos-hardware
+          system
+          revision;
       };
       forAllSystems = flake-utils.lib.eachDefaultSystem
         (system:
@@ -73,14 +89,18 @@
           in
           {
             formatter = pkgs.nixpkgs-fmt;
-            checks.lint = import ./lib/lint.nix { inherit pkgs lintingPkgs; };
-            devShells.default = import ./lib/dev-shell.nix { inherit pkgs lintingPkgs agenixBin; };
+            checks.lint = import ./lib/lint.nix {
+              inherit pkgs lintingPkgs;
+            };
+            devShells.default = import ./lib/dev-shell.nix {
+              inherit pkgs lintingPkgs agenixBin;
+            };
           });
     in
     nixpkgs.lib.recursiveUpdate forAllSystems {
       packages.${system}.disko = disko.packages.${system}.default;
       nixosConfigurations = {
-        iso = mkISO { inherit nixpkgs system; };
+        iso = mkISO;
         vm = mkNixOS "vm";
       };
     };
