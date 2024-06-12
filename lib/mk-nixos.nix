@@ -6,6 +6,7 @@
 , disko
 , impermanence
 , nixos-hardware
+, catppuccin
 , system
 , revision
 }: name:
@@ -34,6 +35,7 @@ lib.nixosSystem {
     agenix.nixosModules.default
     disko.nixosModules.disko
     impermanence.nixosModules.impermanence
+    catppuccin.nixosModules.catppuccin
     ../modules/nixos/impermanence.nix
     ./cachix.nix
     ../system/configuration.nix

@@ -14,7 +14,6 @@ _:
       enable = true;
       device = "nodev";
       efiSupport = true;
-      splashImage = ../resources/wallpaper.png;
       memtest86.enable = true;
       extraEntries = ''
         menuentry "Reboot" {
@@ -34,6 +33,12 @@ _:
   console = {
     font = "Lat2-Terminus16";
     keyMap = "fr-bepo";
+  };
+
+  catppuccin = {
+    enable = true;
+    flavor = "mocha";
+    accent = "green";
   };
 
   documentation.nixos = {
