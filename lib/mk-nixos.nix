@@ -7,15 +7,14 @@
 , impermanence
 , nixos-hardware
 , catppuccin
-, system
 , revision
-}: name:
+}: name: profile: system:
 
 let
   pkgs = overlays system;
   hardware = nixos-hardware.nixosModules;
   specialArgs = {
-    inherit myLib agenix hardware;
+    inherit myLib agenix hardware profile;
   };
   baseConfig = _: {
     # FIXME : agenix/impermanence mixup

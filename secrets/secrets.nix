@@ -1,7 +1,8 @@
 let
   pdalpra = (import ../keys/pdalpra.nix).sshKeys;
   vm = (import ../keys/vm.nix).sshKeys;
-  all = pdalpra ++ vm;
+  work = (import ../keys/work-mbp.nix).sshKeys;
+  all = pdalpra ++ vm ++ work;
 in
 {
   "pdalpra.age".publicKeys = all;

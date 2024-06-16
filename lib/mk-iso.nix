@@ -1,4 +1,4 @@
-{ nixpkgs, system }:
+{ nixpkgs }: system:
 
 let
   baseConfig = { pkgs, ... }: {

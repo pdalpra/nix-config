@@ -2,8 +2,8 @@
 
 {
   home.packages = with pkgs; [
-    unstable.protonvpn-gui
-    unstable.protonmail-bridge
-    thunderbird
+    # unstable.protonvpn-gui
+    # unstable.protonmail-bridge
+    # thunderbird
   ];
 }

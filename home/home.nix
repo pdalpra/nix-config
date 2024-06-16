@@ -1,31 +1,32 @@
-{ lib, ... }:
+{ lib, myLib, pkgs, ... }:
 
 with lib;
+with myLib;
 
 let
   importAll = imports: foldl' concat [ ] (map import imports);
-in
-{
-  imports = importAll [
+  generic = [
     ./modules/cli
     ./modules/dev
     ./modules/editors
-    ./modules/media
+    #   ./modules/media
     ./modules/misc
     ./modules/web
-    ./modules/wm
   ];
+  linuxSpecific = [ ]; # mkOptional pkgs.stdenv.isLinux [ ./modules/wm ] [ ];
+in
+{
+  imports = importAll (generic ++ linuxSpecific);
 
   manual = {
     html.enable = true;
     manpages.enable = true;
   };
 
-  xdg.userDirs =
-    {
-      enable = true;
-      createDirectories = true;
-    };
+  xdg.userDirs = mkIf pkgs.stdenv.isLinux {
+    enable = true;
+    createDirectories = true;
+  };
 
   news.display = "silent";
 

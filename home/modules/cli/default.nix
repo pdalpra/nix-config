@@ -1,4 +1,5 @@
 [
+  ./alacritty.nix
   ./apps.nix
   ./fzf.nix
   ./starship.nix

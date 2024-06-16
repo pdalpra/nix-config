@@ -3,7 +3,7 @@
 {
   programs = {
     chromium = {
-      enable = true;
+      enable = false;
       package = pkgs.chromium;
       extensions = [
         { id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa"; } # 1Password
@@ -15,7 +15,7 @@
     };
 
     firefox = {
-      enable = true;
+      enable = false;
 
       profiles = {
         default = {

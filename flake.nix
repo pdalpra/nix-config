@@ -18,6 +18,10 @@
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -41,6 +45,7 @@
     , nurpkgs
     , agenix
     , home-manager
+    , nix-darwin
     , disko
     , impermanence
     , nixos-hardware
@@ -49,21 +54,22 @@
     , ...
     }:
     let
-      inherit (nixpkgs) lib;
       myLib = import ./lib/utils.nix {
-        inherit lib;
+        inherit (nixpkgs) lib;
       };
       overlays = import ./lib/overlays.nix {
         inherit nixpkgs nixpkgs-unstable nurpkgs;
       };
-      system = "x86_64-linux";
+      linuxSystem = "x86_64-linux";
+      macosSystem = "aarch64-darwin";
       revision = nixpkgs.lib.mkIf (self ? rev) self.rev;
       mkISO = import ./lib/mk-iso.nix {
-        inherit nixpkgs system;
+        inherit nixpkgs;
       };
       mkNixOS = import ./lib/mk-nixos.nix {
+        inherit (nixpkgs) lib;
+
         inherit
-          lib
           myLib
           overlays
           home-manager
@@ -72,7 +78,17 @@
           impermanence
           nixos-hardware
           catppuccin
-          system
+          revision;
+      };
+      mkDarwin = import ./lib/mk-darwin.nix {
+        inherit (nix-darwin) lib;
+
+        inherit
+          myLib
+          overlays
+          home-manager
+          agenix
+          catppuccin
           revision;
       };
       forAllSystems = flake-utils.lib.eachDefaultSystem
@@ -101,10 +117,13 @@
           });
     in
     nixpkgs.lib.recursiveUpdate forAllSystems {
-      packages.${system}.disko = disko.packages.${system}.default;
+      packages.${linuxSystem}.disko = disko.packages.${linuxSystem}.default;
       nixosConfigurations = {
-        iso = mkISO;
-        vm = mkNixOS "vm";
+        iso = mkISO linuxSystem;
+        vm = mkNixOS "vm" "perso" linuxSystem;
+      };
+      darwinConfigurations = {
+        work-mbp = mkDarwin "work-mbp" "work" macosSystem;
       };
     };
 }

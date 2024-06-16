@@ -1,5 +1,5 @@
 [
-  ./fonts.nix
+  #./fonts.nix
   ./keyboards.nix
   ./security.nix
 ]

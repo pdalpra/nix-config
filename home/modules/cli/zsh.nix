@@ -13,6 +13,7 @@
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     autocd = true;
+    envExtra = ''[[ -s "$HOME/.zshenv_work" ]] && source "$HOME/.zshenv_work"'';
 
     prezto = {
       enable = true;
