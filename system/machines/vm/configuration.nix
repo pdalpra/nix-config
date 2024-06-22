@@ -1,5 +1,7 @@
 {
 
+  profile = "personal";
+
   # Required by ZFS
   networking.hostId = "fcd4a364";
 

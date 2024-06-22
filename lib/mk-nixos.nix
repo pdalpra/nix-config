@@ -36,6 +36,7 @@ lib.nixosSystem {
     disko.nixosModules.disko
     impermanence.nixosModules.impermanence
     catppuccin.nixosModules.catppuccin
+    ../modules/common/profile.nix
     ../modules/nixos/impermanence.nix
     ./cachix.nix
     ../system/configuration.nix
