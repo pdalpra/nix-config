@@ -37,9 +37,12 @@
 
     users.pdalpra = {
       imports = [
+        ../modules/common/profile.nix
         agenix.homeManagerModules.default
         ../home/home.nix
       ];
+
+      inherit (config) profile;
     };
   };
 }
