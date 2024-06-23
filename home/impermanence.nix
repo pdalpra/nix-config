@@ -37,6 +37,7 @@
     ];
 
     configs = [
+      "dconf"
       "chromium"
       "Slack"
       "Code"
