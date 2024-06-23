@@ -1,5 +1,5 @@
 [
-  ./alacritty.nix
+  ./terminal.nix
   ./dunst.nix
   ./polybar.nix
   ./rofi.nix
