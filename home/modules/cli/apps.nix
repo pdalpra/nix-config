@@ -10,7 +10,6 @@ in
   home = {
     packages = with pkgs; [
       _1password
-      bottom
       comma
       diskonaut
       httpie
@@ -39,6 +38,7 @@ in
 
   programs = {
     bat.enable = true;
+    bottom.enable = true;
     direnv = enableWithZshIntegration // {
       nix-direnv.enable = true;
     };
