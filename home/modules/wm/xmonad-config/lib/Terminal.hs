@@ -10,7 +10,7 @@ setup c =
 
 
 term :: String
-term = "alacritty"
+term = "kitty"
 
 
 runShow :: String -> [String] -> String -> String
