@@ -1,4 +1,4 @@
-{ pkgs, config, myLib, agenix, ... }:
+{ pkgs, config, myLib, agenix, catppuccin, ... }:
 
 {
 
@@ -39,10 +39,14 @@
       imports = [
         ../modules/common/profile.nix
         agenix.homeManagerModules.default
+        catppuccin.homeManagerModules.catppuccin
         ../home/home.nix
       ];
 
       inherit (config) profile;
+      catppuccin = {
+        inherit (config.catppuccin) flavor accent;
+      };
     };
   };
 }

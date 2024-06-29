@@ -1,5 +1,8 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
+let
+  theme = "catppuccin_${config.catppuccin.flavor}";
+in
 {
   home.sessionVariables = {
     EDITOR = "vim";
@@ -10,7 +13,7 @@
     plugins = with pkgs.vimPlugins; [
       vim-nix
       vim-scala
-      wombat256-vim
+      catppuccin-vim
     ];
 
     extraConfig = ''
@@ -49,7 +52,7 @@
       set wildmenu " Enables wild Menu
       set wildignore=*.o,*.cmo,*.cmi,*.pyc " Ignonre thoses extensions in wild menu
       set wildmode=list:longest " Show all possibilities in wild menu
-      colorscheme wombat256mod " Colorscheme
+      colorscheme ${theme} " Colorscheme
       set novisualbell " Don't blink, don't even blink, blink and you're dead !
       set showcmd " Show command being typed
       set showmatch " Show matching brackets

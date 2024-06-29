@@ -83,6 +83,7 @@ in
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
+    catppuccin.enable = true;
     package = starshipPackage;
     settings = mergeAll [
       enabledModules

@@ -41,8 +41,8 @@
             name = "Arc-Dark";
           };
           cursorTheme = {
-            package = pkgs.capitaine-cursors;
-            name = "capitaine-cursors";
+            package = pkgs.catppuccin-cursors.mochaGreen;
+            name = "mochaGreen";
           };
           iconTheme = {
             package = pkgs.tela-circle-icon-theme;

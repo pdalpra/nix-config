@@ -15,7 +15,7 @@ let
   pkgs = overlays system;
   hardware = nixos-hardware.nixosModules;
   specialArgs = {
-    inherit myLib agenix hardware;
+    inherit myLib agenix hardware catppuccin;
   };
   baseConfig = _: {
     # FIXME : agenix/impermanence mixup
@@ -36,12 +36,12 @@ lib.nixosSystem {
     disko.nixosModules.disko
     impermanence.nixosModules.impermanence
     catppuccin.nixosModules.catppuccin
+    home-manager.nixosModules.home-manager
     ../modules/common/profile.nix
     ../modules/nixos/impermanence.nix
     ./cachix.nix
     ../system/configuration.nix
     specificConfig
     diskoConfig
-    home-manager.nixosModules.home-manager
   ];
 }
