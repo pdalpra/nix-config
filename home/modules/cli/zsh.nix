@@ -28,7 +28,6 @@
         "directory"
         "spectrum"
         "syntax-highlighting"
-        "history-substring-search"
         "autosuggestions"
         "completion"
       ];

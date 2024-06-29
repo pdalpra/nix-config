@@ -51,7 +51,7 @@
     let
       inherit (nixpkgs) lib;
       myLib = import ./lib/utils.nix {
-        inherit lib;
+        inherit lib nixpkgs;
       };
       overlays = import ./lib/overlays.nix {
         inherit nixpkgs nixpkgs-unstable nurpkgs;
@@ -62,6 +62,7 @@
         inherit nixpkgs system;
       };
       mkNixOS = import ./lib/mk-nixos.nix {
+
         inherit
           lib
           myLib
@@ -105,6 +106,7 @@
       nixosConfigurations = {
         iso = mkISO;
         vm = mkNixOS "vm";
+        fw16 = mkNixOS "fw16";
       };
     };
 }
