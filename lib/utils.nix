@@ -1,4 +1,4 @@
-{ lib }:
+{ lib, nixpkgs }:
 
 rec {
   filterFiles = test: dir:
@@ -11,4 +11,8 @@ rec {
   listFiles = filterFiles (_: true);
 
   mergeAll = builtins.foldl' lib.attrsets.recursiveUpdate { };
+
+  isDarwin = nixpkgs.stdenv.isDarwin;
+
+  mkOptional = pred: ifTrue: ifFalse: if (pred) then ifTrue else ifFalse;
 }

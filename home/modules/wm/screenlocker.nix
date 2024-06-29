@@ -14,8 +14,7 @@ let
         --set XSECURELOCK_FONT "Berkeley Mono:size=20:style=Medium,Regular" \
         --set XSECURELOCK_SHOW_DATETIME 1 \
         --set XSECURELOCK_BLANK_DPMS_STATE suspend \
-        --set XSECURELOCK_SHOW_HOSTNAME 0 \
-        --set XSECURELOCK_SAVER_STOP_ON_BLANK 1 \
+        --set XSECURELOCK_SHOW_HOSTNAME 1 \
         --set XSECURELOCK_DATETIME_FORMAT "%d/%m/%Y - %H:%M:%S"
       '';
     });

@@ -2,6 +2,9 @@
 
 with lib;
 
+let
+  profile = config.profile;
+in
 {
   options.profile = with types; mkOption {
     description = "Usage profile for this machine. Must be set.";
@@ -15,7 +18,7 @@ with lib;
   config = {
     assertions = [
       {
-        assertion = config.profile != null;
+        assertion = profile != null;
         message = "Profile must be set";
       }
     ];
