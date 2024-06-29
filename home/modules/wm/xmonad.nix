@@ -12,9 +12,14 @@ let
   ];
 in
 {
+  catppuccin.pointerCursor.enable = true;
   home = {
     # Create folder for screenshots
     file."${config.xdg.userDirs.pictures}/screenshots/.keep".text = "";
+    pointerCursor = {
+      gtk.enable = true;
+      x11.enable = true;
+    };
   };
 
   home.packages = with pkgs; [

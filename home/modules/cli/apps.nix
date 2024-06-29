@@ -37,8 +37,14 @@ in
   };
 
   programs = {
-    bat.enable = true;
-    bottom.enable = true;
+    bat = {
+      enable = true;
+      catppuccin.enable = true;
+    };
+    bottom = {
+      enable = true;
+      catppuccin.enable = true;
+    };
     direnv = enableWithZshIntegration // {
       nix-direnv.enable = true;
     };

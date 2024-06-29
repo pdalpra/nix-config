@@ -57,9 +57,9 @@ in
       ];
       delta = {
         enable = true;
+        catppuccin.enable = true;
         options = {
           side-by-side = true;
-          theme = "Dracula";
         };
       };
       aliases = {

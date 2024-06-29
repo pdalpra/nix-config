@@ -34,6 +34,7 @@ in
 
   services.polybar = {
     enable = true;
+    catppuccin.enable = true;
 
     package = pkgs.polybar.override {
       iwSupport = true;

@@ -11,7 +11,10 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    syntaxHighlighting.enable = true;
+    syntaxHighlighting = {
+      enable = true;
+      catppuccin.enable = true;
+    };
     autocd = true;
 
     prezto = {

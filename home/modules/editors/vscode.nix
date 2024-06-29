@@ -11,7 +11,8 @@
       arrterian.nix-env-selector
       scalameta.metals
       scala-lang.scala
-      ms-vscode.theme-tomorrowkit
+      catppuccin.catppuccin-vsc
+      catppuccin.catppuccin-vsc-icons
     ];
   };
 }
