@@ -57,7 +57,7 @@
         inherit nixpkgs nixpkgs-unstable nurpkgs;
       };
       system = "x86_64-linux";
-      revision = nixpkgs.lib.mkIf (self ? rev) self.rev;
+      revision = lib.mkIf (self ? rev) self.rev;
       mkISO = import ./lib/mk-iso.nix {
         inherit nixpkgs system;
       };

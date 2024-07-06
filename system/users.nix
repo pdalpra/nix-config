@@ -1,5 +1,13 @@
 { pkgs, config, myLib, agenix, catppuccin, ... }:
 
+with myLib;
+let
+  networkManager = mkIfElse
+    config.networking.networkmanager.enable
+    [ "networkmanager" ]
+    [ ];
+  optionalGroups = networkManager;
+in
 {
 
   # Secrets
@@ -24,7 +32,9 @@
         extraGroups = [
           "docker"
           "wheel"
-        ];
+          "audio"
+          "video"
+        ] ++ optionalGroups;
         openssh.authorizedKeys.keys = (import ../keys/pdalpra.nix).sshKeys;
       };
     };
