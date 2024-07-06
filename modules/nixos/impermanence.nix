@@ -141,9 +141,8 @@ in
         loader.grub.zfsSupport = true;
         supportedFilesystems = [ "zfs" ];
         initrd.postDeviceCommands = mkAfter (
-          if (!cfg.pause) then
+          mkIfElse (!cfg.pause)
             "zfs rollback -r ${blankSnapshot cfg.zfs.pool} && echo 'Blank snapshot restored'"
-          else
             ""
         );
       };
