@@ -1,0 +1,5 @@
+{
+  sshKeys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKIW6rSw9YXMmyl/GWV2I7ug7SHfyDJYOW0DtyL/Dmc4"
+  ];
+}
