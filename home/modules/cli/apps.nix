@@ -17,6 +17,7 @@ in
       mdcat
       neofetch
       prettyping
+      rsync
       tealdeer
     ];
 

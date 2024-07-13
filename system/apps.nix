@@ -20,6 +20,7 @@ in
     pathsToLink = [ "/share/zsh" ];
 
     systemPackages = with pkgs; [
+      cifs-utils
       curl
       git
       htop
