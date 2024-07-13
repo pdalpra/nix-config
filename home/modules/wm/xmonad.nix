@@ -54,6 +54,7 @@ in
       thunderbird &
       yubikey-touch-detector -libnotify &
       whatsapp-for-linux &
+      light -I
       feh --bg-scale ${../../../resources/wallpaper.png}
     '';
 
