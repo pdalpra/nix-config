@@ -105,6 +105,7 @@
       nixosConfigurations = {
         iso = mkISO;
         vm = mkNixOS "vm";
+        fw16 = mkNixOS "fw16";
       };
     };
 }
