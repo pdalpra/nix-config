@@ -1,4 +1,4 @@
-_:
+{ lib, ... }:
 {
   imports = [
     ./apps.nix
@@ -32,7 +32,7 @@ _:
 
   console = {
     font = "Lat2-Terminus16";
-    keyMap = "fr-bepo";
+    keyMap = lib.mkDefault "us";
   };
 
   catppuccin = {
