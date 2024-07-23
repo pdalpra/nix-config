@@ -6,6 +6,7 @@
     asunder
     pavucontrol
     quodlibet
+    ffmpeg # TODO: package in wav-converter instead
   ];
 
   # Manage asunder configuration
