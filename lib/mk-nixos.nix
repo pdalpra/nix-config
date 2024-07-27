@@ -39,6 +39,7 @@ lib.nixosSystem {
     home-manager.nixosModules.home-manager
     ../modules/common/profile.nix
     ../modules/nixos/impermanence.nix
+    ../modules/nixos/illuminanced.nix
     ./cachix.nix
     ../system/configuration.nix
     specificConfig
