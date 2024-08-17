@@ -89,7 +89,7 @@ perso =
   Workspace
     { name = "perso"
     , workingDirectory = "~/Code/perso"
-    , runAtStartup = []
+    , runAtStartup = ["code", term]
     }
 
 
@@ -141,6 +141,7 @@ workspacesLayout c =
     . webLayout
     . mailLayout
     . chatLayout
+    . nixLayout
     . workLayout
     . persoLayout
     $ layout
@@ -148,11 +149,13 @@ workspacesLayout c =
     toggleFullScreen = mkToggle $ single NBFULL
     dropSpacingLabel = renamed [CutWordsLeft 1]
     layout = layoutHook def
+    codeLayout = Tall 1 (1 / 2) (2 / 3) ||| Full
     webLayout = forWorkspace web (tabs ||| Full)
     mailLayout = forWorkspace mail Full
     chatLayout = forWorkspace chat (tabs ||| Full)
-    workLayout = forWorkspace work layout
-    persoLayout = forWorkspace perso layout
+    nixLayout = forWorkspace nix codeLayout
+    workLayout = forWorkspace work codeLayout
+    persoLayout = forWorkspace perso codeLayout
     forWorkspace ws = onWorkspace (name ws)
     tabs = renamed [CutWordsRight 1] $ tabbed shrinkText tabTheme
     tabTheme =
