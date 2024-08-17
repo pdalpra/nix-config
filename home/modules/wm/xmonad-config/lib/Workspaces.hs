@@ -93,7 +93,6 @@ perso =
     }
 
 
--- TODO fix terminal setup
 nix :: Workspace
 nix =
   Workspace
