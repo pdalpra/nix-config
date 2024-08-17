@@ -1,12 +1,13 @@
 { pkgs, config, ... }:
 
 {
+  # TODO: package in wav-converter instead of pulling ffmpeg
   home.packages = with pkgs; [
     android-file-transfer
     asunder
     pavucontrol
     quodlibet
-    ffmpeg # TODO: package in wav-converter instead
+    ffmpeg
   ];
 
   # Manage asunder configuration
