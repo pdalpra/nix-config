@@ -65,7 +65,7 @@ in
     };
     log = {
       file = mkOption {
-        type = string;
+        type = str;
         default = "syslog";
         description = "'syslog' or path to a file";
       };
@@ -99,28 +99,28 @@ in
     };
     devices = {
       current = mkOption {
-        type = string;
+        type = str;
         default = "/sys/class/backlight/amdgpu_bl1/brightness";
         description = "Path to device file with the current brightness level";
       };
       max = mkOption {
-        type = string;
+        type = str;
         default = "/sys/class/backlight/amdgpu_bl1/max_brightness";
         description = "Path to device file with the max brightness level";
       };
       illuminance = mkOption {
-        type = string;
+        type = str;
         default = "/sys/bus/iio/devices/iio:device0/in_illuminance_raw";
         description = "Path to device file with the detected illuminance";
       };
       events = {
         mask = mkOption {
-          type = string;
+          type = str;
           default = "/dev/input/event*";
           description = "TODO documentation";
         };
         name = mkOption {
-          type = string;
+          type = str;
           default = "Framework Laptop 16 Keyboard Module - ISO Keyboard";
           description = "TODO documentation";
         };
