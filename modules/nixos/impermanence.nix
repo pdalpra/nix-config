@@ -1,8 +1,5 @@
 { config, lib, myLib, ... }:
 
-with lib;
-with myLib;
-
 let
   cfg = config.system.impermanence;
   concat = s1: s2: s1 + s2;
@@ -25,7 +22,7 @@ let
   } // options;
 in
 {
-  options.system.impermanence = with types; {
+  options.system.impermanence = with lib; with types; {
     enable = mkEnableOption "Enable impermanence";
     pause = mkEnableOption "Keep disk layout, but do not wipe on boot";
 
@@ -110,9 +107,9 @@ in
     };
   };
 
-  config = mkMerge [
+  config = lib.mkMerge [
     # Generic support: setting paths, enable fuse, etc...
-    (mkIf cfg.enable {
+    (lib.mkIf cfg.enable {
 
       ##########
       # SYSTEM #
@@ -125,10 +122,10 @@ in
 
       environment.persistence.${cfg.paths.homes} = {
         hideMounts = true;
-        users = pipe cfg.users [
-          attrValues
+        users = lib.pipe cfg.users [
+          lib.attrValues
           (map perUser)
-          mergeAll
+          myLib.mergeAll
         ];
       };
     })
@@ -136,12 +133,12 @@ in
     # - blank snapshot after creation
     # - auto restore blank snapshot at boot
     # - Create datasets for system, homes and the nix store
-    (mkIf (cfg.enable && cfg.zfs.enable) {
+    (lib.mkIf (cfg.enable && cfg.zfs.enable) {
       boot = {
         loader.grub.zfsSupport = true;
         supportedFilesystems = [ "zfs" ];
-        initrd.postDeviceCommands = mkAfter (
-          mkIfElse (!cfg.pause)
+        initrd.postDeviceCommands = lib.mkAfter (
+          myLib.mkIfElse (!cfg.pause)
             "zfs rollback -r ${blankSnapshot cfg.zfs.pool} && echo 'Blank snapshot restored'"
             ""
         );
