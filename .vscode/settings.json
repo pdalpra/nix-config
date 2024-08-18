@@ -11,20 +11,14 @@
     "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix",
     "nix.enableLanguageServer": true,
     "nix.formatterPath": "nixpkgs-fmt",
-    "nix.serverPath": "nil",
+    "nix.serverPath": "nixd",
     "nix.serverSettings": {
-        "nil": {
+        "nixd": {
             "formatting": {
                 "command": [
                     "nixpkgs-fmt"
                 ]
             },
-            "nix": {
-                "flake": {
-                    "autoEvalInputs": true,
-                    "nixpkgsInputName": "nixpkgs"
-                }
-            }
         }
     },
     "files.watcherExclude": {

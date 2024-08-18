@@ -8,7 +8,7 @@ let
     cachix
     git-secret
     nixpkgs-fmt
-    unstable.nil
+    unstable.nixd
     agenixBin
     agenixFile
   ];
