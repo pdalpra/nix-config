@@ -1,13 +1,27 @@
 { pkgs, config, ... }:
 
+let
+  # TODO: move it wav-converter repo as a flake
+  wavConverter = with pkgs; rustPlatform.buildRustPackage rec {
+    pname = "wav-converter";
+    version = "0.0.1";
+    cargoHash = "sha256-xKzR1HlbPoNojCBE2tnBu1RdR30rym9p/C2C2Ytnk5Y=ff";
+    buildInputs = [ ffmpeg ];
+    src = fetchFromGitHub {
+      owner = "pdalpra";
+      repo = pname;
+      rev = "0a724a7e43759eb7f4cbbcf4d7713dc840e6a98d";
+      hash = "sha256-anqUdSZQUodOE8+FBPKn1+bTGs49WoSRoY8JBrrj+s0=";
+    };
+  };
+in
 {
-  # TODO: package in wav-converter instead of pulling ffmpeg
   home.packages = with pkgs; [
     android-file-transfer
     asunder
     pavucontrol
     quodlibet
-    ffmpeg
+    wavConverter
   ];
 
   # Manage asunder configuration
