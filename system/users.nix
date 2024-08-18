@@ -1,8 +1,7 @@
 { pkgs, config, myLib, agenix, catppuccin, ... }:
 
-with myLib;
 let
-  networkManager = mkIfElse
+  networkManager = myLib.mkIfElse
     config.networking.networkmanager.enable
     [ "networkmanager" ]
     [ ];

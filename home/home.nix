@@ -1,9 +1,7 @@
 { lib, ... }:
 
-with lib;
-
 let
-  importAll = imports: foldl' concat [ ] (map import imports);
+  importAll = imports: lib.foldl' lib.concat [ ] (map import imports);
 in
 {
   imports = importAll [

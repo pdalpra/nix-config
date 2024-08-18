@@ -1,14 +1,11 @@
 { pkgs, config, lib, myLib, ... }:
 
-with lib;
-with myLib;
-
 let
   libPath = ./xmonad-config/lib;
-  libFiles = pipe libPath [
-    listFiles
+  libFiles = lib.pipe libPath [
+    myLib.listFiles
     (map (file: { "${file}" = libPath + "/${file}"; }))
-    mergeAll
+    myLib.mergeAll
   ];
 in
 {

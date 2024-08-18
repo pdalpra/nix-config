@@ -1,8 +1,5 @@
 { config, lib, myLib, pkgs, ... }:
 
-with lib;
-with myLib;
-
 let
   pidFile = "/var/run/illuminanced.pid";
   cfg = config.services.illuminanced;
@@ -19,7 +16,7 @@ let
       hash = "sha256-PQHGKz/2UxCf8FosuxmL7DL9Z+H9nzXHdyn+73gWw1I=";
     };
   };
-  levels = mergeAll (lists.imap0
+  levels = myLib.mergeAll (lib.lists.imap0
     (i: v: {
       "illuminance_${toString i}" = v.illuminance;
       "light_${toString i}" = v.light;
@@ -56,7 +53,7 @@ in
   # TODO: document module options
   # - kalman
   # - devices.events
-  options.services.illuminanced = with types; {
+  options.services.illuminanced = with lib; with types; {
     enable = mkEnableOption "Enable illuminanced";
     package = mkOption {
       type = package;
@@ -160,7 +157,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     systemd.services.illuminanced = {
       enable = true;
       wantedBy = [ "multi-user.target" ];

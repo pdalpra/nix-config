@@ -1,9 +1,7 @@
 { config, lib, ... }:
 
-with lib;
-
 {
-  options.profile = with types; mkOption {
+  options.profile = with lib; with types; mkOption {
     description = "Usage profile for this machine. Must be set.";
     default = null;
     type = nullOr (enum [

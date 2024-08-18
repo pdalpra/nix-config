@@ -1,12 +1,9 @@
 { pkgs, lib, myLib, ... }:
 
-with builtins;
-with lib;
-with myLib;
 
 let
-  isRust = path: hasSuffix ".rs" path && path != "mod.rs";
-  toogleModules = enabled: modules: mergeAll (map (mod: { "${mod}" = { disabled = !enabled; }; }) modules);
+  isRust = path: lib.hasSuffix ".rs" path && path != "mod.rs";
+  toogleModules = enabled: modules: myLib.mergeAll (map (mod: { "${mod}" = { disabled = !enabled; }; }) modules);
   starshipPackage = pkgs.unstable.starship;
   promptOrder = [
     "nix_shell"
@@ -26,7 +23,7 @@ let
     "line_break"
     "character"
   ];
-  promptFormat = concatStrings (map (s: "\$${s}") promptOrder);
+  promptFormat = lib.concatStrings (map (s: "\$${s}") promptOrder);
   modulesSources = "${starshipPackage.src}/src/modules";
   enabledModules = toogleModules true promptOrder; # <== ensure all modules used in the prompt are enabled
 
@@ -35,10 +32,10 @@ let
   # - List all Rust sources files
   # - Get the file name, without the extension (<- name of the module)
   # - Exclude the enabled modules
-  disabledModules = pipe modulesSources [
-    (filterFiles isRust)
-    (map (removeSuffix ".rs"))
-    (subtractLists promptOrder)
+  disabledModules = lib.pipe modulesSources [
+    (myLib.filterFiles isRust)
+    (map (lib.removeSuffix ".rs"))
+    (lib.subtractLists promptOrder)
     (toogleModules false)
   ];
   starshipConfig = {
@@ -85,7 +82,7 @@ in
     enableZshIntegration = true;
     catppuccin.enable = true;
     package = starshipPackage;
-    settings = mergeAll [
+    settings = myLib.mergeAll [
       enabledModules
       disabledModules
       starshipConfig

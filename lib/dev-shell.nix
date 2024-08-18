@@ -1,10 +1,8 @@
 { pkgs, lintingPkgs, agenixBin }:
 
-with pkgs;
-
 let
-  agenixFile = writeShellScriptBin "agenix-file" "cat $2 | ${agenixBin}/bin/agenix --editor='-' -e $1";
-  nixTools = [
+  agenixFile = pkgs.writeShellScriptBin "agenix-file" "cat $2 | ${agenixBin}/bin/agenix --editor='-' -e $1";
+  nixTools = with pkgs; [
     cachix
     git-secret
     nixpkgs-fmt
@@ -12,13 +10,13 @@ let
     agenixBin
     agenixFile
   ];
-  haskellTools = with haskellPackages; [
+  haskellTools = with pkgs.haskellPackages; [
     cabal-install
     fourmolu
     haskell-language-server
     hlint
   ];
-  xmonadDependencies = [
+  xmonadDependencies = with pkgs; [
     xorg.libX11
     xorg.libXrandr
     xorg.libXScrnSaver
@@ -28,7 +26,7 @@ let
     zlib.dev
   ];
 in
-mkShell {
+pkgs.mkShell {
   name = "nix-config-dev";
 
   buildInputs =
