@@ -54,6 +54,7 @@
     udisks2.enable = true;
     thermald.enable = true;
     gvfs.enable = true;
+    illuminanced.enable = true;
   };
 
   programs = {
