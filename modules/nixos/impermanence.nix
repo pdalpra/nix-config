@@ -117,7 +117,10 @@ in
 
       environment.persistence.${cfg.paths.system} = {
         inherit (cfg) directories;
-        files = cfg.files ++ [ "/etc/machine-id" ];
+        files = cfg.files ++ [
+          "/etc/machine-id"
+          "/var/lib/nixos"
+        ];
       };
 
       environment.persistence.${cfg.paths.homes} = {
