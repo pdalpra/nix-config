@@ -19,7 +19,7 @@ executable config
     WindowRules
     Workspaces
 
-  ghc-options:      -Wall -Whi-shadowing -Wname-shadowing
+  ghc-options:      -Wall -Wname-shadowing
   build-depends:
     , base            ^>=4.18.0
     , dbus            ^>=1.2.0

@@ -8,8 +8,8 @@
   ];
 
   boot = {
-    zfs.package = pkgs.unstable.zfs;
-    kernelPackages = pkgs.unstable.linuxPackages_6_8;
+    zfs.package = pkgs.zfs;
+    kernelPackages = pkgs.linuxPackages_6_10;
   };
 
   hardware = {

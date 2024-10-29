@@ -57,11 +57,12 @@ in
 
     windowManager.xmonad = {
       inherit libFiles;
+      inherit (pkgs.unstable) haskellPackages;
 
       enable = true;
       config = ./xmonad-config/config.hs;
       extraPackages = hp: with hp; [
-        xmonad-contrib
+        xmonad-contrib_0_18_1
         dbus
       ];
     };
