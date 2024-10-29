@@ -71,7 +71,7 @@ chat =
   Workspace
     { name = "chat"
     , workingDirectory = "~"
-    , runAtStartup = ["slack"]
+    , runAtStartup = []
     }
 
 

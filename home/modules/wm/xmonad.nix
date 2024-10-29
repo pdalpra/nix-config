@@ -47,7 +47,6 @@ in
       protonmail-bridge -n &
       chromium &
       chromium --incognito &
-      slack &
       thunderbird &
       yubikey-touch-detector -libnotify &
       whatsapp-for-linux &
