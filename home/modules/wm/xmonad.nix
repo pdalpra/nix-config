@@ -45,12 +45,12 @@ in
     initExtra = ''
       1password --silent &
       protonmail-bridge -n &
-      chromium &
+      firefox &
       chromium --incognito &
       thunderbird &
       yubikey-touch-detector -libnotify &
-      whatsapp-for-linux &
-      light -I
+      steam -silent &
+      blueman-applet &
       feh --bg-scale ${../../../resources/wallpaper.png}
     '';
 
