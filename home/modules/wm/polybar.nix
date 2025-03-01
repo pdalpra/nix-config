@@ -17,6 +17,8 @@ let
   };
 in
 {
+  catppuccin.polybar.enable = true;
+
   # Ensures that the polybar logs folder is created
   home = {
     file."${polybarLogs}/.keep".text = "";
@@ -34,7 +36,6 @@ in
 
   services.polybar = {
     enable = true;
-    catppuccin.enable = true;
 
     package = pkgs.polybar.override {
       iwSupport = true;

@@ -1,6 +1,8 @@
 { pkgs, config, ... }:
 
 {
+  catppuccin.rofi.enable = true;
+
   home.file."${config.xdg.configHome}/rofimoji.rc" = {
     text = ''
       action = copy
@@ -14,7 +16,6 @@
 
   programs.rofi = {
     enable = true;
-    catppuccin.enable = true;
     cycle = true;
     font = "Berkeley Mono 20";
 

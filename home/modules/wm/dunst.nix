@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
 {
+  catppuccin.dunst.enable = true;
+
   home.packages = with pkgs; [
     libnotify
   ];
@@ -8,7 +10,6 @@
 
   services.dunst = {
     enable = true;
-    catppuccin.enable = true;
 
     iconTheme = {
       package = pkgs.tela-circle-icon-theme;

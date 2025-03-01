@@ -1,6 +1,7 @@
 { pkgs, lib, ... }:
 
 {
+  catppuccin.zsh-syntax-highlighting.enable = true;
   home.activation = {
     # Remove sayings on logout, installed by prezto
     removeZlogout = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -11,10 +12,7 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    syntaxHighlighting = {
-      enable = true;
-      catppuccin.enable = true;
-    };
+    syntaxHighlighting.enable = true;
     autocd = true;
 
     prezto = {

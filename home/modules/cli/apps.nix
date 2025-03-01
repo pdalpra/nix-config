@@ -7,9 +7,14 @@ let
   };
 in
 {
+  catppuccin = {
+    bat.enable = true;
+    bottom.enable = true;
+  };
+
   home = {
     packages = with pkgs; [
-      _1password
+      _1password-cli
       comma
       diskonaut
       httpie
@@ -38,14 +43,8 @@ in
   };
 
   programs = {
-    bat = {
-      enable = true;
-      catppuccin.enable = true;
-    };
-    bottom = {
-      enable = true;
-      catppuccin.enable = true;
-    };
+    bat.enable = true;
+    bottom.enable = true;
     direnv = enableWithZshIntegration // {
       nix-direnv.enable = true;
     };

@@ -9,14 +9,13 @@
 
   boot = {
     zfs.package = pkgs.zfs;
-    kernelPackages = pkgs.linuxPackages_6_10;
+    kernelPackages = pkgs.linuxPackages_6_12;
   };
 
   hardware = {
     cpu.amd.updateMicrocode = true;
-    opengl = with pkgs; {
-      driSupport = true;
-      driSupport32Bit = true;
+    graphics = with pkgs; {
+      enable32Bit = true;
       extraPackages = [ amdvlk ];
       extraPackages32 = [ driversi686Linux.amdvlk ];
     };

@@ -1,5 +1,4 @@
 [
-  ./terminal.nix
   ./dunst.nix
   ./polybar.nix
   ./rofi.nix

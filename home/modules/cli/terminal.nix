@@ -1,9 +1,10 @@
 _:
 
 {
+  catppuccin.kitty.enable = true;
+
   programs.kitty = {
     enable = true;
-    catppuccin.enable = true;
     extraConfig = ''
       font_family Berkeley Mono
       font_size 14

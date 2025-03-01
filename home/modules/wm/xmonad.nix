@@ -9,7 +9,8 @@ let
   ];
 in
 {
-  catppuccin.pointerCursor.enable = true;
+  catppuccin.cursors.enable = true;
+
   home = {
     # Create folder for screenshots
     file."${config.xdg.userDirs.pictures}/screenshots/.keep".text = "";

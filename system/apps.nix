@@ -48,7 +48,7 @@ in
 
   programs = {
     bash = {
-      enableCompletion = true;
+      completion.enable = true;
       enableLsColors = true;
     };
 
@@ -59,7 +59,10 @@ in
       enableSSHSupport = true;
     };
 
-    vim.defaultEditor = true;
+    vim = {
+      enable = true;
+      defaultEditor = true;
+    };
     zsh.enable = true;
   };
 

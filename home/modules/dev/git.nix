@@ -6,6 +6,8 @@ let
     "${config.xdg.configHome}/git";
 in
 {
+  catppuccin.delta.enable = true;
+
   age.secrets = {
     perso = {
       file = ../../../secrets/git-perso.age;
@@ -57,7 +59,6 @@ in
       ];
       delta = {
         enable = true;
-        catppuccin.enable = true;
         options = {
           side-by-side = true;
         };

@@ -77,10 +77,10 @@ let
   };
 in
 {
+  catppuccin.starship.enable = true;
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
-    catppuccin.enable = true;
     package = starshipPackage;
     settings = myLib.mergeAll [
       enabledModules

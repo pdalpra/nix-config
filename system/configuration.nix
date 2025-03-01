@@ -55,7 +55,7 @@
 
   nix = {
     extraOptions = ''
-      experimental-features = nix-command flakes no-url-literals repl-flake
+      experimental-features = nix-command flakes no-url-literals
     '';
     gc = {
       automatic = true;
