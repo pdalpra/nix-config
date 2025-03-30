@@ -7,6 +7,7 @@ let
 in
 {
   services.zfs.trim.enable = true;
+  system.impermanence.pause = true;
   system.impermanence.zfs = {
     enable = true;
     inherit pool;
