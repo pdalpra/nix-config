@@ -97,12 +97,12 @@ in
     devices = {
       current = mkOption {
         type = str;
-        default = "/sys/class/backlight/amdgpu_bl2/brightness";
+        default = "/sys/class/backlight/amdgpu_bl1/brightness";
         description = "Path to device file with the current brightness level";
       };
       max = mkOption {
         type = str;
-        default = "/sys/class/backlight/amdgpu_bl2/max_brightness";
+        default = "/sys/class/backlight/amdgpu_bl1/max_brightness";
         description = "Path to device file with the max brightness level";
       };
       illuminance = mkOption {
