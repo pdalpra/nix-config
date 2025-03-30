@@ -26,7 +26,6 @@ windowRules =
     , appName =? "whatsapp-for-linux" -?> shiftTo chat
     , className =? "thunderbird" -?> shiftTo mail
     , appName =? "pavucontrol" -?> smallCenteredFloat
-    , className =? "Thunar" -?> doFloat
     , appName =? "slack" -?> shiftTo chat
     ]
   where
@@ -35,3 +34,4 @@ windowRules =
 
 hacks :: Event -> X All
 hacks = windowedFullscreenFixEventHook <> fixSteamFlicker
+ 
