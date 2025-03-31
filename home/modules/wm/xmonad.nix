@@ -7,6 +7,12 @@ let
     (map (file: { "${file}" = libPath + "/${file}"; }))
     myLib.mergeAll
   ];
+  thunar = with pkgs; xfce.thunar.override {
+    thunarPlugins = [
+      xfce.thunar-volman
+      xfce.thunar-archive-plugin
+    ];
+  };
 in
 {
   catppuccin.cursors.enable = true;
@@ -23,7 +29,8 @@ in
   home.packages = with pkgs; [
     feh
     unstable.scrot
-    xfce.thunar
+    thunar
+    xarchiver
     xorg.xbacklight
     xorg.xev
     xorg.xmessage
@@ -46,8 +53,8 @@ in
     initExtra = ''
       1password --silent &
       protonmail-bridge -n &
-      firefox &
-      chromium --incognito &
+      brave &
+      brave --incognito &
       thunderbird &
       yubikey-touch-detector -libnotify &
       steam -silent &
