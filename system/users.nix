@@ -48,7 +48,7 @@ in
       imports = [
         ../modules/common/profile.nix
         agenix.homeManagerModules.default
-        catppuccin.homeManagerModules.catppuccin
+        catppuccin.homeModules.catppuccin
         ../home/home.nix
       ];
 
