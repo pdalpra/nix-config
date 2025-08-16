@@ -69,6 +69,7 @@
   system.impermanence = {
     directories = [
       "/var/lib/bluetooth"
+      "/var/lib/fprint"
       "/etc/NetworkManager/system-connections"
     ];
   };
