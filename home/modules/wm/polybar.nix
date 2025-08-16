@@ -195,8 +195,8 @@ in
         blacklist-0 = "num lock";
         blacklist-1 = "scroll lock";
         label-layout = "%{T3}%{T-}  %icon%";
-        layout-icon-0 = "us;US (Qwerty)";
-        layout-icon-1 = "fr;bepo;FR (Bépo)";
+        layout-icon-0 = "fr;;FR";
+        layout-icon-1 = "fr;bepo;Bépo";
       };
     };
   };

@@ -20,7 +20,7 @@
     xserver = {
       enable = true;
       xkb = {
-        layout = "us,fr";
+        layout = "fr,fr";
         variant = ",bepo";
       };
 
