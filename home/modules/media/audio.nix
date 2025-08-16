@@ -5,7 +5,7 @@ let
   wavConverter = with pkgs; rustPlatform.buildRustPackage rec {
     pname = "wav-converter";
     version = "0.0.1";
-    cargoHash = "sha256-xKzR1HlbPoNojCBE2tnBu1RdR30rym9p/C2C2Ytnk5Y=ff";
+    cargoHash = "sha256-JzASRsE20J7g6MDE2rINHI6J+OLVAj4Wk4B4nh0kZIY=";
     buildInputs = [ ffmpeg ];
     src = fetchFromGitHub {
       owner = "pdalpra";

@@ -3,16 +3,15 @@
 let
   pidFile = "/var/run/illuminanced.pid";
   cfg = config.services.illuminanced;
-  # TODO: work on my fork to allow tweaking the keycode to switch modes
   illuminancedPkg = pkgs.rustPlatform.buildRustPackage rec {
     pname = "illuminanced";
     version = "0.0.1";
     doCheck = false;
-    cargoHash = "sha256-+2AQRaIxPGOmu0AHxkcd6LAHcAYE2X5MZB9MkIBzj2A=";
+    cargoHash = "sha256-/A/EnaMAJ34Qmzo0ozQM7gD0H8nBkqMfwkOb0xhw3to=";
     src = pkgs.fetchFromGitHub {
-      owner = "pdalpra";
+      owner = "mikhail-m1";
       repo = pname;
-      rev = "93dd5c2b5de5a77abd7ea486cb663113cb79492d";
+      rev = "4e9d9c67797e2e9721641e165fa37867675a04fd";
       hash = "sha256-PQHGKz/2UxCf8FosuxmL7DL9Z+H9nzXHdyn+73gWw1I=";
     };
   };
