@@ -24,5 +24,6 @@
     "files.watcherExclude": {
         "**/target": true
     },
-    "editor.fontFamily": "'Berkeley Mono', 'monospace', monospace"
+    "editor.fontFamily": "'Berkeley Mono', 'monospace', monospace",
+    "haskell.plugin.semanticTokens.globalOn": true
 }

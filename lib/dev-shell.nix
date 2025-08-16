@@ -13,7 +13,7 @@ let
   haskellTools = with pkgs.haskellPackages; [
     cabal-install
     fourmolu
-    haskell-language-server
+    pkgs.unstable.haskellPackages.haskell-language-server
     hlint
   ];
   xmonadDependencies = with pkgs; [

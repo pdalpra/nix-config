@@ -6,13 +6,6 @@ let
     nix-env --switch-generation $1 -p ${nixSystemPath}
     ${nixSystemPath}/bin/switch-to-configuration switch
   '';
-  nerdFonts = pkgs.nerdfonts.override {
-    fonts = [
-      "FiraCode"
-      "JetBrainsMono"
-      "SourceCodePro"
-    ];
-  };
 in
 {
   environment = {
@@ -41,8 +34,10 @@ in
   fonts = {
     enableDefaultPackages = true;
     fontDir.enable = true;
-    packages = [
-      nerdFonts
+    packages = with pkgs.nerd-fonts; [
+      fira-code
+      jetbrains-mono
+      sauce-code-pro
     ];
   };
 

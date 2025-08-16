@@ -5,7 +5,7 @@
   home.packages = with pkgs; [
     _1password-gui
     yubikey-manager
-    yubikey-manager-qt
+    yubioath-flutter
     yubikey-touch-detector
   ];
 

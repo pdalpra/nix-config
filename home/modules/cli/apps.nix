@@ -16,14 +16,14 @@ in
     packages = with pkgs; [
       _1password-cli
       comma
-      diskonaut
-      httpie
       manix
       mdcat
       neofetch
       prettyping
+      httpie
       rsync
       tealdeer
+      unzip
     ];
 
     sessionVariables = {
