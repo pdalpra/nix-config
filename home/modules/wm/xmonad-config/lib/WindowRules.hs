@@ -24,7 +24,7 @@ windowRules =
   composeOne
     [ appName =? "brave-browser" -?> shiftTo web
     , appName =? "whatsapp-for-linux" -?> shiftTo chat
-    , className =? "thunderbird" -?> shiftTo mail
+    , className =? "electron-mail" -?> shiftTo mail
     , appName =? "pavucontrol" -?> smallCenteredFloat
     , appName =? "slack" -?> shiftTo chat
     ]

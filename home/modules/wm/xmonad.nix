@@ -52,10 +52,9 @@ in
 
     initExtra = ''
       1password --silent &
-      protonmail-bridge -n &
       brave &
       brave --incognito &
-      thunderbird &
+      electron-mail &
       yubikey-touch-detector -libnotify &
       steam -silent &
       blueman-applet &
