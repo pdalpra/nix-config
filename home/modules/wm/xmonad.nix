@@ -51,6 +51,7 @@ in
     enable = true;
 
     initExtra = ''
+      xrandr -r 60
       1password --silent &
       brave &
       brave --incognito &
