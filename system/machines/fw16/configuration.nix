@@ -1,7 +1,7 @@
 { pkgs, lib, config, hardware, ... }:
 
 {
-  profile = "personal";
+  profile = [ "personal" ];
 
   imports = [
     hardware.framework-16-7040-amd

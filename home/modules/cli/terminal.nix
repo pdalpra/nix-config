@@ -1,6 +1,6 @@
-_:
+{ lib, config, ... }:
 
-{
+lib.mkIf (!builtins.elem "headless" config.profile) {
   catppuccin.kitty.enable = true;
 
   programs.kitty = {

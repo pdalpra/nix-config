@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 let
   xsecurelock =
     pkgs.xsecurelock.overrideAttrs (previous: {
@@ -20,7 +20,7 @@ let
       '';
     });
 in
-{
+lib.mkIf (!builtins.elem "headless" config.profile) {
   # Restarts xss-lock automatically
   home.activation = {
     restartXssLock = lib.hm.dag.entryAfter [ "writeBoundary" ]

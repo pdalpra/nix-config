@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, lib, config, ... }:
 
-{
+lib.mkIf (!builtins.elem "headless" config.profile) {
   programs = {
     chromium = {
       enable = true;

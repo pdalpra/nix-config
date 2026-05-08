@@ -75,6 +75,14 @@
           system
           revision;
       };
+      mkHome = import ./lib/mk-home.nix {
+        inherit
+          myLib
+          overlays
+          home-manager
+          agenix
+          catppuccin;
+      };
       forAllSystems = flake-utils.lib.eachDefaultSystem
         (system:
           let
@@ -106,6 +114,13 @@
         iso = mkISO;
         vm = mkNixOS "vm";
         fw16 = mkNixOS "fw16";
+      };
+      homeConfigurations = {
+        "headless-x86_64" = mkHome "pdalpra" [ "headless" ] "x86_64-linux";
+        "headless-aarch64" = mkHome "pdalpra" [ "headless" ] "aarch64-linux";
+      };
+      lib = {
+        inherit mkHome;
       };
     };
 }
