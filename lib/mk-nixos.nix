@@ -9,7 +9,7 @@
 , catppuccin
 , system
 , revision
-}: name:
+}: name: extraModules:
 
 let
   pkgs = overlays system;
@@ -44,5 +44,5 @@ lib.nixosSystem {
     ../system/configuration.nix
     specificConfig
     diskoConfig
-  ];
+  ] ++ extraModules;
 }

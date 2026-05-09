@@ -3,7 +3,7 @@
 , home-manager
 , agenix
 , catppuccin
-}: username: profile: system:
+}: username: profile: system: extraModules:
 
 let
   pkgs = overlays system;
@@ -21,5 +21,5 @@ home-manager.lib.homeManagerConfiguration {
       inherit profile;
     }
     ../home/home.nix
-  ];
+  ] ++ extraModules;
 }
