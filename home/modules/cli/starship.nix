@@ -3,6 +3,8 @@
 
 let
   isRust = path: lib.hasSuffix ".rs" path && path != "mod.rs";
+  # cc.rs and cpp.rs are internal compiler-detection helpers, not starship modules
+  nonModules = [ "cc" "cpp" ];
   toogleModules = enabled: modules: myLib.mergeAll (map (mod: { "${mod}" = { disabled = !enabled; }; }) modules);
   starshipPackage = pkgs.unstable.starship;
   promptOrder = [
@@ -35,7 +37,7 @@ let
   disabledModules = lib.pipe modulesSources [
     (myLib.filterFiles isRust)
     (map (lib.removeSuffix ".rs"))
-    (lib.subtractLists promptOrder)
+    (lib.subtractLists (promptOrder ++ nonModules))
     (toogleModules false)
   ];
   starshipConfig = {
