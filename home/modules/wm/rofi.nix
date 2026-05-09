@@ -1,6 +1,6 @@
-{ pkgs, config, ... }:
+{ pkgs, lib, config, ... }:
 
-{
+lib.mkIf (!builtins.elem "headless" config.profile) {
   catppuccin.rofi.enable = true;
 
   home.file."${config.xdg.configHome}/rofimoji.rc" = {

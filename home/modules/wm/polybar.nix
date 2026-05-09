@@ -16,7 +16,7 @@ let
     padding-right = 1;
   };
 in
-{
+lib.mkIf (!builtins.elem "headless" config.profile) {
   catppuccin.polybar.enable = true;
 
   # Ensures that the polybar logs folder is created

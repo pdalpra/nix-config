@@ -14,7 +14,7 @@ let
     ];
   };
 in
-{
+lib.mkIf (!builtins.elem "headless" config.profile) {
   catppuccin.cursors.enable = true;
 
   home = {

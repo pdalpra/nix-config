@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, lib, config, ... }:
 
 let
   # TODO: move it wav-converter repo as a flake
@@ -15,7 +15,7 @@ let
     };
   };
 in
-{
+lib.mkIf (!builtins.elem "headless" config.profile) {
   home.packages = with pkgs; [
     android-file-transfer
     asunder
