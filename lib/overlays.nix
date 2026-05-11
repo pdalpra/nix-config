@@ -1,4 +1,4 @@
-{ nixpkgs, nixpkgs-unstable, nurpkgs }: system:
+{ nixpkgs, nixpkgs-unstable, nurpkgs, zjstatus }: system:
 
 let
   config = { allowUnfree = true; };
@@ -11,6 +11,9 @@ let
   };
   unstableOverlay = _: _: {
     unstable = import nixpkgs-unstable { inherit config system; };
+  };
+  zjstatusOverlay = _: _: {
+    zjstatus = zjstatus.packages.${system}.default;
   };
   steamOverlay = _: prev: {
     steam = prev.steam.override {
@@ -45,6 +48,7 @@ import nixpkgs {
     nurOverlay
     unstableOverlay
     steamOverlay
+    zjstatusOverlay
   ];
 }
 

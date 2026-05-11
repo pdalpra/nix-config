@@ -25,6 +25,10 @@
     impermanence.url = "github:nix-community/impermanence";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     catppuccin.url = "github:catppuccin/nix";
+    zjstatus = {
+      url = "github:dj95/zjstatus";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Flake libraries
     flake-utils.url = "github:numtide/flake-utils";
@@ -46,6 +50,7 @@
     , nixos-hardware
     , catppuccin
     , flake-utils
+    , zjstatus
     , ...
     }:
     let
@@ -54,7 +59,7 @@
         inherit lib;
       };
       overlays = import ./lib/overlays.nix {
-        inherit nixpkgs nixpkgs-unstable nurpkgs;
+        inherit nixpkgs nixpkgs-unstable nurpkgs zjstatus;
       };
       system = "x86_64-linux";
       revision = lib.mkIf (self ? rev) self.rev;
