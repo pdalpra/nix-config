@@ -36,7 +36,7 @@ in
       grep = "${ripgrep}/bin/rg";
       time = "${hyperfine}/bin/hyperfine";
       cloc = "${tokei}/bin/tokei";
-      du = "${du-dust}/bin/dust";
+      du = "${dust}/bin/dust";
       df = "${duf}/bin/duf";
       nixdev = "nix develop --command zsh";
     };

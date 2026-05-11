@@ -4,6 +4,6 @@
   programs.go = {
     enable = true;
     package = pkgs.unstable.go;
-    goPath = "Code/go";
+    env.GOPATH = "Code/go";
   };
 }

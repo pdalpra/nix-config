@@ -6,8 +6,6 @@ let
     "${config.xdg.configHome}/git";
 in
 {
-  catppuccin.delta.enable = true;
-
   age.secrets = {
     perso = {
       file = ../../../secrets/git-perso.age;
@@ -46,6 +44,15 @@ in
       };
     };
 
+    delta = {
+      enable = true;
+      enableGitIntegration = true;
+      options = {
+        side-by-side = true;
+        features = "catppuccin-${config.catppuccin.flavor}";
+      };
+    };
+
     git = {
       enable = true;
       includes = [
@@ -56,24 +63,21 @@ in
           condition = "gitdir:~/Code/work";
           inherit (config.age.secrets.work) path;
         }
+        {
+          path = "${config.catppuccin.sources.delta}/catppuccin.gitconfig";
+        }
       ];
-      delta = {
-        enable = true;
-        options = {
-          side-by-side = true;
-        };
-      };
-      aliases = {
-        st = "status";
-        co = "checkout";
-        br = "branch";
-        ci = "commit";
+      settings = {
+        alias = {
+          st = "status";
+          co = "checkout";
+          br = "branch";
+          ci = "commit";
 
-        tree = ''!git log --graph --all --pretty=oneline --graph --decorate --color=always | less -r'';
-        cleanup = ''!git remote prune origin && git branch --merged | grep -v '^* master$' | grep -v '^  master$' | xargs -r git branch -d'';
-        wip = ''!git ci -a --amend --no-edit --date=now && git push -f'';
-      };
-      extraConfig = {
+          tree = ''!git log --graph --all --pretty=oneline --graph --decorate --color=always | less -r'';
+          cleanup = ''!git remote prune origin && git branch --merged | grep -v '^* master$' | grep -v '^  master$' | xargs -r git branch -d'';
+          wip = ''!git ci -a --amend --no-edit --date=now && git push -f'';
+        };
         color.ui = true;
         core = {
           autocrlf = "input";
