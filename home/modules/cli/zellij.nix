@@ -43,10 +43,8 @@
             datetime          "#[fg=#6C7086,bold] {format} "
             datetime_format   "%Y-%m-%d %H:%M"
             datetime_timezone "Europe/Paris"
+            datetime_interval "60"
           }
-        }
-        pane size=2 borderless=true {
-          plugin location="zellij:status-bar"
         }
       }
     }
